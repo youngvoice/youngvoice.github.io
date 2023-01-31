@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="how to design hash in a practical problem?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hash">
+<meta property="og:url" content="http://example.com/2022/09/01/hash/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="how to design hash in a practical problem?">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-01-31T08:57:47.637Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="learning">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/09/01/hash/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/09/01/hash/","path":"2022/09/01/hash/","title":"hash"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hash | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problems"><span class="nav-number">1.</span> <span class="nav-text">Problems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-solution"><span class="nav-number">2.</span> <span class="nav-text">what solution?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#special-note"><span class="nav-number">2.1.</span> <span class="nav-text">special note</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-do-we-deal-with-collisions"><span class="nav-number">3.</span> <span class="nav-text">How do we deal with collisions?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-make-h-appear-to-be-%E2%80%9Crandom%E2%80%9D-so-we-can-avoiding-collisions-or-at-least-minimizing-their-number"><span class="nav-number">3.0.1.</span> <span class="nav-text">Why make h appear to be “random”, so we can avoiding collisions or at least minimizing their number???</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-the-meaning-of-%E2%80%9Crandom%E2%80%9D-in-hash"><span class="nav-number">3.0.2.</span> <span class="nav-text">What is the meaning of “random” in hash???</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-chaining"><span class="nav-number">4.</span> <span class="nav-text">What is chaining?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-load-factor"><span class="nav-number">5.</span> <span class="nav-text">what is load factor?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Simple-uniform-hashing-an-assumption"><span class="nav-number">6.</span> <span class="nav-text">What is Simple uniform hashing: an assumption</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-complexity-of-search-in-Chaining"><span class="nav-number">7.</span> <span class="nav-text">What complexity of search in Chaining?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-prove-the-average-case-time-complexicity-that-a-successful-search-will-takes-in-a-hash-table-in-which-collisions-are-resolved-by-chaining-under-the-assumption-of-simple-uniform-hashing"><span class="nav-number">7.1.</span> <span class="nav-text">How to prove the average-case time complexicity that a successful search will takes in a hash table in which collisions are resolved by chaining, under the assumption of simple uniform hashing?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x3D-x3D-gt-gt-%E6%88%91%E4%B8%A5%E9%87%8D%E7%BC%BA%E5%A4%B1%E5%AF%B9%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1%E7%9A%84%E8%83%BD%E5%8A%9B-lt-lt-x3D-x3D"><span class="nav-number">8.</span> <span class="nav-text">&#x3D;&#x3D;&gt;&gt;我严重缺失对问题建模的能力 &lt;&lt;&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-the-conclusion-of-the-above-analysis"><span class="nav-number">9.</span> <span class="nav-text">What the conclusion of the above analysis?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-hash-function-can-used-in-Chaining"><span class="nav-number">10.</span> <span class="nav-text">What hash function can used in Chaining?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-division-method"><span class="nav-number">10.1.</span> <span class="nav-text">The division method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-multiplication-method"><span class="nav-number">10.2.</span> <span class="nav-text">The multiplication method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Universal-hashing"><span class="nav-number">10.3.</span> <span class="nav-text">Universal hashing</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash-function-%E5%88%86%E6%9E%90%E4%B8%AD%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%80%A7%E6%98%AF%E6%80%8E%E4%B9%88%E5%BC%95%E5%85%A5%E7%9A%84%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">11.</span> <span class="nav-text">hash function 分析中的随机性是怎么引入的？？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-large-should-table-be-set"><span class="nav-number">12.</span> <span class="nav-text">How large should table be set?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-job-needs-doing-to-grow-or-shrink-table"><span class="nav-number">13.</span> <span class="nav-text">What job needs doing to grow or shrink table???</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-grow-or-shrink-table-linear-or-exponent"><span class="nav-number">14.</span> <span class="nav-text">How to grow or shrink table(linear or exponent)?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-determine-the-style-of-grow-or-shrink-through-Amortization-analysis"><span class="nav-number">15.</span> <span class="nav-text">How to determine the style of grow or shrink through Amortization analysis???</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-opening-address"><span class="nav-number">16.</span> <span class="nav-text">What is opening address?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#summary"><span class="nav-number">17.</span> <span class="nav-text">summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">18.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/01/hash/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hash | Hexo">
+      <meta itemprop="description" content="how to design hash in a practical problem?">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hash
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-01 00:00:00" itemprop="dateCreated datePublished" datetime="2022-09-01T00:00:00+00:00">2022-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-01-31 08:57:47" itemprop="dateModified" datetime="2023-01-31T08:57:47+00:00">2023-01-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/algorithms/" itemprop="url" rel="index"><span itemprop="name">algorithms</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">how to design hash in a practical problem?</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h1><ol>
+<li>dictionary (key, value) pairs problem.</li>
+<li>a compiler’s symbol table (identifiers)</li>
+<li>storing employee records with phone numbers(used as keys).</li>
+<li>存储一个班的学生信息，以学号为 key 进行存储。</li>
+</ol>
+<h1 id="what-solution"><a href="#what-solution" class="headerlink" title="what solution?"></a>what solution?</h1><ol>
+<li>Direct Access Table<br>items are stored in an array, indexed by key(random access)</li>
+</ol>
+<p>problem 1<br>key must can be used to indexed into array<br>problem 2<br>larger key range $\Longrightarrow$ bigger array</p>
+<p>do all operations in O(1) time</p>
+<p>$\Longrightarrow$<br>try 1<br>prehash keys to integers<br>interpreting keys as natural numbers</p>
+<p>try 2<br>Reduce universe $u$ of all keys (say, integers) down to reasonable size $m$ for table, $m\approx n &#x3D; #keys$</p>
+<p>hash function h: $u \longrightarrow {0, 1, \dots , m - 1}$</p>
+<p>collision: if $k_i, k_j \in K \text{ and } k_i \neq k_j$ we have  $h(k_i) &#x3D; h(k_j)$ it’s a collision.<br>$K$ is the set actually stored. </p>
+<p>就是想借助数组访问高效的特点，期望来加快操作速度（array&#x2F;list $\rightarrow$ BST $\rightarrow$ hash）</p>
+<h2 id="special-note"><a href="#special-note" class="headerlink" title="special note"></a>special note</h2><p><em><strong>When the number of keys actually stored is small relative to the total number of possible keys, hash tables become an effective alternative to directly addressing an array, since a hash table typically uses an array of size proportional to the number of keys actually stored.</strong></em></p>
+<p>$K \subseteq u\Longleftrightarrow$  table doubling<br>$K$ is the set actually stored. </p>
+<h1 id="How-do-we-deal-with-collisions"><a href="#How-do-we-deal-with-collisions" class="headerlink" title="How do we deal with collisions?"></a>How do we deal with collisions?</h1><p>Because $|U| &gt; m$, however, there must be at least two keys that have the same hash value; avoiding collisions altogether is therefore impossible.</p>
+<p>两个解决的方向：<br>direction 1. a well-designed “random”-looking hash function can minimize the number of collisions(a good hash function)<br>direction 2. a method for resolving the collisions that do occur.</p>
+<p>冲突是不可避免的，所以一定要找到一种解决冲突的方法。<br>method 1. Chaining<br>method 2. Open addressing</p>
+<h3 id="Why-make-h-appear-to-be-“random”-so-we-can-avoiding-collisions-or-at-least-minimizing-their-number"><a href="#Why-make-h-appear-to-be-“random”-so-we-can-avoiding-collisions-or-at-least-minimizing-their-number" class="headerlink" title="Why make h appear to be “random”, so we can avoiding collisions or at least minimizing their number???"></a>Why make h appear to be “random”, so we can avoiding collisions or at least minimizing their number???</h3><h3 id="What-is-the-meaning-of-“random”-in-hash"><a href="#What-is-the-meaning-of-“random”-in-hash" class="headerlink" title="What is the meaning of “random” in hash???"></a>What is the meaning of “random” in hash???</h3><p>上面两个问题，可以看 hash 函数分析</p>
+<h1 id="What-is-chaining"><a href="#What-is-chaining" class="headerlink" title="What is chaining?"></a>What is chaining?</h1><p>put the colliding elements in each of slot of table.</p>
+<h1 id="what-is-load-factor"><a href="#what-is-load-factor" class="headerlink" title="what is load factor?"></a>what is load factor?</h1><p>simple uniform hashing: An assumption, Each key is equally likely to be hashed to any slot of table, independent of where other keys are hashed.</p>
+<p>let n &#x3D; # keys stored in table<br>m &#x3D; # slots in table<br>load factor $\alpha &#x3D; n&#x2F;m$<br>&#x3D; expected # keys per slot<br>&#x3D; expected length of a chain.</p>
+<h1 id="What-is-Simple-uniform-hashing-an-assumption"><a href="#What-is-Simple-uniform-hashing-an-assumption" class="headerlink" title="What is Simple uniform hashing: an assumption"></a>What is Simple uniform hashing: an assumption</h1><h1 id="What-complexity-of-search-in-Chaining"><a href="#What-complexity-of-search-in-Chaining" class="headerlink" title="What complexity of search in Chaining?"></a>What complexity of search in Chaining?</h1><p>search must go through whole list T[h(key)]<br>worst case: all n keys hash to same slot $\Longrightarrow <br>\Theta(n)$ per operation(退化成链表)</p>
+<p>expected running time for search is $\Theta(1+\alpha)$</p>
+<p>case 1: the search is unsuccessful<br>case 2: the search is successful</p>
+<h2 id="How-to-prove-the-average-case-time-complexicity-that-a-successful-search-will-takes-in-a-hash-table-in-which-collisions-are-resolved-by-chaining-under-the-assumption-of-simple-uniform-hashing"><a href="#How-to-prove-the-average-case-time-complexicity-that-a-successful-search-will-takes-in-a-hash-table-in-which-collisions-are-resolved-by-chaining-under-the-assumption-of-simple-uniform-hashing" class="headerlink" title="How to prove the average-case time complexicity that a successful search will takes in a hash table in which collisions are resolved by chaining, under the assumption of simple uniform hashing?"></a>How to prove the average-case time complexicity that a successful search will takes in a hash table in which collisions are resolved by chaining, under the assumption of simple uniform hashing?</h2><p>+++++++++++++++++++++++++++<br>通过对 case2 的分析，可以看出来</p>
+<h1 id="x3D-x3D-gt-gt-我严重缺失对问题建模的能力-lt-lt-x3D-x3D"><a href="#x3D-x3D-gt-gt-我严重缺失对问题建模的能力-lt-lt-x3D-x3D" class="headerlink" title="&#x3D;&#x3D;&gt;&gt;我严重缺失对问题建模的能力 &lt;&lt;&#x3D;&#x3D;"></a>&#x3D;&#x3D;&gt;&gt;我严重缺失对问题建模的能力 &lt;&lt;&#x3D;&#x3D;</h1><p>+++++++++++++++++++++++++++</p>
+<h1 id="What-the-conclusion-of-the-above-analysis"><a href="#What-the-conclusion-of-the-above-analysis" class="headerlink" title="What the conclusion of the above analysis?"></a>What the conclusion of the above analysis?</h1><p>If the number of hash-table slots is at least proportional to the number of elements in the table, searching will take constant time on average.</p>
+<h1 id="What-hash-function-can-used-in-Chaining"><a href="#What-hash-function-can-used-in-Chaining" class="headerlink" title="What hash function can used in Chaining?"></a>What hash function can used in Chaining?</h1><p>什么样的 hash function 它是不好的？</p>
+<p>a good hash function satisfies the assumption of simple uniform hashing.</p>
+<p>在编译器中，如果我们以程序中的变量名作为 key 来存储符号信息，那么会发现，一个程序中往往会出现非常相像的变量名，所以与字母相关的hash函数可能不是很好。<br>这说明，我们的应用场景下 key 的选择并不是随机在 $U$ 空间采样的<br>也就是在具体应用中可能会出现采样的数据 pattern 模式，如果不在 hash 函数中处理这种情况，那会将数据 hash 到某几个 slots 中，这样会降低算法性能。</p>
+<p><strong>A good approach derives the hash value in a way that we expect to be independent of any patterns that might exist in the data.</strong><br>我的思考：<br>我们尽量让 hash value 与数据模式无关，是为了防止某个场景下数据出现 pattern 使得 hash 算法性能降低。<br>能不能利用数据中的 pattern 让 hash 性能较好？？？（也就是在具体应用中会出现采样数据的固定pattern）</p>
+<p>note:<br>可以借此考察一下项目中的 hash function 设计的怎么样？</p>
+<p>stronger properties, key close, hash values far apart, linear probing, universal hashing.</p>
+<h2 id="The-division-method"><a href="#The-division-method" class="headerlink" title="The division method"></a>The division method</h2><p>how to choose the value of m????<br>为什么要选择 prime number 呢？？？<br>如果选了 2 的次幂会出现什么问题？</p>
+<h2 id="The-multiplication-method"><a href="#The-multiplication-method" class="headerlink" title="The multiplication method"></a>The multiplication method</h2><p>解释该运算的含义???</p>
+<h2 id="Universal-hashing"><a href="#Universal-hashing" class="headerlink" title="Universal hashing"></a>Universal hashing</h2><p>对于一个固定的 hash function 而言，就算可以将最大的数据集合 $u$ 在全部都存放完，数据在 hash table 上呈均匀分布。那么，在某次操作中我们就可以选择某些 hash entry 上的项构成将要存储的元素，此时，针对该手动构造的数据集，该 hash 操作的性能就会下降很大。</p>
+<p>也即以为着对于一个固定的 hash 函数，我们总能找到一些使其性能较差的情况。</p>
+<p>如何在将 key 映射到 hash table 时，引入随机性。（将 hash 函数随机化，这种随机化是在创建一个 hash table 时创建的）</p>
+<p>需要找一个应用 universal hash 的实例？？？</p>
+<h1 id="hash-function-分析中的随机性是怎么引入的？？？"><a href="#hash-function-分析中的随机性是怎么引入的？？？" class="headerlink" title="hash function 分析中的随机性是怎么引入的？？？"></a>hash function 分析中的随机性是怎么引入的？？？</h1><ol>
+<li>假设<br>至少在 simple uniform hashing 中，我们假设对于一个还没有存入到 hash table 中的 element 而言，其被存入到任何一个 hash slot 中的概率是相等的，与已经存入 hash table 中的 element 没有关系。</li>
+</ol>
+<h1 id="How-large-should-table-be-set"><a href="#How-large-should-table-be-set" class="headerlink" title="How large should table be set?"></a>How large should table be set?</h1><p>根据上面的分析，为了使得 hash 性能较好，即搜索的平均复杂度为 constant time, 就要求 hash table 的 slots 个数与存入 table 中的元素个数之间成比例。</p>
+<p>但是一开始我们不知道存入 hash table 中的元素个数，所以，基本的想法是 start small and grow (or shrink) as necessary.</p>
+<h1 id="What-job-needs-doing-to-grow-or-shrink-table"><a href="#What-job-needs-doing-to-grow-or-shrink-table" class="headerlink" title="What job needs doing to grow or shrink table???"></a>What job needs doing to grow or shrink table???</h1><p>hash function must change</p>
+<p>$\Longrightarrow$ must rebuild hash table from scratch</p>
+<h1 id="How-to-grow-or-shrink-table-linear-or-exponent"><a href="#How-to-grow-or-shrink-table-linear-or-exponent" class="headerlink" title="How to grow or shrink table(linear or exponent)?"></a>How to grow or shrink table(linear or exponent)?</h1><p>table doubling </p>
+<h1 id="How-to-determine-the-style-of-grow-or-shrink-through-Amortization-analysis"><a href="#How-to-determine-the-style-of-grow-or-shrink-through-Amortization-analysis" class="headerlink" title="How to determine the style of grow or shrink through Amortization analysis???"></a>How to determine the style of grow or shrink through Amortization analysis???</h1><h1 id="What-is-opening-address"><a href="#What-is-opening-address" class="headerlink" title="What is opening address?"></a>What is opening address?</h1><p>put the colliding elements …….</p>
+<h1 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h1><p>hash table is a generalization of array<br>hash 分析是一个难点</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/hashing-data-structure/?ref=gcse">https://www.geeksforgeeks.org/hashing-data-structure/?ref=gcse</a><br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/hashing-set-1-introduction/">https://www.geeksforgeeks.org/hashing-set-1-introduction/</a><br><a target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/d3e4d64266d481c74c9e7c15e09999fe_MIT6_006F11_lec08.pdf">https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/d3e4d64266d481c74c9e7c15e09999fe_MIT6_006F11_lec08.pdf</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/learning/" rel="tag"># learning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/01/31/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

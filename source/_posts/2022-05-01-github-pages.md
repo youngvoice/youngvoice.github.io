@@ -1,9 +1,10 @@
 ---
-titile: How use github-pages
+title: How use github-pages
 description: to use github-pages based on Jekyll or hexo
 categories:
- - tutorial
+- [tools, github pages]
 tags: [operate]
+ - tutorial
 ---
 # github pages
 ## unpublish and workflow rerun

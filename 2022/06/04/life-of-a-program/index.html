@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="the story of a whole life of program">
+<meta property="og:type" content="article">
+<meta property="og:title" content="what story a program has?">
+<meta property="og:url" content="http://example.com/2022/06/04/life-of-a-program/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="the story of a whole life of program">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-02T14:04:43.844Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="question">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/06/04/life-of-a-program/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/06/04/life-of-a-program/","path":"2022/06/04/life-of-a-program/","title":"what story a program has?"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>what story a program has? | Hexo</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hexo</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#how-do-we-use-a-computer"><span class="nav-number">1.</span> <span class="nav-text">how do we use a computer?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-the-composition-of-a-user-program"><span class="nav-number">2.</span> <span class="nav-text">what is the composition of a user program?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-a-user-process"><span class="nav-number">3.</span> <span class="nav-text">what is a user process</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-happend-when-we-run-a-program-in-linux-system"><span class="nav-number">4.</span> <span class="nav-text">what happend, when we run a program in linux system ?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-the-execute-follow-of-user-program-in-user-space"><span class="nav-number">5.</span> <span class="nav-text">what is the execute follow of user program in user space?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-is-system-calls"><span class="nav-number">5.1.</span> <span class="nav-text">what is system calls?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#why-we-not-call-syscall-directly-from-normal-program"><span class="nav-number">6.</span> <span class="nav-text">why we not call syscall directly from normal program?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-implement-syscall-in-kernel-space"><span class="nav-number">7.</span> <span class="nav-text">how to implement syscall in kernel space?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-implement-write-syscall"><span class="nav-number">7.1.</span> <span class="nav-text">how to implement write syscall?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E5%A6%82%E4%BD%95%E6%93%8D%E4%BD%9C%E6%96%87%E4%BB%B6%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">进程如何操作文件？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-will-happen-when-multiple-process-open-the-same-file-to-write"><span class="nav-number">8.1.</span> <span class="nav-text">what will happen when multiple process open the same file to write?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-the-model-of-the-file-system"><span class="nav-number">9.</span> <span class="nav-text">what is the model of the file system?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#In-order-to-run-a-program-what-the-kernel-need-to-do-get-into-through-syscall"><span class="nav-number">10.</span> <span class="nav-text">In order to run a program, what the kernel need to do(get into through syscall)?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-create-processes"><span class="nav-number">11.</span> <span class="nav-text">How to create processes?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-represent-the-process-in-kernel"><span class="nav-number">12.</span> <span class="nav-text">how to represent the process in kernel?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E%E8%BF%9B%E7%A8%8B%E6%9C%89%E5%85%B3%E7%9A%84%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84%EF%BC%9F"><span class="nav-number">13.</span> <span class="nav-text">与进程有关的组织结构？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fork%EF%BC%8Cvfork%EF%BC%8Cclone%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">14.</span> <span class="nav-text">fork，vfork，clone之间的区别是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fork-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">15.</span> <span class="nav-text">fork 系统调用如何实现？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#libc-%E4%B8%AD%E7%9A%84fork%E6%98%AF%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8-fork-syscall%EF%BC%8C-%E8%BF%98%E6%98%AF%E8%B0%83%E7%94%A8clone-%EF%BC%9F"><span class="nav-number">16.</span> <span class="nav-text">libc 中的fork是直接调用 fork syscall， 还是调用clone ？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-create-process-or-thread-through-syscall"><span class="nav-number">17.</span> <span class="nav-text">how to create process or thread through syscall?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-executable-files"><span class="nav-number">18.</span> <span class="nav-text">what is executable files?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exec-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F"><span class="nav-number">19.</span> <span class="nav-text">exec 系统调用如何实现？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-does-layout-the-new-program-segments-and-process-memory-regions"><span class="nav-number">20.</span> <span class="nav-text">how does layout the new program segments and process memory regions?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-does-linux-support-executable-formats"><span class="nav-number">21.</span> <span class="nav-text">what does linux support executable formats?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-the-linux-support-bash-script"><span class="nav-number">22.</span> <span class="nav-text">How the linux support bash script?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-the-linux-support-the-Java-program"><span class="nav-number">23.</span> <span class="nav-text">How the linux support the Java program?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-load-binary-of-binfmt-be-called"><span class="nav-number">24.</span> <span class="nav-text">How does load_binary of binfmt be called?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-the-system-state-when-multiple-process-in-progress-%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%97%B6%E6%89%A7%E8%A1%8C%E6%97%B6%E7%9A%84%E6%A0%B7%E5%AD%90%E5%A6%82%E4%BD%95%E6%8F%8F%E8%BF%B0"><span class="nav-number">25.</span> <span class="nav-text">what is the system state when multiple process in progress?(多进程同时执行时的样子如何描述)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-the-user-space-entry-for-new-process-return-from-kernel-after-exec"><span class="nav-number">26.</span> <span class="nav-text">what is the user space entry for new process return from kernel?(after exec)</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/04/life-of-a-program/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="what story a program has? | Hexo">
+      <meta itemprop="description" content="the story of a whole life of program">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          what story a program has?
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-04 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-04T00:00:00+00:00">2022-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-02 14:04:43" itemprop="dateModified" datetime="2023-02-02T14:04:43+00:00">2023-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/process/" itemprop="url" rel="index"><span itemprop="name">process</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">the story of a whole life of program</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="how-do-we-use-a-computer"><a href="#how-do-we-use-a-computer" class="headerlink" title="how do we use a computer?"></a>how do we use a computer?</h1><p>In common, we use a computer through command line or GUI, which all through program.</p>
+<h1 id="what-is-the-composition-of-a-user-program"><a href="#what-is-the-composition-of-a-user-program" class="headerlink" title="what is the composition of a user program?"></a>what is the composition of a user program?</h1><p>data and text</p>
+<h1 id="what-is-a-user-process"><a href="#what-is-a-user-process" class="headerlink" title="what is a user process"></a>what is a user process</h1><p>program + runtime context</p>
+<h1 id="what-happend-when-we-run-a-program-in-linux-system"><a href="#what-happend-when-we-run-a-program-in-linux-system" class="headerlink" title="what happend, when we run a program in linux system ?"></a>what happend, when we run a program in linux system ?</h1><ol>
+<li>the shell call exec system call enter kernel space</li>
+<li>the kernel create the process image and prepare runtime environment </li>
+<li>then switch to the new process and execute it</li>
+<li>return from kernel space and run user code</li>
+</ol>
+<p>上面的描述有问题？？？（2023.1.4）</p>
+<p>a simple shell design:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> command[];</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;user#%s&quot;</span>, command);</span><br><span class="line">        <span class="keyword">if</span> (!fork()) &#123;exec(command, <span class="literal">NULL</span>);&#125;</span><br><span class="line">        wait();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>the child process run command.</p>
+<h1 id="what-is-the-execute-follow-of-user-program-in-user-space"><a href="#what-is-the-execute-follow-of-user-program-in-user-space" class="headerlink" title="what is the execute follow of user program in user space?"></a>what is the execute follow of user program in user space?</h1><p>we can gdb debug the execute process<br>we can try to compiler the program</p>
+<p>When we do something in program, we need to use some operating system functions to access hardware or some other resources that we can’t directly to operate. The gates or interfaces are syscalls.</p>
+<p>For example:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">.global _start</span><br><span class="line">_start:</span><br><span class="line">    xorl %eax, %eax</span><br><span class="line">    movb $<span class="number">4</span>, %al</span><br><span class="line">    xorl %ebx, %ebx</span><br><span class="line">    incl %ebx</span><br><span class="line">    movl $.LC0, %ecx</span><br><span class="line">    xorl %edx, %edx</span><br><span class="line">    movb $<span class="number">13</span>, %dl</span><br><span class="line">    <span class="type">int</span> $<span class="number">0x80</span></span><br><span class="line">    xorl %eax, %eax</span><br><span class="line">    movl %eax, %ebx</span><br><span class="line">    incl %eax</span><br><span class="line">    <span class="type">int</span> $<span class="number">0x80</span></span><br><span class="line"></span><br><span class="line">.section .rodata</span><br><span class="line">.LC0:</span><br><span class="line">.<span class="built_in">string</span> <span class="string">&quot;Hello World\xa\x0&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>compile the program</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">as --32 -o hello.o hello.s</span><br><span class="line">ld -melf_i386 -o hello hello.o</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>通过strace跟踪系统调用，如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">strace hello</span><br><span class="line"></span><br><span class="line">execve(<span class="string">&quot;./hello&quot;</span>, [<span class="string">&quot;./hello&quot;</span>], 0x7fff53978d40 /* 41 vars */) = 0</span><br><span class="line">strace: [ Process PID=2500301 runs <span class="keyword">in</span> 32 bit mode. ]</span><br><span class="line">write(1, <span class="string">&quot;Hello World\n\0&quot;</span>, 13Hello World</span><br><span class="line">)         = 13</span><br><span class="line"><span class="built_in">exit</span>(0)                                 = ?</span><br><span class="line">+++ exited with 0 +++</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>可以发现打印字符串到屏幕的任务中，调用了execve, write, exit系统调用</p>
+<h2 id="what-is-system-calls"><a href="#what-is-system-calls" class="headerlink" title="what is system calls?"></a>what is system calls?</h2><p>Operating system offer processes running in User mode a set of interfaces (<strong>the most interfaces are system calls</strong>) to interact with hardware devices. Putting an extra layer between the application and the hardware has several advantages. </p>
+<p>First, it makes programming easier by freeing users from studying low-level programming characteristics of hardware devices.<br>Second, it greatly increases system security, because the kernel can check the accuracy request at the interface level before attempting to satisfy it.<br>Last but not least, these interface make program more portable, because they can be compiled and executed correctly on every kernel that offers the same set of interfaces.<br>Reference ULK.</p>
+<h1 id="why-we-not-call-syscall-directly-from-normal-program"><a href="#why-we-not-call-syscall-directly-from-normal-program" class="headerlink" title="why we not call syscall directly from normal program?"></a>why we not call syscall directly from normal program?</h1><p>lib wrapper 和 syscall 之间的对应关系<br>POSIX API<br>API(application programmer interface) is a function definition that specifies how to obtain a given service.</p>
+<p>The POSIX standard refers to API. A system can be certified as POSIX-compliant if it offers the proper set of APIs to the application program, no matter how the corresponding functions are implemented. </p>
+<p>Several non-Unix systems have been certified as POSIX-compliant, because they offer all traditional Unix services in User mode libraries.</p>
+<p>Some of the APIs defined by the libc standard C library refer to wrapper routines (routines whose only purpose is to issue a system call). Usually, each system call has a corresponding wrapper routine, which defines the API that application programs should employ. The converse is not true, by the way, an API does not necessarily correspond to a specific system call. First of all, the API could offer its services directly in User Mode. Second, a single API function could make serveral system calls. Moreover, several API functions could make the same system call, but wrap extra functionaliy around it.<br>Reference ULK.</p>
+<h1 id="how-to-implement-syscall-in-kernel-space"><a href="#how-to-implement-syscall-in-kernel-space" class="headerlink" title="how to implement syscall in kernel space?"></a>how to implement syscall in kernel space?</h1><p>就像调用了一个函数，通过传递的参数来判断执行，（系统调用号作为一个参数，在内核）<br>系统调用号与 sys_call_table (arch&#x2F;x86&#x2F;entry&#x2F;syscalls&#x2F;syscall_64.tbl)<br>syscall in kernel are a c function, so how to pass parameter and return value? (calling conventions, ABI, the specification specify store parameter in register or stack)</p>
+<h2 id="how-to-implement-write-syscall"><a href="#how-to-implement-write-syscall" class="headerlink" title="how to implement write syscall?"></a>how to implement write syscall?</h2><p>let’s directly look the kernel implement</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE3(write, <span class="type">unsigned</span> <span class="type">int</span>, fd, <span class="type">const</span> <span class="type">char</span> __user *, buf,</span><br><span class="line">                <span class="type">size_t</span>, count)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> ksys_write(fd, buf, count);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">ksys_write</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> fd, <span class="type">const</span> <span class="type">char</span> __user *buf, <span class="type">size_t</span> count)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">fd</span> <span class="title">f</span> =</span> fdget_pos(fd);</span><br><span class="line">        <span class="type">ssize_t</span> ret = -EBADF;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (f.file) &#123;</span><br><span class="line">                <span class="type">loff_t</span> pos, *ppos = file_ppos(f.file);</span><br><span class="line">                <span class="keyword">if</span> (ppos) &#123;</span><br><span class="line">                        pos = *ppos;</span><br><span class="line">                        ppos = &amp;pos;</span><br><span class="line">                &#125;</span><br><span class="line">                ret = vfs_write(f.file, buf, count, ppos);</span><br><span class="line">                <span class="keyword">if</span> (ret &gt;= <span class="number">0</span> &amp;&amp; ppos)</span><br><span class="line">                        f.file-&gt;f_pos = pos;</span><br><span class="line">                fdput_pos(f);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>writes data from a buffer declared by the user to a given device or a file.</p>
+<p>找到内核中管理文件的结构，然后将内容写入文件，再更新文件的位置指示器。</p>
+<p>fdget_pos function gets the file descriptor table of the current process, current-&gt;files , and then get the fd structure for the given file descriptor number. If there are multiple thread, then mutex_lock(&amp;file-&gt;f_pos_lock);</p>
+<p>we get the current postion in the file with the call of the file_ppos that just return f_pos field of our file.</p>
+<p>and then call the vfs_write function.</p>
+<p>we change the position in the file. That just updates f_pos with the given position in the given file</p>
+<p>finally unlocks the f_pos_lock mutex that protects file position during concurrent writes from threads that share file decriptor.</p>
+<h1 id="进程如何操作文件？"><a href="#进程如何操作文件？" class="headerlink" title="进程如何操作文件？"></a>进程如何操作文件？</h1><p>有三个数据结构将VFS和系统的进程紧密联系在一起，分别是 file_struct, fs_struct, namespace结构体</p>
+<p>关于对已打开文件的操作，首先从进程的 fdtable 中根据 fd 找到被打开文件的 struct file *file 然后进行读写操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fdget_pos(fd);</span><br><span class="line">        __fdget_pos(fd)</span><br><span class="line">                __fget_light(fd, FMODE_PATH);</span><br><span class="line">                        <span class="class"><span class="keyword">struct</span> <span class="title">files_struct</span> *<span class="title">files</span> =</span> current-&gt;files;</span><br><span class="line">                        file = files_lookup_fd_raw(files, fd);</span><br><span class="line">        __to_fd(__fdget_pos(fd));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="what-will-happen-when-multiple-process-open-the-same-file-to-write"><a href="#what-will-happen-when-multiple-process-open-the-same-file-to-write" class="headerlink" title="what will happen when multiple process open the same file to write?"></a>what will happen when multiple process open the same file to write?</h2><p>从用户层面文件是在各个进程之间共享的资源，所以，当同时多个进程打开并写入时，操作系统对写入的顺序没有任何保证，这样很可能会使输出的内容交织在一起无法辨认。</p>
+<p>note: </p>
+<ol>
+<li>程序运行会涉及到文件系统等别的子系统</li>
+</ol>
+<h1 id="what-is-the-model-of-the-file-system"><a href="#what-is-the-model-of-the-file-system" class="headerlink" title="what is the model of the file system?"></a>what is the model of the file system?</h1><p>sys_write 背后的实现逻辑是什么？</p>
+<p>首先内核将文件相关的内容分成了</p>
+<ol>
+<li>与进程相关的部分</li>
+<li>与文件系统相关的部分（与管理磁盘相关的部分）</li>
+</ol>
+<h1 id="In-order-to-run-a-program-what-the-kernel-need-to-do-get-into-through-syscall"><a href="#In-order-to-run-a-program-what-the-kernel-need-to-do-get-into-through-syscall" class="headerlink" title="In order to run a program, what the kernel need to do(get into through syscall)?"></a>In order to run a program, what the kernel need to do(get into through syscall)?</h1><p>the kernel need to handle the following things.<br>the main task is load instructions into memory and point the cpu to them.<br>and also the kernel need to deal with flexibility in several areas:</p>
+<ol>
+<li>different executable formats</li>
+<li>shared libraries</li>
+<li>other information in the execution context(command-line arguments and environment variables)</li>
+</ol>
+<h1 id="How-to-create-processes"><a href="#How-to-create-processes" class="headerlink" title="How to create processes?"></a>How to create processes?</h1><h1 id="how-to-represent-the-process-in-kernel"><a href="#how-to-represent-the-process-in-kernel" class="headerlink" title="how to represent the process in kernel?"></a>how to represent the process in kernel?</h1><p>process descriptor task_struct<br>task list</p>
+<p>task_struct 中包含了能完整描述一个正在执行的程序所包含的数据，即内核管理一个进程所需要的全部信息。</p>
+<p>打开的文件，进程的地址空间，挂起的信号，进程的状态…</p>
+<h1 id="与进程有关的组织结构？"><a href="#与进程有关的组织结构？" class="headerlink" title="与进程有关的组织结构？"></a>与进程有关的组织结构？</h1><p>(task_state)进程的状态</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> TASK_RUNNING                    0x0000</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TASK_INTERRUPTIBLE              0x0001</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TASK_UNINTERRUPTIBLE            0x0002</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __TASK_STOPPED                  0x0004</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> __TASK_TRACED                   0x0008</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>进程的家族树</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Pointers to the (original) parent process, youngest child, younger sibling,</span></span><br><span class="line"><span class="comment">* older sibling, respectively.  (p-&gt;father can be replaced with</span></span><br><span class="line"><span class="comment">* p-&gt;real_parent-&gt;pid)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Real parent process: */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> __<span class="title">rcu</span>        *<span class="title">real_parent</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Recipient of SIGCHLD, wait4() reports: */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span> __<span class="title">rcu</span>        *<span class="title">parent</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">        * Children/sibling form the list of natural children:</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span>                <span class="title">children</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">list_head</span>                <span class="title">sibling</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task_struct</span>              *<span class="title">group_leader</span>;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以猜想到在创建进程时需要完成以下的动作：</p>
+<ul>
+<li><p>分配进程内核栈 及 thread_info<br>分配进程描述符 task_struct<br>将内核栈、thread_info 和 task_struct 关联起来</p>
+</li>
+<li><p>设置进程的状态</p>
+</li>
+<li><p>设置进程上下文</p>
+</li>
+<li><p>关联进程到进程家族树</p>
+</li>
+</ul>
+<hr>
+<p>three mechanism</p>
+<ol>
+<li>The Copy on Write</li>
+<li>lightweight processes: share paging tables, the open file tables, and the signal dispositions</li>
+<li>The vfork() system call</li>
+</ol>
+<h1 id="fork，vfork，clone之间的区别是什么？"><a href="#fork，vfork，clone之间的区别是什么？" class="headerlink" title="fork，vfork，clone之间的区别是什么？"></a>fork，vfork，clone之间的区别是什么？</h1><p>lib function wrapper clone() is used to create Lightweight processes</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">clone</span><span class="params">(<span class="type">int</span> (*fn)(<span class="type">void</span> *), <span class="type">void</span> *<span class="built_in">stack</span>, <span class="type">int</span> flags, <span class="type">void</span> *arg, ...</span></span><br><span class="line"><span class="params">                 <span class="comment">/* pid_t *parent_tid, void *tls, pid_t *child_tid */</span> )</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>arguments for this function:<br>fn<br>arg<br>flags<br>child_stack<br>tls<br>ptid<br>ctid</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//sets up the stack of the new lightweight process</span></span><br><span class="line"><span class="comment">// invokes a clone() syscall hidden to the programmer</span></span><br><span class="line"><span class="comment">//save the pointer fn into the child&#x27;s stack position corresponding to the return address of the wrapper function itself;</span></span><br><span class="line"><span class="comment">// the pointer arg is saved on the child&#x27;s stack right below fn.</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>when the wrapper function terminates, the cpu fetches the return address from the stack and executes the fn(arg) function.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">clone(); <span class="comment">//wrapper function</span></span><br><span class="line"><span class="comment">// when clone() return then execute fn(arg)</span></span><br><span class="line"><span class="keyword">goto</span>: fn(arg);</span><br></pre></td></tr></table></figure>
+
+
+<p>the sys_clone() service routine does not have the fn and arg parameters.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&quot;kernel/fork.c&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __ARCH_WANT_SYS_CLONE</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_CLONE_BACKWARDS</span></span><br><span class="line">SYSCALL_DEFINE5(clone, <span class="type">unsigned</span> <span class="type">long</span>, clone_flags, <span class="type">unsigned</span> <span class="type">long</span>, newsp,</span><br><span class="line">                 <span class="type">int</span> __user *, parent_tidptr,</span><br><span class="line">                 <span class="type">unsigned</span> <span class="type">long</span>, tls,</span><br><span class="line">                 <span class="type">int</span> __user *, child_tidptr)</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> defined(CONFIG_CLONE_BACKWARDS2)</span></span><br><span class="line">SYSCALL_DEFINE5(clone, <span class="type">unsigned</span> <span class="type">long</span>, newsp, <span class="type">unsigned</span> <span class="type">long</span>, clone_flags,</span><br><span class="line">                 <span class="type">int</span> __user *, parent_tidptr,</span><br><span class="line">                 <span class="type">int</span> __user *, child_tidptr,</span><br><span class="line">                 <span class="type">unsigned</span> <span class="type">long</span>, tls)</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> defined(CONFIG_CLONE_BACKWARDS3)</span></span><br><span class="line">SYSCALL_DEFINE6(clone, <span class="type">unsigned</span> <span class="type">long</span>, clone_flags, <span class="type">unsigned</span> <span class="type">long</span>, newsp,</span><br><span class="line">                <span class="type">int</span>, stack_size,</span><br><span class="line">                <span class="type">int</span> __user *, parent_tidptr,</span><br><span class="line">                <span class="type">int</span> __user *, child_tidptr,</span><br><span class="line">                <span class="type">unsigned</span> <span class="type">long</span>, tls)</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">SYSCALL_DEFINE5(clone, <span class="type">unsigned</span> <span class="type">long</span>, clone_flags, <span class="type">unsigned</span> <span class="type">long</span>, newsp,</span><br><span class="line">                 <span class="type">int</span> __user *, parent_tidptr,</span><br><span class="line">                 <span class="type">int</span> __user *, child_tidptr,</span><br><span class="line">                 <span class="type">unsigned</span> <span class="type">long</span>, tls)</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">kernel_clone_args</span> <span class="title">args</span> =</span> &#123;</span><br><span class="line">                .flags          = (lower_32_bits(clone_flags) &amp; ~CSIGNAL),</span><br><span class="line">                .pidfd          = parent_tidptr,</span><br><span class="line">                .child_tid      = child_tidptr,</span><br><span class="line">                .parent_tid     = parent_tidptr,</span><br><span class="line">                .exit_signal    = (lower_32_bits(clone_flags) &amp; CSIGNAL),</span><br><span class="line">                .<span class="built_in">stack</span>          = newsp,</span><br><span class="line">                .tls            = tls,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> kernel_clone(&amp;args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>sys_fork and sys_vfork</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __ARCH_WANT_SYS_FORK</span></span><br><span class="line">SYSCALL_DEFINE0(fork)</span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_MMU</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">kernel_clone_args</span> <span class="title">args</span> =</span> &#123;</span><br><span class="line">                .exit_signal = SIGCHLD,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> kernel_clone(&amp;args);</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">        <span class="comment">/* can not support in nommu mode */</span></span><br><span class="line">        <span class="keyword">return</span> -EINVAL;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> __ARCH_WANT_SYS_VFORK</span></span><br><span class="line">SYSCALL_DEFINE0(vfork)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">kernel_clone_args</span> <span class="title">args</span> =</span> &#123;</span><br><span class="line">                .flags          = CLONE_VFORK | CLONE_VM,</span><br><span class="line">                .exit_signal    = SIGCHLD,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> kernel_clone(&amp;args);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="fork-系统调用如何实现？"><a href="#fork-系统调用如何实现？" class="headerlink" title="fork 系统调用如何实现？"></a>fork 系统调用如何实现？</h1><h1 id="libc-中的fork是直接调用-fork-syscall，-还是调用clone-？"><a href="#libc-中的fork是直接调用-fork-syscall，-还是调用clone-？" class="headerlink" title="libc 中的fork是直接调用 fork syscall， 还是调用clone ？"></a>libc 中的fork是直接调用 fork syscall， 还是调用clone ？</h1><p>libc 中的 fork wrapper</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">weak_alias (__libc_fork, fork)</span><br><span class="line">__libc_fork()</span><br><span class="line">        arch_fork();</span><br><span class="line">                INLINE_CLONE_SYSCALL();</span><br></pre></td></tr></table></figure>
+<p>the traditional fork() system call is implemented by Linux as a clone() system call</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//flags = flags | SIGCHLD </span></span><br><span class="line"><span class="comment">//flags = flags &amp; ~clone_flags</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// set child_stack = current parent stack, (so use the Copy On Write mechanism)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>vfork()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//flags = SIGCHLD | CLONE_VM | CLONE_VFORK</span></span><br><span class="line"><span class="comment">//child_stack = parent stack </span></span><br></pre></td></tr></table></figure>
+
+<p>kernel_clone() handles the clone(), fork(), and vfork() system calls.<br>调用 copy_process 返回新分配的子进程（子线程）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This creates a new process as a copy of the old one,</span></span><br><span class="line"><span class="comment"> * but does not actually start it yet.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * It copies the registers, and all the appropriate</span></span><br><span class="line"><span class="comment"> * parts of the process environment (as per the clone</span></span><br><span class="line"><span class="comment"> * flags). The actual kick-off is left to the caller.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">kernel_clone();</span><br><span class="line">        copy_process();</span><br><span class="line"><span class="comment">//      struct task_struct *p = copy_process();</span></span><br><span class="line">                <span class="comment">//check</span></span><br><span class="line">                dup_task_struct(); <span class="comment">//为新进程创建一个内核栈，thread_info and task_struct</span></span><br><span class="line">                <span class="comment">//设置子进程的状态为 TASK_UNINTERRUPTIBLE 保证不会被调度运行</span></span><br><span class="line">                <span class="comment">// 分配一个 PID</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="comment">//other check</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="how-to-create-process-or-thread-through-syscall"><a href="#how-to-create-process-or-thread-through-syscall" class="headerlink" title="how to create process or thread through syscall?"></a>how to create process or thread through syscall?</h1><p>从上面的分析可以看出，无论是创建线程还是创建进程，在内核中都是调用 kernel_clone() 函数, 并且 sys_clone 的参数传递最为灵活。</p>
+<h1 id="what-is-executable-files"><a href="#what-is-executable-files" class="headerlink" title="what is executable files?"></a>what is executable files?</h1><p>An executable file is a regular file that describes how to initialize a new execution context.</p>
+<h1 id="exec-系统调用如何实现？"><a href="#exec-系统调用如何实现？" class="headerlink" title="exec 系统调用如何实现？"></a>exec 系统调用如何实现？</h1><p>The exec functions is the system call that allows a process to start executing a new program<br>The sys_execve() service routine finds the corresponding file, checks the executable format, and modifies the execution context of the current process according to the information stored in it, then the process starts executing the code stored in the executable file.</p>
+<p>It replaces the shell’s arguments with new ones passed as parameters in the execve() system call and acquires a new shell environment. All pages inherited from the parent (and shared with the Copy On Write mechanism) are released so that the new computation starts with a fresh User Mode address space; even the privileges of the process could change. However, the new computation inherits from the previous one all open file descriptors that were not closed automatically.</p>
+<p>when a process is created, it always inherits the credentials of its parent. However, these credentials can be modified later, either when the process starts executing a new program or when it issues suitable system calls.</p>
+<h1 id="how-does-layout-the-new-program-segments-and-process-memory-regions"><a href="#how-does-layout-the-new-program-segments-and-process-memory-regions" class="headerlink" title="how does layout the new program segments and process memory regions?"></a>how does layout the new program segments and process memory regions?</h1><h1 id="what-does-linux-support-executable-formats"><a href="#what-does-linux-support-executable-formats" class="headerlink" title="what does linux support executable formats?"></a>what does linux support executable formats?</h1><p>In linux, an executable format is described by an object of type linux_binfmt, the type linux_binfmt defined as follow:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">linux_binfmt</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">lh</span>;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">module</span> *<span class="title">module</span>;</span></span><br><span class="line">        <span class="type">int</span> (*load_binary)(<span class="keyword">struct</span> linux_binprm *);</span><br><span class="line">        <span class="type">int</span> (*load_shlib)(<span class="keyword">struct</span> file *);</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> CONFIG_COREDUMP</span></span><br><span class="line">        <span class="type">int</span> (*core_dump)(<span class="keyword">struct</span> coredump_params *cprm);</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> min_coredump;     <span class="comment">/* minimal dump size */</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">&#125; __randomize_layout;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>binfmt essentially provides three methods:</p>
+<ol>
+<li>load_binary</li>
+<li>load_shlib</li>
+<li>core_dump</li>
+</ol>
+<p>All linux_binfmt objects are included in a singly linked list. Elements can be inserted and removed in the list by invoking the register_binfmt() and unregister_binfmt() functions.</p>
+<h1 id="How-the-linux-support-bash-script"><a href="#How-the-linux-support-bash-script" class="headerlink" title="How the linux support bash script?"></a>How the linux support bash script?</h1><p>The last element in the formats list is always an object decribing the executable format for interpreted scripts. This format defines only the load_binary method.<br>The corresponding load_script() function checks whether the executable file starts with the !# pair of characters. If so, it interprets the rest of the first line as the pathname of another executable file and tries to execute it by passing the name of the script file as a parameter.</p>
+<h1 id="How-the-linux-support-the-Java-program"><a href="#How-the-linux-support-the-Java-program" class="headerlink" title="How the linux support the Java program?"></a>How the linux support the Java program?</h1><h1 id="How-does-load-binary-of-binfmt-be-called"><a href="#How-does-load-binary-of-binfmt-be-called" class="headerlink" title="How does load_binary of binfmt be called?"></a>How does load_binary of binfmt be called?</h1><p>the kernel implement code of sys_execve() is following:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE3(execve,</span><br><span class="line">                <span class="type">const</span> <span class="type">char</span> __user *, filename,</span><br><span class="line">                <span class="type">const</span> <span class="type">char</span> __user *<span class="type">const</span> __user *, argv,</span><br><span class="line">                <span class="type">const</span> <span class="type">char</span> __user *<span class="type">const</span> __user *, envp)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> do_execve(getname(filename), argv, envp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>filename: the address of the executable file pathname<br>argv: the address of a NULL-terminated array of pointers to strings; each string represents a command-line argument.<br>envp: the address of a NULL-terminated array of pointers to strings; each string represents an environment variable in the NAME&#x3D;value format.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">do_execve()</span><br><span class="line">        do_execveat_common()</span><br><span class="line">                bprm_execve()</span><br><span class="line">                        sched_exec()</span><br><span class="line">                        exec_binprm()</span><br><span class="line">                                search_binary_handler()</span><br><span class="line">                                        load_binary()</span><br></pre></td></tr></table></figure>
+
+<p>search_binary_handler()<br>the function scans the formats list and tries to apply the load_binary method of each element, passing to it the linux_binprm data structure. The scan of the formats list terminates as soon as a load_binary method succeeds in acknowledging the executable format of the file.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">load_elf_binary()</span><br><span class="line">        <span class="comment">/* Flush all traces of the currently running executable */</span></span><br><span class="line">        begin_new_exec();</span><br><span class="line">        setup_new_exec();</span><br><span class="line">        setup_arg_pages();</span><br><span class="line">        <span class="comment">/* Now we do a little grungy work by mmapping the ELF image into </span></span><br><span class="line"><span class="comment">         * the correct location in memory. </span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Sets the values of the start_code, end_code, start_data, end_data, </span></span><br><span class="line"><span class="comment">         * start_brk, brk, and start_stack fields of the process&#x27;s memory descriptor  </span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Calling set_brk effectively mmaps the pages that we need</span></span><br><span class="line"><span class="comment">         * for the bss and break sections.  We must do this before</span></span><br><span class="line"><span class="comment">         * mapping in the interpreter, to make sure it doesn&#x27;t wind</span></span><br><span class="line"><span class="comment">         * up getting placed where the bss needs to go.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        set_brk();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (interpreter) load_elf_interp();</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment">/* stores in the binfmt field of the process decriptor the address of the </span></span><br><span class="line"><span class="comment">         * linux_binfmt object of the executable format </span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line">        set_binfmt();</span><br><span class="line">        create_elf_tables();</span><br><span class="line">        finalize_exec();</span><br><span class="line">        START_THREAD();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>First of all, some simple consistency checks<br>Some simple consistency checks for the interpreter<br>Flush all traces of the currently running executable</p>
+<h1 id="what-is-the-system-state-when-multiple-process-in-progress-多进程同时执行时的样子如何描述"><a href="#what-is-the-system-state-when-multiple-process-in-progress-多进程同时执行时的样子如何描述" class="headerlink" title="what is the system state when multiple process in progress?(多进程同时执行时的样子如何描述)"></a>what is the system state when multiple process in progress?(多进程同时执行时的样子如何描述)</h1><h1 id="what-is-the-user-space-entry-for-new-process-return-from-kernel-after-exec"><a href="#what-is-the-user-space-entry-for-new-process-return-from-kernel-after-exec" class="headerlink" title="what is the user space entry for new process return from kernel?(after exec)"></a>what is the user space entry for new process return from kernel?(after exec)</h1><ol>
+<li>statically linked program<br>user program entry.</li>
+<li>dynamically linked program<br>first run dynamic linker, then transfer control to user program entry.</li>
+</ol>
+<p>Update 2022&#x2F;6&#x2F;25</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>John Doe
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="http://example.com/2022/06/04/life-of-a-program/" title="what story a program has?">http://example.com/2022/06/04/life-of-a-program/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/question/" rel="tag"># question</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/31/github-flow/" rel="prev" title="github work flow">
+                  <i class="fa fa-chevron-left"></i> github work flow
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/26/file-system/" rel="next" title="what mechanism exists back in file system?">
+                  what mechanism exists back in file system? <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

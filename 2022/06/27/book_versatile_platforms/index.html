@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="虚拟机需要解决哪些问题？虚拟机用来解释执行汇编指令， 都有哪些汇编指令需要处理？？？2022.4.102.1 Basic interpretationdecode-and-dispatchcomplete architected state of a machine implementing the source ISA, including all architected registers a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I am thinking...">
+<meta property="og:url" content="https://youngvoice.github.io/2022/06/27/book_versatile_platforms/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="虚拟机需要解决哪些问题？虚拟机用来解释执行汇编指令， 都有哪些汇编指令需要处理？？？2022.4.102.1 Basic interpretationdecode-and-dispatchcomplete architected state of a machine implementing the source ISA, including all architected registers a">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-27T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T09:23:00.635Z">
+<meta property="article:author" content="youngvoice">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2022/06/27/book_versatile_platforms/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2022/06/27/book_versatile_platforms/","path":"2022/06/27/book_versatile_platforms/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%9C%80%E8%A6%81%E8%A7%A3%E5%86%B3%E5%93%AA%E4%BA%9B%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">虚拟机需要解决哪些问题？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%E9%9C%80%E8%A6%81%E5%A4%84%E7%90%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">都有哪些汇编指令需要处理？？？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-Three-Process-virtual-machines"><span class="nav-number">2.</span> <span class="nav-text">Chapter Three Process virtual machines</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#some-key-problem"><span class="nav-number">2.1.</span> <span class="nav-text">some key problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Instruction-emulation"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. Instruction emulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Exception-emulation"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. Exception emulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Operating-system-emulation"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. Operating system emulation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-can-we-run-programs-that-have-been-compiled-for-the-operating-system-and-processor%E2%80%99s-instruction-set-that-different-from-the-user%E2%80%99s-on-the-user%E2%80%99s-platform"><span class="nav-number">3.</span> <span class="nav-text">how can we run programs that have been compiled for the operating system and processor’s instruction set that different from the user’s on the user’s platform?</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2022/06/27/book_versatile_platforms/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-27 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-27T00:00:00+00:00">2022-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-04 09:23:00" itemprop="dateModified" datetime="2023-02-04T09:23:00+00:00">2023-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="虚拟机需要解决哪些问题？"><a href="#虚拟机需要解决哪些问题？" class="headerlink" title="虚拟机需要解决哪些问题？"></a>虚拟机需要解决哪些问题？</h1><p>虚拟机用来解释执行汇编指令，</p>
+<h2 id="都有哪些汇编指令需要处理？？？"><a href="#都有哪些汇编指令需要处理？？？" class="headerlink" title="都有哪些汇编指令需要处理？？？"></a>都有哪些汇编指令需要处理？？？</h2><p>2022.4.10<br>2.1 Basic interpretation<br>decode-and-dispatch<br>complete architected state of a machine implementing the source ISA, including all architected registers and main memory.</p>
+<p>2.2 threaded interpretation<br>2.3 predecoding and direct threaded interpretation<br>centralized dispatch table</p>
+<p>2022.4.11<br>2.5 Binary translation<br>Figure 2.18 illustrates state mapping. Here, some of the target ISA registers point to memory image and register block of source ISA. In addition, some of the target registers are mapped directly to some of the source registers; that is, source values are maintained in target register. Other portions of the source state, such as the program counter and the stack pointer, may also be held in target registers. After mapping is performed, some target<br>registers should be left over for use by the emulator code. Further discussion of register state mapping is in Section 2.8.1.</p>
+<p>2.6<br>2.6.1 The code-discovery problem<br>Figure 2.21 Causes of the Instruction discovery problem</p>
+<p>2.6.2 The code-location problem<br>translated code is accessed with a target program counter(TPC), which is different from the architected source program counter(SPC).<br>the target code cannot jump to a source code location, Figure 2.22<br>2.6.3 incremental predecoding and translation<br>Figure 2.23 overview of dynamic translation system<br>emulation manager<br>code cache<br>map table: associate the SPC for a block of source code with the TPC for the corresponding block of translated code.<br>dynamic basic block &#x2F; static basic block</p>
+<p><strong>Tracking the source program code</strong><br>One way of doing this is to map the SPC to a register on the host platform, with the register being updated either at each translated instruction or at the end of each translated block (as in Figure 2.19). Another possibility is shown in Figure 2.27. Here the value of the next SPC is placed in a “stub” at the end of the translated block. When the translated block finishes, control is transferred back to the EM using a jump-and-link (JAL) instruction. The link register can then be used by the EM to access the SPC from the end of the translated code block (Cmelik and Keppel 1994).</p>
+<p>2022.4.12<br>2.7 Control transfer optimizations<br>eliminating the need to go through the EM between every pair of translation blocks.<br>2.7.1 Translation chaining<br>these are situations where the destination of a branch or jump never changes.<br>2.7.2 software indirect jump prediction<br>the comparisons are ordered, with the most frequent SPC destination address being given first.<br>2.7.3 shadow stack<br>Figure 2.33<br>The IA-32 return address is loaded from the emulated IA-32 stack. This address is compared with the IA-32 return address saved on the shadow stack. If these match, then the shadow stack PowerPC return value can be used to jump to the return translation block.</p>
+<p>2022.4.13</p>
+<p>2.8 Instruction set issues<br>complete instruction set</p>
+<p>2.8.1 Register Architectures<br>If the number of target registers is significantly larger than the number of source registers.<br>although the condition code values are set frequently, they are seldom used.<br>2.8.2 Condition codes<br>lazy evaluation: the operands and operation that set the condition code, rather than the condition code setting themselves, are saved.<br>During binary translation, the translator can analyze sequences of instructions to determine whether implicitly set condition codes will actually be used.</p>
+<p>2.8.3 Data Formats and Arithmetic<br>addressing modes<br>2.8.4 Memory Address Resolution<br>bytes, halfwords, and full words<br>2.8.5 Memory data alignment<br>2.8.6 Byte order<br>order bytes within a word<br>How Byte order influence the char string store?<br>system call<br>2.8.7 Addressing Architecture<br>address space</p>
+<p>2022.04.15</p>
+<h1 id="Chapter-Three-Process-virtual-machines"><a href="#Chapter-Three-Process-virtual-machines" class="headerlink" title="Chapter Three Process virtual machines"></a>Chapter Three Process virtual machines</h1><h2 id="some-key-problem"><a href="#some-key-problem" class="headerlink" title="some key problem"></a>some key problem</h2><h3 id="1-Instruction-emulation"><a href="#1-Instruction-emulation" class="headerlink" title="1. Instruction emulation"></a>1. Instruction emulation</h3><h3 id="2-Exception-emulation"><a href="#2-Exception-emulation" class="headerlink" title="2. Exception emulation"></a>2. Exception emulation</h3><h3 id="3-Operating-system-emulation"><a href="#3-Operating-system-emulation" class="headerlink" title="3. Operating system emulation"></a>3. Operating system emulation</h3><h1 id="how-can-we-run-programs-that-have-been-compiled-for-the-operating-system-and-processor’s-instruction-set-that-different-from-the-user’s-on-the-user’s-platform"><a href="#how-can-we-run-programs-that-have-been-compiled-for-the-operating-system-and-processor’s-instruction-set-that-different-from-the-user’s-on-the-user’s-platform" class="headerlink" title="how can we run programs that have been compiled for the operating system and processor’s instruction set that different from the user’s on the user’s platform?"></a>how can we run programs that have been compiled for the operating system and processor’s instruction set that different from the user’s on the user’s platform?</h1><p>provide a virtual environment at the program, or process, level.</p>
+<p>computer programs are compiled, distributed, and stored as executable binaries that comform to a specific application binary interface(ABI)(includes features of both the hardware instruction set and the operating system)</p>
+<p>IA-32 EL(execution layer)<br>Figure 3.1<br>two perspective: </p>
+<ol>
+<li>guest process </li>
+<li>host system</li>
+</ol>
+<p><strong>the guest process run above ABI, so the VM need to provide support the guest ABI.</strong></p>
+<p>major aspects of a process VM<br>mapping of guest state to host state<br>emulation of the memory-addressing architecture,<br>instructions,<br>exceptions,<br>operating system calls.</p>
+<p>code cache management techniques</p>
+<p>3.1 Virtual Machine Implement<br>Figure3.2</p>
+<p>OS call emulator and Exception Emulation (ref a thesis???)</p>
+<p>3.2 Compatibility<br>Figure 3.3<br>Figure 3.4<br>control transfer(user –&gt; os , os —&gt; user)<br>user managed state<br>os managed state<br>3.3 State mapping<br>resource mapping<br>registers and memory<br>3.3.2 Memory address space mapping<br>runtime managed translation table</p>
+<p>3.5 Instruction Emulation<br>the integration of instruction emulation into an overall VM.<br>For optimal performance, the emulaiton engine typically combines multiple emulation methods.<br>Figure 3.17</p>
+<p>signal对user application的意义是什么？<br>应用程序和操作系统的交互：syscall signal</p>
+<p>3.9 System Environment<br>we consider the integration of guest processes into the host system environment.</p>
+<p>为了理解我们需要emulation的接口，我们重新看 ISA Bridging with callback(9513977)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2022/06/27/book_versatile_platforms/" title="">https://youngvoice.github.io/2022/06/27/book_versatile_platforms/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/26/file-system/" rel="prev" title="what mechanism exists back in file system?">
+                  <i class="fa fa-chevron-left"></i> what mechanism exists back in file system?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/29/snapshot_of_address_space/" rel="next" title="argc, argv, envp, auxiliary vector">
+                  argc, argv, envp, auxiliary vector <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

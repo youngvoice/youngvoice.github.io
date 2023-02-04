@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="mit 6.828 lab1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6.828 JOS lab1">
+<meta property="og:url" content="https://youngvoice.github.io/2022/09/04/6-828-1/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="mit 6.828 lab1">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T09:23:00.635Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="learning">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2022/09/04/6-828-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2022/09/04/6-828-1/","path":"2022/09/04/6-828-1/","title":"6.828 JOS lab1"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>6.828 JOS lab1 | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-redirect-serial-port-to-host-terminal"><span class="nav-number">1.</span> <span class="nav-text">how to redirect serial port to host terminal?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E4%B8%8A%E7%AC%AC%E4%B8%80%E4%B8%AAsector%E4%B8%8E-master-boot-record%E6%98%AF%E4%BB%80%E4%B9%88%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">磁盘上第一个sector与 master boot record是什么关系？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-the-segmented-address-0xf000-fff0-turn-into-a-physical-address"><span class="nav-number">3.</span> <span class="nav-text">How does the segmented address 0xf000:fff0 turn into a physical address?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-the-BIOS-does-summary"><span class="nav-number">4.</span> <span class="nav-text">What the BIOS does? (summary)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-will-run-after-BIOS-boot-loader"><span class="nav-number">5.</span> <span class="nav-text">What will run after BIOS?(boot loader)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-Bootloader-does"><span class="nav-number">6.</span> <span class="nav-text">What Bootloader does?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#load-ELF-kernel-image"><span class="nav-number">7.</span> <span class="nav-text">load ELF kernel image?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90-ELF-%E6%96%87%E4%BB%B6%E6%97%B6%EF%BC%8C%E5%93%AA%E4%BA%9B%E4%BF%A1%E6%81%AF%E5%B0%86%E4%BC%9A%E5%BD%B1%E5%93%8D%E5%A4%B4%E9%83%A8%E4%BF%A1%E6%81%AF%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">生成 ELF 文件时，哪些信息将会影响头部信息？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-print-information-to-console"><span class="nav-number">9.</span> <span class="nav-text">How to print information to console?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exercise"><span class="nav-number">10.</span> <span class="nav-text">Exercise</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2022/09/04/6-828-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="6.828 JOS lab1 | I am thinking...">
+      <meta itemprop="description" content="mit 6.828 lab1">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          6.828 JOS lab1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-04 00:00:00" itemprop="dateCreated datePublished" datetime="2022-09-04T00:00:00+00:00">2022-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-04 09:23:00" itemprop="dateModified" datetime="2023-02-04T09:23:00+00:00">2023-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/operating-system/" itemprop="url" rel="index"><span itemprop="name">operating system</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/operating-system/JOS-series/" itemprop="url" rel="index"><span itemprop="name">JOS series</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">mit 6.828 lab1</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>qemu</p>
+<p>console</p>
+<h1 id="how-to-redirect-serial-port-to-host-terminal"><a href="#how-to-redirect-serial-port-to-host-terminal" class="headerlink" title="how to redirect serial port to host terminal?"></a>how to redirect serial port to host terminal?</h1><p>serial port(how to redirect to host terminal???)</p>
+<h1 id="磁盘上第一个sector与-master-boot-record是什么关系？"><a href="#磁盘上第一个sector与-master-boot-record是什么关系？" class="headerlink" title="磁盘上第一个sector与 master boot record是什么关系？"></a>磁盘上第一个sector与 master boot record是什么关系？</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">start point in 16 bit code mode(real mode)</span><br><span class="line">+----------------------+ &lt;- 0x100000 (1MB)</span><br><span class="line">|        .             |</span><br><span class="line">| ljmp $0xf000,$0xe05b | &lt;- 0xffff0   &lt;=== initial PC</span><br><span class="line">|        .             |</span><br><span class="line">|        .             |</span><br><span class="line">|        .             |</span><br><span class="line">|    BIOS ROM          |</span><br><span class="line">|                      |</span><br><span class="line">|        .             |</span><br><span class="line">|        .             |</span><br><span class="line">|        .             |</span><br><span class="line">+----------------------+ &lt;- 0x000F0000 (960KB)</span><br></pre></td></tr></table></figure>
+<p>The BIOS in a PC is “hard-wired” to the physical address range 0x000f0000 - 0x000fffff, so that ensures that the BIOS always gets control of the machine first after power-up or any system restart.</p>
+<h1 id="How-does-the-segmented-address-0xf000-fff0-turn-into-a-physical-address"><a href="#How-does-the-segmented-address-0xf000-fff0-turn-into-a-physical-address" class="headerlink" title="How does the segmented address 0xf000:fff0 turn into a physical address?"></a>How does the segmented address 0xf000:fff0 turn into a physical address?</h1><p>CS&#x3D;0xf000<br>IP&#x3D;0xfff0</p>
+<p>real mode addressing<br>$$<br>\text{physical address} &#x3D; 16*segment + offset<br>$$</p>
+<p>so the start point compute as follow:<br>$$<br>\begin{aligned}<br>&amp;16*0xf000 + 0xfff0 \<br>&amp;&#x3D; 0xf0000 + 0xfff0 \<br>&amp;&#x3D; 0xffff0<br>\end{aligned}<br>$$</p>
+<h1 id="What-the-BIOS-does-summary"><a href="#What-the-BIOS-does-summary" class="headerlink" title="What the BIOS does? (summary)"></a>What the BIOS does? (summary)</h1><p>It sets up an interrupt descriptor table and initializes various devices such as the VGA display, PCI  and disk etc. After that, it searches for a bootable device such as a floppy, hard drive, or CD-ROM. When it finds a bootable disk, the BIOS reads the boot loader from the disk and transfers control to it.</p>
+<h1 id="What-will-run-after-BIOS-boot-loader"><a href="#What-will-run-after-BIOS-boot-loader" class="headerlink" title="What will run after BIOS?(boot loader)"></a>What will run after BIOS?(boot loader)</h1><p>512 byte<br>sector<br>boot sector<br>boot loader code<br>bootable device(floppy or hard disk or CD-ROM)<br>0x7c00 - 0x7dff</p>
+<p>boot&#x2F;boot.S<br>boot&#x2F;main.c</p>
+<h1 id="What-Bootloader-does"><a href="#What-Bootloader-does" class="headerlink" title="What Bootloader does?"></a>What Bootloader does?</h1><ol>
+<li>switches the processor from real mode to 32-bit protected mode</li>
+<li>reads the kernel from the hard disk</li>
+</ol>
+<p>Boot Up Steps</p>
+<ol>
+<li><p>When the CPU boots it loads the BIOS into memory (0xf000:fff0) and executes it.</p>
+</li>
+<li><p>The BIOS initializes devices, sets of the interrupt routines, and reads the first sector of the boot device into memory (0x7c00) and jumps to it.</p>
+</li>
+<li><p>Control starts in bootloader(boot.S) which sets up protected mode, and a stack so C code can then run, and call bootmain().</p>
+</li>
+<li><p>bootmain() takes over, reads in the kernel image and jumps to it.</p>
+</li>
+</ol>
+<h1 id="load-ELF-kernel-image"><a href="#load-ELF-kernel-image" class="headerlink" title="load ELF kernel image?"></a>load ELF kernel image?</h1><p>how to find the elf head?(second disk sector)<br>how to decide the size of the image?<br>how to decide the start point of the image?</p>
+<p>首先将 kernel ELF image 写到磁盘从第二个 sector 开始的位置。<br>然后在读取时，先读 image 的文件头部，根据文件头部信息读取其他相关部分。</p>
+<p>通过 .&#x2F;obj&#x2F;boot&#x2F;boot.asm 可以看出 boot loader 的大小为 (0x7d9a - 0x7c00) 小于 512 byte</p>
+<p>readseg 读取 segment<br>readsect 读取 一个 sector</p>
+<h1 id="生成-ELF-文件时，哪些信息将会影响头部信息？"><a href="#生成-ELF-文件时，哪些信息将会影响头部信息？" class="headerlink" title="生成 ELF 文件时，哪些信息将会影响头部信息？"></a>生成 ELF 文件时，哪些信息将会影响头部信息？</h1><p>kernel elf image 的文件头部记录着内核的入口函数的位置 </p>
+<p>“.&#x2F;kern&#x2F;kernel.ld”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRY(_start)</span><br></pre></td></tr></table></figure>
+
+<p>“kern&#x2F;entry.S”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">###################################################################</span><br><span class="line"># The kernel (this code) is linked at address ~(KERNBASE + 1 Meg),</span><br><span class="line"># but the bootloader loads it at address ~1 Meg.</span><br><span class="line">#</span><br><span class="line"># RELOC(x) maps a symbol x from its link address to its actual</span><br><span class="line"># location in physical memory (its load address).</span><br><span class="line">###################################################################</span><br><span class="line"></span><br><span class="line">#define RELOC(x) ((x) - KERNBASE)</span><br><span class="line"></span><br><span class="line">.globl          _start</span><br><span class="line">_start = RELOC(entry)</span><br></pre></td></tr></table></figure>
+
+
+<p>linear address &#x2F; physical address<br>boot&#x2F;boot.S set up an identity mapping from linear addresses to physical addresses and we’re never going to change that</p>
+<h1 id="How-to-print-information-to-console"><a href="#How-to-print-information-to-console" class="headerlink" title="How to print information to console?"></a>How to print information to console?</h1><p>kern&#x2F;printf.c 定义 high level interface to I&#x2F;O subsystem.<br>lib&#x2F;printfmt.c 将要打印的变量等信息进行格式化处理。<br>kern&#x2F;console.c 处理系统中与 I&#x2F;O 硬件相关的操作，比如 vga，串口等硬件设备</p>
+<h1 id="Exercise"><a href="#Exercise" class="headerlink" title="Exercise"></a>Exercise</h1><p>Exercise 8.<br>修改后的处理 “%o” pattern 的代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span></span><br><span class="line"><span class="title function_">vprintfmt</span><span class="params">(<span class="type">void</span> (*putch)(<span class="type">int</span>, <span class="type">void</span>*), <span class="type">void</span> *putdat, <span class="type">const</span> <span class="type">char</span> *fmt, va_list ap)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// (unsigned) octal</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;o&#x27;</span>:</span><br><span class="line">            <span class="comment">// Replace this with your code.</span></span><br><span class="line">            putch(<span class="string">&#x27;0&#x27;</span>, putdat);</span><br><span class="line">            num = getuint(&amp;ap, lflag);</span><br><span class="line">            base = <span class="number">8</span>;</span><br><span class="line">            <span class="keyword">goto</span> number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>some questions?<br>question 1<br>waiting for drawing graph …</p>
+<p>question 2<br>下面的代码表示 Text-mode CGA&#x2F;VGA display 向上移动一行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// What is the purpose of this?</span></span><br><span class="line"><span class="keyword">if</span> (crt_pos &gt;= CRT_SIZE) &#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">        memmove(crt_buf, crt_buf + CRT_COLS, (CRT_SIZE - CRT_COLS) * <span class="keyword">sizeof</span>(<span class="type">uint16_t</span>));</span><br><span class="line">        <span class="keyword">for</span> (i = CRT_SIZE - CRT_COLS; i &lt; CRT_SIZE; i++)</span><br><span class="line">                crt_buf[i] = <span class="number">0x0700</span> | <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        crt_pos -= CRT_COLS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>question 3</p>
+<p>cprintf(“x %d, y %x, z %d\n”, x, y, z);</p>
+<p>当执行上面的打印语句时，在 cprintf() 函数内，将 ap 通过 va_start(ap, fmt); 初始化成指向 cprintf() 函数栈上 x 变量处，接着调用 vcprintf() , vprintfmt() , 在函数 vprintfmt() 内，对 fmt 指向的格式化字符串逐个处理，当遇到普通字符则调用 putch 直接将其输出，当遇到格式化字符，则用 va_arg() 按指定的格式取出 ap 所指向的参数值，并将 ap 按所取参数的大小向前移动，使其指向下一个参数，将所取得的参数通过 putch 打印出来，接着处理下一个格式字串 fmt 中的字符。</p>
+<p>question 4<br>little-endian &#x2F; big-endian</p>
+<p>question 5<br>question 6<br>variable number of arguments</p>
+<p>The Stack</p>
+<p>Exercise 9</p>
+<p>对于内核启动是用到的栈是在程序中静态分配的，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">###################################################################</span><br><span class="line"># boot stack</span><br><span class="line">###################################################################</span><br><span class="line">        .p2align        PGSHIFT         # force page alignment</span><br><span class="line">        .globl          bootstack</span><br><span class="line">bootstack:</span><br><span class="line">        .space          KSTKSIZE</span><br><span class="line">        .globl          bootstacktop</span><br><span class="line">bootstacktop:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>并且让 ESP 指向该区域的高地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Clear the frame pointer register (EBP)</span><br><span class="line"># so that once we get into debugging C code,</span><br><span class="line"># stack backtraces will be terminated properly.</span><br><span class="line">movl    $0x0,%ebp                       # nuke frame pointer</span><br><span class="line"></span><br><span class="line"># Set the stack pointer</span><br><span class="line">movl    $(bootstacktop),%esp</span><br><span class="line"></span><br><span class="line"># now to C code</span><br><span class="line">call    i386_init</span><br></pre></td></tr></table></figure>
+
+<p>Exercise 10<br>gdb 有没有什么办法可以直接查看程序的栈的状态</p>
+<p>Exercise 11<br>首先，看看内存空间的状态：</p>
+<ol>
+<li>boot&#x2F;boot.S set up an identity mapping from linear addresses to physical addresses </li>
+<li>entry_pgdir</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>physical memory</th>
+<th>virtual memory</th>
+<th>comments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[0, 4MB)</td>
+<td>[0, 4MB)</td>
+<td>this region is critical for a few instructions in entry.S and we never use it again</td>
+</tr>
+<tr>
+<td>[0, 4MB)</td>
+<td>[KERNBASE, KERNBASE+4MB)</td>
+<td>We choose 4MB because that’s how much we can map with one page table and it’s enough to get us through early boot</td>
+</tr>
+</tbody></table>
+<p>kern&#x2F;monitor.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">mon_backtrace</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv, <span class="keyword">struct</span> Trapframe *tf)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line"></span><br><span class="line">        <span class="type">uint32_t</span> *ebp, *eip, off;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">        ebp = (<span class="type">uint32_t</span> *)read_ebp();</span><br><span class="line">        cprintf(<span class="string">&quot;Stack backtrace:\n&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (ebp != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="comment">//cprintf(&quot;ebp %08x &quot;, ebp);</span></span><br><span class="line">                <span class="comment">//eip = ebp[1];</span></span><br><span class="line">                cprintf(<span class="string">&quot;ebp %08x &quot;</span>, (<span class="type">uint32_t</span>)ebp);</span><br><span class="line">                cprintf(<span class="string">&quot;eip %08x &quot;</span>, ebp[<span class="number">1</span>]);</span><br><span class="line">                <span class="comment">//cprintf(&quot;eip %p &quot;, eip);</span></span><br><span class="line">                cprintf(<span class="string">&quot;args %08x &quot;</span>, ebp[<span class="number">2</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x &quot;</span>, ebp[<span class="number">3</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x &quot;</span>, ebp[<span class="number">4</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x &quot;</span>, ebp[<span class="number">5</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x\n&quot;</span>, ebp[<span class="number">6</span>]);</span><br><span class="line">                </span><br><span class="line">                ebp = (<span class="type">uint32_t</span> *)ebp[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Note:  the optimization level is related to the function read_ebp() (to be function call or to be inline)</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS := <span class="variable">$(CFLAGS)</span> <span class="variable">$(DEFS)</span> <span class="variable">$(LABDEFS)</span> -O1 -fno-builtin -I<span class="variable">$(TOP)</span> -MD</span><br></pre></td></tr></table></figure>
+
+<p>Exercise 12</p>
+<p>looks up eip in the symbol table</p>
+<p>kern&#x2F;monitor.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">mon_backtrace</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv, <span class="keyword">struct</span> Trapframe *tf)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line"></span><br><span class="line">        <span class="type">uint32_t</span> *ebp, *eip, off;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Eipdebuginfo</span> <span class="title">info</span>;</span></span><br><span class="line">        ebp = (<span class="type">uint32_t</span> *)read_ebp();</span><br><span class="line">        cprintf(<span class="string">&quot;Stack backtrace:\n&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (ebp != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="comment">//cprintf(&quot;ebp %08x &quot;, ebp);</span></span><br><span class="line">                <span class="comment">//eip = ebp[1];</span></span><br><span class="line">                cprintf(<span class="string">&quot;ebp %08x &quot;</span>, (<span class="type">uint32_t</span>)ebp);</span><br><span class="line">                cprintf(<span class="string">&quot;eip %08x &quot;</span>, ebp[<span class="number">1</span>]);</span><br><span class="line">                <span class="comment">//cprintf(&quot;eip %p &quot;, eip);</span></span><br><span class="line">                cprintf(<span class="string">&quot;args %08x &quot;</span>, ebp[<span class="number">2</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x &quot;</span>, ebp[<span class="number">3</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x &quot;</span>, ebp[<span class="number">4</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x &quot;</span>, ebp[<span class="number">5</span>]);</span><br><span class="line">                cprintf(<span class="string">&quot;%08x\n&quot;</span>, ebp[<span class="number">6</span>]);</span><br><span class="line">                <span class="keyword">if</span> (debuginfo_eip(ebp[<span class="number">1</span>], &amp;info) == <span class="number">0</span>) &#123;</span><br><span class="line">                        cprintf(<span class="string">&quot;\t%s:&quot;</span>, info.eip_file);</span><br><span class="line">                        cprintf(<span class="string">&quot;%d: &quot;</span>, info.eip_line);</span><br><span class="line">                        cprintf(<span class="string">&quot;%.*s+&quot;</span>, info.eip_fn_namelen, info.eip_fn_name);</span><br><span class="line">                        <span class="comment">//cprintf(&quot;%s+&quot;, info.eip_fn_name);</span></span><br><span class="line">                        off = ebp[<span class="number">1</span>] - info.eip_fn_addr;</span><br><span class="line">                        cprintf(<span class="string">&quot;%d\n&quot;</span>, off);</span><br><span class="line">                &#125;</span><br><span class="line">                ebp = (<span class="type">uint32_t</span> *)ebp[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>kern&#x2F;monitor.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">Command</span> <span class="title">commands</span>[] =</span> &#123;</span><br><span class="line">       &#123; <span class="string">&quot;help&quot;</span>, <span class="string">&quot;Display this list of commands&quot;</span>, mon_help &#125;,</span><br><span class="line">       &#123; <span class="string">&quot;kerninfo&quot;</span>, <span class="string">&quot;Display information about the kernel&quot;</span>, mon_kerninfo &#125;,</span><br><span class="line">       &#123; <span class="string">&quot;backtrace&quot;</span>, <span class="string">&quot;Stack backtrace:&quot;</span>, mon_backtrace &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>kern&#x2F;kdebug.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span></span><br><span class="line"><span class="title function_">debuginfo_eip</span><span class="params">(<span class="type">uintptr_t</span> addr, <span class="keyword">struct</span> Eipdebuginfo *info)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">Stab</span> *<span class="title">stabs</span>, *<span class="title">stab_end</span>;</span></span><br><span class="line">        <span class="type">const</span> <span class="type">char</span> *stabstr, *stabstr_end;</span><br><span class="line">        <span class="type">int</span> lfile, rfile, lfun, rfun, lline, rline;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Initialize *info</span></span><br><span class="line">        info-&gt;eip_file = <span class="string">&quot;&lt;unknown&gt;&quot;</span>;</span><br><span class="line">        info-&gt;eip_line = <span class="number">0</span>;</span><br><span class="line">        info-&gt;eip_fn_name = <span class="string">&quot;&lt;unknown&gt;&quot;</span>;</span><br><span class="line">        info-&gt;eip_fn_namelen = <span class="number">9</span>;</span><br><span class="line">        info-&gt;eip_fn_addr = addr;</span><br><span class="line">        info-&gt;eip_fn_narg = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Find the relevant set of stabs</span></span><br><span class="line">        <span class="keyword">if</span> (addr &gt;= ULIM) &#123;</span><br><span class="line">                stabs = __STAB_BEGIN__;</span><br><span class="line">                stab_end = __STAB_END__;</span><br><span class="line">                stabstr = __STABSTR_BEGIN__;</span><br><span class="line">                stabstr_end = __STABSTR_END__;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// Can&#x27;t search for user-level addresses yet!</span></span><br><span class="line">                panic(<span class="string">&quot;User address&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// String table validity checks</span></span><br><span class="line">        <span class="keyword">if</span> (stabstr_end &lt;= stabstr || stabstr_end[<span class="number">-1</span>] != <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// Now we find the right stabs that define the function containing</span></span><br><span class="line">        <span class="comment">// &#x27;eip&#x27;.  First, we find the basic source file containing &#x27;eip&#x27;.</span></span><br><span class="line">        <span class="comment">// Then, we look in that source file for the function.  Then we look</span></span><br><span class="line">        <span class="comment">// for the line number.</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Search the entire set of stabs for the source file (type N_SO).</span></span><br><span class="line">        lfile = <span class="number">0</span>;</span><br><span class="line">        rfile = (stab_end - stabs) - <span class="number">1</span>;</span><br><span class="line">        stab_binsearch(stabs, &amp;lfile, &amp;rfile, N_SO, addr);</span><br><span class="line">        <span class="keyword">if</span> (lfile == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Search within that file&#x27;s stabs for the function definition</span></span><br><span class="line">        <span class="comment">// (N_FUN).</span></span><br><span class="line">        lfun = lfile;</span><br><span class="line">        rfun = rfile;</span><br><span class="line">        stab_binsearch(stabs, &amp;lfun, &amp;rfun, N_FUN, addr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (lfun &lt;= rfun) &#123;</span><br><span class="line">                <span class="comment">// stabs[lfun] points to the function name</span></span><br><span class="line">                <span class="comment">// in the string table, but check bounds just in case.</span></span><br><span class="line">                <span class="keyword">if</span> (stabs[lfun].n_strx &lt; stabstr_end - stabstr)</span><br><span class="line">                        info-&gt;eip_fn_name = stabstr + stabs[lfun].n_strx;</span><br><span class="line">                info-&gt;eip_fn_addr = stabs[lfun].n_value;</span><br><span class="line">                addr -= info-&gt;eip_fn_addr;</span><br><span class="line">                <span class="comment">// Search within the function definition for the line number.</span></span><br><span class="line">                lline = lfun;</span><br><span class="line">                rline = rfun;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// Couldn&#x27;t find function stab!  Maybe we&#x27;re in an assembly</span></span><br><span class="line">                <span class="comment">// file.  Search the whole file for the line number.</span></span><br><span class="line">                info-&gt;eip_fn_addr = addr;</span><br><span class="line">                lline = lfile;</span><br><span class="line">                rline = rfile;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Ignore stuff after the colon.</span></span><br><span class="line">        info-&gt;eip_fn_namelen = strfind(info-&gt;eip_fn_name, <span class="string">&#x27;:&#x27;</span>) - info-&gt;eip_fn_name;</span><br><span class="line">        <span class="comment">// Search within [lline, rline] for the line number stab.</span></span><br><span class="line">        <span class="comment">// If found, set info-&gt;eip_line to the right line number.</span></span><br><span class="line">        <span class="comment">// If not found, return -1.</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// Hint:</span></span><br><span class="line">        <span class="comment">//      There&#x27;s a particular stabs type used for line numbers.</span></span><br><span class="line">        <span class="comment">//      Look at the STABS documentation and &lt;inc/stab.h&gt; to find</span></span><br><span class="line">        <span class="comment">//      which one.</span></span><br><span class="line">        <span class="comment">// Your code here.</span></span><br><span class="line">        stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line">        <span class="keyword">if</span> (lline &lt;= rline) &#123;</span><br><span class="line">                 <span class="keyword">if</span> (stabs[lline].n_strx &lt; stabstr_end - stabstr)</span><br><span class="line">                        info-&gt;eip_line = stabs[lline].n_value;</span><br><span class="line">                        <span class="comment">//info-&gt;eip_line = stabs[lline].n_desc;</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Search backwards from the line number for the relevant filename</span></span><br><span class="line">        <span class="comment">// stab.</span></span><br><span class="line">        <span class="comment">// We can&#x27;t just use the &quot;lfile&quot; stab because inlined functions</span></span><br><span class="line">        <span class="comment">// can interpolate code from a different file!</span></span><br><span class="line">        <span class="comment">// Such included source files use the N_SOL stab type.</span></span><br><span class="line">        <span class="keyword">while</span> (lline &gt;= lfile</span><br><span class="line">               &amp;&amp; stabs[lline].n_type != N_SOL</span><br><span class="line">               &amp;&amp; (stabs[lline].n_type != N_SO || !stabs[lline].n_value))</span><br><span class="line">                lline--;</span><br><span class="line">        <span class="keyword">if</span> (lline &gt;= lfile &amp;&amp; stabs[lline].n_strx &lt; stabstr_end - stabstr)</span><br><span class="line">                info-&gt;eip_file = stabstr + stabs[lline].n_strx;</span><br><span class="line">        <span class="comment">// Set eip_fn_narg to the number of arguments taken by the function,</span></span><br><span class="line">        <span class="comment">// or 0 if there was no containing function.</span></span><br><span class="line">        <span class="keyword">if</span> (lfun &lt; rfun)</span><br><span class="line">                <span class="keyword">for</span> (lline = lfun + <span class="number">1</span>;</span><br><span class="line">                     lline &lt; rfun &amp;&amp; stabs[lline].n_type == N_PSYM;</span><br><span class="line">                     lline++)</span><br><span class="line">                        info-&gt;eip_fn_narg++;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2022/09/04/6-828-1/" title="6.828 JOS lab1">https://youngvoice.github.io/2022/09/04/6-828-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/learning/" rel="tag"># learning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/01/hash/" rel="prev" title="hash">
+                  <i class="fa fa-chevron-left"></i> hash
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/10/6-828-2/" rel="next" title="6.828 JOS lab2">
+                  6.828 JOS lab2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

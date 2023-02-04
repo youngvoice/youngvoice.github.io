@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="VNDK and namespace">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VNDK">
+<meta property="og:url" content="https://youngvoice.github.io/2022/07/23/linker_namespace/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="VNDK and namespace">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-23T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T09:23:00.635Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="VNDK">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2022/07/23/linker_namespace/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2022/07/23/linker_namespace/","path":"2022/07/23/linker_namespace/","title":"VNDK"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VNDK | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-VNDK"><span class="nav-number">1.</span> <span class="nav-text">Why VNDK?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#two-challenge-in-Treble-VNDK-design"><span class="nav-number">2.</span> <span class="nav-text">two challenge in Treble VNDK design</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-it-work"><span class="nav-number">3.</span> <span class="nav-text">How does it work?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configuration-file-format"><span class="nav-number">4.</span> <span class="nav-text">Configuration file format</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Directory-section-mapping-property"><span class="nav-number">4.1.</span> <span class="nav-text">Directory-section mapping property</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relation-properties"><span class="nav-number">4.2.</span> <span class="nav-text">Relation properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Namespace-properties"><span class="nav-number">4.3.</span> <span class="nav-text">Namespace properties</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linker-namespace-creation"><span class="nav-number">5.</span> <span class="nav-text">Linker namespace creation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linker-namespace-isolation"><span class="nav-number">6.</span> <span class="nav-text">Linker namespace isolation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VNDK-configuration"><span class="nav-number">6.1.</span> <span class="nav-text">VNDK configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VNDK-Lite-configuration"><span class="nav-number">6.2.</span> <span class="nav-text">VNDK Lite configuration</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LinkerConfig"><span class="nav-number">7.</span> <span class="nav-text">LinkerConfig</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#two-special-namespace"><span class="nav-number">8.</span> <span class="nav-text">two special namespace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-change-android-11-linker-config"><span class="nav-number">9.</span> <span class="nav-text">how to change android 11 linker config</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#how-create-the-linker-namespace"><span class="nav-number">9.1.</span> <span class="nav-text">how create the linker namespace?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#protobuf"><span class="nav-number">10.</span> <span class="nav-text">protobuf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">11.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2022/07/23/linker_namespace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VNDK | I am thinking...">
+      <meta itemprop="description" content="VNDK and namespace">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VNDK
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-23 00:00:00" itemprop="dateCreated datePublished" datetime="2022-07-23T00:00:00+00:00">2022-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-04 09:23:00" itemprop="dateModified" datetime="2023-02-04T09:23:00+00:00">2023-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">VNDK and namespace</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>VNDK(Vendor Native Development Kit)<br>The Vendor Native Development Kit (VNDK) is a set of libraries exclusively for vendors to implement their HALs.</p>
+<h1 id="Why-VNDK"><a href="#Why-VNDK" class="headerlink" title="Why VNDK?"></a>Why VNDK?</h1><p>Framework-only updates include the following challenges:<br>Dependency between framework modules and vendor modules.<br>Extensions to AOSP libraries. </p>
+<p>To address these challenges, Android 8.0 introduces several techniques such as VNDK (described in this section), HIDL, hwbinder, device tree overlay, and sepolicy overlay.</p>
+<p>由于我们不是google，或者vendor，所以体会不到该问题的所有方面</p>
+<p>VNDK concepts</p>
+<ul>
+<li><p>Framework shared libraries for vendor<br>two approaches to support vendor modules across multiple Android releases:</p>
+<ol>
+<li>stabilize the ABIs&#x2F;APIs of the framework shared libraries.</li>
+<li>copy old framework shared libraries.</li>
+</ol>
+<p>  framework shared libraries are classified into three sub-categories:</p>
+<ol>
+<li>LL-NDK Libraries that has stable API&#x2F;ABI.</li>
+<li>Eligible VNDK Libraries(VNDK) that are safe to be copied twice.</li>
+<li>Framework-only Libraries (FWK-only)</li>
+</ol>
+</li>
+<li><p>Same-Process HAL (SP-HAL)</p>
+<p>  It is a set of predetermined HALs implemented as Vendor Shared Libraries and loaded into Framework Processes. SP-HALs must depend only on LL-NDK and VNDK-SP. VNDK-SP is a predefined subset of eligible VNDK libraries. VNDK-SP libraries are carefully reviewed to ensure double-loading VNDK-SP libraries into framework processes does not cause problems.</p>
+</li>
+</ul>
+<hr>
+<p>Linker Namespace </p>
+<h1 id="two-challenge-in-Treble-VNDK-design"><a href="#two-challenge-in-Treble-VNDK-design" class="headerlink" title="two challenge in Treble VNDK design"></a>two challenge in Treble VNDK design</h1><ul>
+<li>SP-HAL shared libraries and their dependencies, including VNDK-SP libraries, are loaded into framework processes. There should be some mechanisms to prevent symbol conflicts.</li>
+<li>dlopen() and android_dlopen_ext() can introduce some runtime dependencies that aren’t visible at build time and can be difficult to detect using static analysis.</li>
+</ul>
+<h1 id="How-does-it-work"><a href="#How-does-it-work" class="headerlink" title="How does it work?"></a>How does it work?</h1><p>The dynamic linker is responsible for loading the shared libraries specified in DT_NEEDED entries or the shared libraries specified by the argument of dlopen() or android_dlopen_ext(). In both cases, the dynamic linker finds the linker namespace where the caller resides and tries to load the dependencies into the same linker namespace. If the dynamic linker can’t load the shared library into the specified linker namespace, it asks the <em>linked linker namespace</em> for exported shared libraries.</p>
+<h1 id="Configuration-file-format"><a href="#Configuration-file-format" class="headerlink" title="Configuration file format"></a>Configuration file format</h1><h2 id="Directory-section-mapping-property"><a href="#Directory-section-mapping-property" class="headerlink" title="Directory-section mapping property"></a>Directory-section mapping property</h2><p>dir.name<br>A path to a directory that the [name] section applies to.</p>
+<p>dir.system &#x3D; &#x2F;system&#x2F;bin<br>dir.system &#x3D; &#x2F;system&#x2F;xbin<br>[system] section applies to the executables that are loaded from either &#x2F;system&#x2F;bin or &#x2F;system&#x2F;xbin.</p>
+<p>dir.vendor &#x3D; &#x2F;vendor&#x2F;bin<br>[vendor] section applies to the executables that are loaded from &#x2F;vendor&#x2F;bin.</p>
+<p>一个配置文件有多个section，每个section都对应一个目录下可执行的namespace配置</p>
+<h2 id="Relation-properties"><a href="#Relation-properties" class="headerlink" title="Relation properties"></a>Relation properties</h2><p>links</p>
+<p>we can also specify the only library as the requested library name for fallback link.</p>
+<h2 id="Namespace-properties"><a href="#Namespace-properties" class="headerlink" title="Namespace properties"></a>Namespace properties</h2><p>isolated<br>This indicates that only the shared libraries in search.paths or under permitted.paths can be loaded into the  namespace.</p>
+<p>visible<br>A boolean value that indicates whether the program (other than libc) can obtain a linker namespace handle with android_get_exported_namespace() and open a shared library in the linker namespace by passing the handle to android_dlopen_ext().</p>
+<p>search.paths<br>permitted.paths</p>
+<h1 id="Linker-namespace-creation"><a href="#Linker-namespace-creation" class="headerlink" title="Linker namespace creation"></a>Linker namespace creation</h1><p>In Android 11, linker configuration is created at runtime under &#x2F;linkerconfig instead of using plain text files in ${android-src}&#x2F;system&#x2F;core&#x2F;rootdir&#x2F;etc. The configuration is generated at boot time based on the runtime environment, which includes following items:<br>Linker configuration is created by resolving dependencies between linker namespaces. For example, if there are any updates on the APEX modules that include dependency updates, linker configuration is generated reflecting these changes.</p>
+<h1 id="Linker-namespace-isolation"><a href="#Linker-namespace-isolation" class="headerlink" title="Linker namespace isolation"></a>Linker namespace isolation</h1><h2 id="VNDK-configuration"><a href="#VNDK-configuration" class="headerlink" title="VNDK configuration"></a>VNDK configuration</h2><h2 id="VNDK-Lite-configuration"><a href="#VNDK-Lite-configuration" class="headerlink" title="VNDK Lite configuration"></a>VNDK Lite configuration</h2><h1 id="LinkerConfig"><a href="#LinkerConfig" class="headerlink" title="LinkerConfig"></a>LinkerConfig</h1><h1 id="two-special-namespace"><a href="#two-special-namespace" class="headerlink" title="two special namespace"></a>two special namespace</h1><p>default<br>anonymous<br>android_init_anonymous_namespace().<br>init_default_namespaces().</p>
+<h1 id="how-to-change-android-11-linker-config"><a href="#how-to-change-android-11-linker-config" class="headerlink" title="how to change android 11 linker config"></a>how to change android 11 linker config</h1><h2 id="how-create-the-linker-namespace"><a href="#how-create-the-linker-namespace" class="headerlink" title="how create the linker namespace?"></a>how create the linker namespace?</h2><h1 id="protobuf"><a href="#protobuf" class="headerlink" title="protobuf"></a>protobuf</h1><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1484399">https://cloud.tencent.com/developer/article/1484399</a></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://source.android.com/devices/architecture/vndk">https://source.android.com/devices/architecture/vndk</a><br><a target="_blank" rel="noopener" href="https://source.android.com/devices/architecture/vndk/linker-namespace">https://source.android.com/devices/architecture/vndk/linker-namespace</a><br><a target="_blank" rel="noopener" href="https://source.android.com/static/devices/architecture/images/VNDK.pdf">https://source.android.com/static/devices/architecture/images/VNDK.pdf</a><br><a target="_blank" rel="noopener" href="https://android.googlesourcecom/platform/systemlinkerconfig/+/refs/headsmaster">https://android.googlesourcecom/platform/systemlinkerconfig/+/refs/headsmaster</a><br><a target="_blank" rel="noopener" href="https://jackwish.net/blog/2017/namespace-based-dynamic-linking.html">https://jackwish.net/blog/2017/namespace-based-dynamic-linking.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2022/07/23/linker_namespace/" title="VNDK">https://youngvoice.github.io/2022/07/23/linker_namespace/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VNDK/" rel="tag"># VNDK</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/11/route_table/" rel="prev" title="How to access two nets in the same time?">
+                  <i class="fa fa-chevron-left"></i> How to access two nets in the same time?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/08/21/variable-length_argument_lists/" rel="next" title="Variadic functions in C">
+                  Variadic functions in C <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

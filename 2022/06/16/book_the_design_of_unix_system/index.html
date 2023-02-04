@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="the filesystem and process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="the design of unix">
+<meta property="og:url" content="https://youngvoice.github.io/2022/06/16/book_the_design_of_unix_system/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="the filesystem and process">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-06-16T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T09:23:00.635Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="book">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2022/06/16/book_the_design_of_unix_system/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2022/06/16/book_the_design_of_unix_system/","path":"2022/06/16/book_the_design_of_unix_system/","title":"the design of unix"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>the design of unix | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5linus%E8%AE%A9%E5%8E%BB%E7%9B%B4%E6%8E%A5%E8%AF%BB%E4%BB%A3%E7%A0%81%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为啥linus让去直接读代码？</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#how-the-kernel-support-these-features"><span class="nav-number"></span> <span class="nav-text">how the kernel support these features???</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#who-is-the-kernel-services-for-process-and-interrupt"><span class="nav-number"></span> <span class="nav-text">who is the kernel services for?(process and interrupt)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8A%E9%9D%A2%E4%B8%A4%E5%8F%A5%E8%AF%9D%EF%BC%8C%E8%BF%98%E6%98%AF%E9%9C%80%E8%A6%81%E8%80%83%E9%87%8F%EF%BC%8C%E6%AF%94%E5%A6%82%E5%9C%A8%E6%89%A7%E8%A1%8C-interrupt-%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%91%E7%94%9F-dividing-by-zero-%E7%9A%84%E8%AF%9D%EF%BC%8C%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">上面两句话，还是需要考量，比如在执行 interrupt 的时候发生 dividing by zero 的话，如何处理？？？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E8%BF%90%E8%A1%8C%E5%BA%93%E4%B8%8E%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%85%B3%E7%B3%BB%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">关于运行库与系统调用的关系？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#what-purposes-these-table-used-for"><span class="nav-number"></span> <span class="nav-text">what purposes these table used for?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E6%8A%A2%E5%8D%A0%E5%BC%8F%E5%86%85%E6%A0%B8%E4%B9%9F%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E5%90%97%EF%BC%9F%E9%82%A3%E4%B9%8B%E5%89%8D%E7%9A%84%E7%A8%8B%E5%BA%8F%E6%B5%81%E4%BF%9D%E5%AD%98%E5%9C%A8%E5%93%AA%E9%87%8C%E5%91%A2%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">对于抢占式内核也是这样的吗？那之前的程序流保存在哪里呢？</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9C%AC%E4%B9%A6%E4%B8%AD%EF%BC%8C%E8%BF%9B%E7%A8%8B%E5%9C%A8%E5%86%85%E6%A0%B8%E4%B8%AD%E7%9A%84%E8%BF%90%E8%A1%8C%E4%B8%8E%E5%88%87%E6%8D%A2%E6%A8%A1%E5%9E%8B%EF%BC%88%E6%98%AF%E5%90%A6%E6%8A%A2%E5%8D%A0%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">在本书中，进程在内核中的运行与切换模型（是否抢占）是什么样的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-are-five-typical-scenarios-allocating-a-buffer-for-a-disk-block"><span class="nav-number"></span> <span class="nav-text">what are five typical scenarios allocating a buffer for a disk block?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#algorithm-brelse"><span class="nav-number"></span> <span class="nav-text">algorithm brelse</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scenario-4"><span class="nav-number"></span> <span class="nav-text">scenario 4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#why-it-can-not-allocate-a-buffer-immediately-from-the-free-list"><span class="nav-number"></span> <span class="nav-text">why it can not allocate a buffer immediately from the free list?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scenario-5"><span class="nav-number"></span> <span class="nav-text">scenario 5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#why-process-B-can-not-directly-to-access-the-block"><span class="nav-number"></span> <span class="nav-text">why process B can not directly to access the block?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#when-call-algorithm-brelse"><span class="nav-number"></span> <span class="nav-text">when call algorithm brelse?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-handle-shared"><span class="nav-number"></span> <span class="nav-text">how to handle shared?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#when-a-process-wakes-up-where-should-it-to-execute"><span class="nav-number"></span> <span class="nav-text">when a process wakes up, where should it to execute?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-1-How-to-implement-open-syscall"><span class="nav-number"></span> <span class="nav-text">5.1 How to implement open syscall?</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2022/06/16/book_the_design_of_unix_system/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="the design of unix | I am thinking...">
+      <meta itemprop="description" content="the filesystem and process">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          the design of unix
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-16T00:00:00+00:00">2022-06-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-04 09:23:00" itemprop="dateModified" datetime="2023-02-04T09:23:00+00:00">2023-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/book/" itemprop="url" rel="index"><span itemprop="name">book</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/book/review/" itemprop="url" rel="index"><span itemprop="name">review</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">the filesystem and process</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Preface<br>This book describes the internal algorithms and structures that form the basis of the operating system and their relationship to the programmer interface.</p>
+<p>understanding the code was easier once the concepts of the algorithms had been mastered.</p>
+<h6 id="为啥linus让去直接读代码？"><a href="#为啥linus让去直接读代码？" class="headerlink" title="为啥linus让去直接读代码？"></a>为啥linus让去直接读代码？</h6><p>the system description is based on UNIX System V Release 2.</p>
+<p>Chapter 1, General overview of the system<br>The system combined of programs and services that readily apparent to users and operating system that supports these programs and services.<br>the major data structures and algorithms </p>
+<p>1.1<br>The phylosophy of the UNIX system is simplicity and consistency.<br>1.2 SYSTEM structure<br>the hardware: the hardware provides the operating system with basic services</p>
+<p>the operating system interact directly with the hardware, providing common services to programs </p>
+<p>programs interact with the kernel by invoking a well defined set of system calls.</p>
+<p>programs are easy to move between UNIX systems running on different hardware if the programs do not make assumptions about the underlying hardware.</p>
+<p>the set of system calls and the internal algorithms that implement them form the body of the kernel.(系统调用是通向操作系统的大门)</p>
+<p>1.3 user perspective<br>high-level features of the UNIX system</p>
+<h5 id="how-the-kernel-support-these-features"><a href="#how-the-kernel-support-these-features" class="headerlink" title="how the kernel support these features???"></a>how the kernel support these features???</h5><p>1.3.1 The file system<br>1.3.2 Processing environment<br>1.3.3 building block primitives</p>
+<ol>
+<li>redirect </li>
+<li>pipe</li>
+</ol>
+<p>1.4 Operating system services<br>1.5 assumptions about hardware<br>two levels: user mode and kernel mode<br>address space<br>privileged instructions</p>
+<p>Put simply, the hardware views the world in terms of kernel mode and user mode.<br>The kernel keeps internal records to distinguish the many processes executing on the system.</p>
+<p>The kernel is not a separate set of processes that run in parallel to user processes, but it is part of each user process. What the kernel doing various operations meant is that a process executing in kernel mode does the various operations, e.g allocates the resources.</p>
+<h4 id="who-is-the-kernel-services-for-process-and-interrupt"><a href="#who-is-the-kernel-services-for-process-and-interrupt" class="headerlink" title="who is the kernel services for?(process and interrupt)"></a>who is the kernel services for?(process and interrupt)</h4><p>硬件直接服务的话是不是有点像单片机了？</p>
+<p>1.5.1 Interrupts and Exceptions<br>exception condition refers to unexpected events caused by a process.<br>interrupts caused by events that are external to a process.</p>
+<h5 id="上面两句话，还是需要考量，比如在执行-interrupt-的时候发生-dividing-by-zero-的话，如何处理？？？"><a href="#上面两句话，还是需要考量，比如在执行-interrupt-的时候发生-dividing-by-zero-的话，如何处理？？？" class="headerlink" title="上面两句话，还是需要考量，比如在执行 interrupt 的时候发生 dividing by zero 的话，如何处理？？？"></a>上面两句话，还是需要考量，比如在执行 interrupt 的时候发生 dividing by zero 的话，如何处理？？？</h5><p>exceptions happen “in the middle” of the execution of an instruction, the system will attempt restart the instruction after handling the exception;<br>interrupts are considered to happen between the execution of two instructions, the system will continue the next instruction after servicing the interrupt.</p>
+<p>the UNIX uses one mechanism to handle interrupts and exception conditions.</p>
+<p>1.5.2 Processor execution levels</p>
+<p>Chapter 2, Intro to the Kernel<br>Unix supports the illusions that the file system has “places” and that processes have “life”.</p>
+<h5 id="关于运行库与系统调用的关系？"><a href="#关于运行库与系统调用的关系？" class="headerlink" title="关于运行库与系统调用的关系？"></a>关于运行库与系统调用的关系？</h5><p>System calls look like ordinary function calls in C programs, and libraries map these function calls to the primitives needed to enter the operating system. Programs frequently use other libraries such as the standard I&#x2F;O library to provide a more sophisticated use of the system calls.<br>2.2 Intro to system concepts<br>2.2.1 An Overview of the File Subsystem<br>inode<br>in-core inode</p>
+<p>file table<br>user file descriptor table<br>inode table</p>
+<h5 id="what-purposes-these-table-used-for"><a href="#what-purposes-these-table-used-for" class="headerlink" title="what purposes these table used for?"></a>what purposes these table used for?</h5><p>maintain the state of the file and the user’s access to it.<br>2.2.2 Processes</p>
+<ol>
+<li>the byte offset in the file where the user’s next read or write will start</li>
+<li>access rights</li>
+</ol>
+<p>a process uses a separate stack for each mode.</p>
+<h5 id="对于抢占式内核也是这样的吗？那之前的程序流保存在哪里呢？"><a href="#对于抢占式内核也是这样的吗？那之前的程序流保存在哪里呢？" class="headerlink" title="对于抢占式内核也是这样的吗？那之前的程序流保存在哪里呢？"></a>对于抢占式内核也是这样的吗？那之前的程序流保存在哪里呢？</h5><p>The kernel stack of a process is null when the process executes in user mode.</p>
+<p>process 0 becomes the swapper process.<br>process 1 known as init</p>
+<p>2.2.2.1 context of a process<br>The kernel allows a context switch only under specific conditions.  </p>
+<p>2.2.2.2 Process states<br>A processor can execute only one process at a time, at most one process may be in states 1 and 2. The two states correspond to the two modes of execution, user and kernel.<br>this is the static view of a process<br>2.2.2.3 State transitions<br>processes move continuously between the states.<br>A state transition diagram is a directed graph whose nodes represent the states a process can enter and whose edges represent the events that cause a process to move from one state to another.<br>State transitions are legal between two states if there exists an edge from the first state to the second.</p>
+<h1 id="在本书中，进程在内核中的运行与切换模型（是否抢占）是什么样的？"><a href="#在本书中，进程在内核中的运行与切换模型（是否抢占）是什么样的？" class="headerlink" title="在本书中，进程在内核中的运行与切换模型（是否抢占）是什么样的？"></a>在本书中，进程在内核中的运行与切换模型（是否抢占）是什么样的？</h1><p>several processes can execute simultaneously in a time-shared manner, as stated earlier, and they may all run simultaneously in kernel mode. If they were allowed to run in kernel mode without constraint, they could corrupt global kernel data structures. By prohibiting arbitrary context switches and controlling the occurrence of interrupts, the kernel protects its consistency.</p>
+<p>The kernel allows a context switch only when a process moves from the state “kernel running” to the state “asleep in memory.” Processes running in kernel mode cannot be preempted by other processes; therefore the kernel is sometimes said to be non-preemptive, although the system does preempt processes that are in user mode. The kernel maintains consistency of its data structures because it is non-preemptive, thereby solving the mutual exclusion problem.<br>其实，该系统是支持用户空间并行，而不支持内核并行执行。但是当在内核中需要睡眠时，此时的切换是可以进行的。此时，kernel algorithms are encoded to make sure that system data structures are in a safe, consistent state.</p>
+<p>A related problem that can cause inconsistency in kernel data is the handling of interrupts, which can change kernel state information. To solve this problem, the system could prevent all interrupts while executing in kernel mode, but that would delay servicing of the interrupt, possibly hurting system throughput. Instead, the kernel raises the processor execution level to prevent interrupts when entering critical regions of code(A section of code is critical if execution of arbitrary interrupt handlers could result in consistency problems 与中断处理有资源共享). </p>
+<p>e.g a disk interrupt handler manipulates the buffer queues, the section of code where the kernel manipulates the buffer queues is a critical region of code with respect to the disk interrupt handler.</p>
+<p>Critical regions are small and infrequent so that system throughput is largely unaffected by their existence.</p>
+<p>This problem can also be solved by preventing all interrupts when executing in system states or by using elaborate locking schemes to ensure consistency. In multiprocessor systems, the solution outlined here is insufficient.</p>
+<ul>
+<li>To conclude, the kernel protects its consistency by allowing a context switch only when a process puts itself to sleep and by preventing one process from changing the state of another process.</li>
+<li>It also raises the processor execution level around critical regions of code to prevent interrupts that could otherwise cause inconsistencies. </li>
+<li>The process scheduler periodically preempts processes executing in user mode so that processes cannot monopolize use of the CPU.</li>
+</ul>
+<p>2.2.2.4 Sleep and wakeup<br>Using “while-sleep” loop insures that at most one process can gain access to a resource.</p>
+<p>Chapter 3, The buffer Cache</p>
+<p>In figure 2.1, the buffer cache module is between the file subsystem and block devices drivers in the kernel architecture.</p>
+<p>High level kernel algorithms instruct the buffer cache module to pre-cache data or to delay-write data to maximize the caching effect.</p>
+<p>buffer 的数量比磁盘block数量上小得多，一个block一次只能map到一个buffer，否则会出现歧义。</p>
+<p>3.3 scenarios for retrieval of a buffer<br>high-level kernel algorithms in the file subsystem invoke the algorithms for managing the buffer cache.<br>high-level algorithms determine the logical device number and block number that they wish to access when they attempt to retrieve a block.</p>
+<p>for example, if a process whats to read data from a file, the kernel determines which file system contains the file and which block in the file system contains the data.</p>
+<p>when about to read data from a particular disk block, the kernel checks whether the block is in the buffer pool and, if it is not there, assigns it a free buffer. When about to write data to a particular disk block, the kernel checks whether the block is in the buffer pool, and if not, assigns a free buffer for that block.<br>The algorithms for reading and writing disk blocks use the algorithm getblk to allocate buffers from the pool.</p>
+<p>conclude in one word:<br>when high-algorithm attempt to access a disk block, the kernel checks whether the block is in the buffer pool, and if not, assigns a free buffer for that block.<br>the getblk is algorithm used to allocate buffers from the pool.</p>
+<h1 id="what-are-five-typical-scenarios-allocating-a-buffer-for-a-disk-block"><a href="#what-are-five-typical-scenarios-allocating-a-buffer-for-a-disk-block" class="headerlink" title="what are five typical scenarios allocating a buffer for a disk block?"></a>what are five typical scenarios allocating a buffer for a disk block?</h1><h2 id="algorithm-brelse"><a href="#algorithm-brelse" class="headerlink" title="algorithm brelse"></a>algorithm brelse</h2><p>The kernel leaves the buffer marked busy; no other process can access it and change its contents while it is busy, thus preserving the integrity of the data in the buffer.</p>
+<p>When the kernel finishes using the buffer, it releases the buffer according to algorithm brelse.<br>It wakes up </p>
+<ol>
+<li>processes that had fallen asleep because the buffer was busy</li>
+<li>processes that had fallen asleep because no buffers remained on the free list.</li>
+</ol>
+<h2 id="scenario-4"><a href="#scenario-4" class="headerlink" title="scenario 4"></a>scenario 4</h2><p>the kernel, acting for process A, cannot find the disk block on its hash queue, so it attempts to allocate a new buffer from the free list, however, no buffers are available on the free list, so process A goes to sleep,<br>until another process executes algorithm brelse, freeing a buffer.</p>
+<p>when the kernel schedules the process A, it must search the hash queue again for the block.</p>
+<h3 id="why-it-can-not-allocate-a-buffer-immediately-from-the-free-list"><a href="#why-it-can-not-allocate-a-buffer-immediately-from-the-free-list" class="headerlink" title="why it can not allocate a buffer immediately from the free list?"></a>why it can not allocate a buffer immediately from the free list?</h3><p>because it is possible that several processes were waiting for a free buffer and that one of them allocated a newly freed buffer for <strong>the target block sought by process A</strong>(one block can only correspond to one buffer, thus , searching for the block again insures that only one buffer contains the disk block).<br>这个地方其实有两种原因，<br>其一，free list 可能任然为空，因为可能有别的进程已经将free list上新出现的buffer分配完了<br>其二，有可能，已经有别的一个进程给Process A请求的block分配了buffer</p>
+<h2 id="scenario-5"><a href="#scenario-5" class="headerlink" title="scenario 5"></a>scenario 5</h2><p>kernel, acting for process A, searches for a disk block and allocate a buffer but goes to sleep before freeing the buffer.<br>While process A sleeps, suppose the kernel schedules a second process, B, which tries to access the disk block whose buffer was just locked by process A.<br>So, the scenario is that process B will find the locked block on the hash queue.</p>
+<p>process B marks the buffer “in demand” and then sleeps and waits for process A to release the buffer.<br>睡眠与唤醒的不匹配<br>Process A will eventually release the buffer and notice that the buffer is in demand. <strong>It awakens all processes sleeping on the event “the buffer becomes free” including process B</strong>.<br>when the kernel again schedules process B, process B must verify that the buffer is free.</p>
+<p>思考一下：下面这句话是什么意思？<br>all processes sleeping on the event “the buffer becomes free” including process B<br>当释放的 buffer 有 in demand 标记的时候，究竟有没有唤醒等待 free buffer list 为空的进程？因为，等待出现新 buffer 的进程有两种情况，1. 等待 free buffer list 非空，2. 等待 buffer 被 free，这两种情况也对应了引起睡眠的两种原因。</p>
+<h3 id="why-process-B-can-not-directly-to-access-the-block"><a href="#why-process-B-can-not-directly-to-access-the-block" class="headerlink" title="why process B can not directly to access the block?"></a>why process B can not directly to access the block?</h3><p>another process, C, may have been waiting for the same buffer, and the kernel may have scheduled C to run before process B; process C may have gone to sleep leaving the buffer locked. Hence, process B must check that the block is indeed free. </p>
+<h1 id="when-call-algorithm-brelse"><a href="#when-call-algorithm-brelse" class="headerlink" title="when call algorithm brelse?"></a>when call algorithm brelse?</h1><ol>
+<li>a process has no more need a buffer</li>
+<li>handling a disk interrupt to release buffers used for asynchronous I&#x2F;O to and from the disk.</li>
+</ol>
+<h2 id="how-to-handle-shared"><a href="#how-to-handle-shared" class="headerlink" title="how to handle shared?"></a>how to handle shared?</h2><p>prevent disk interrupts</p>
+<ol>
+<li><p>kernel raises the processor execution level to prevent disk interrupts while manipulating the free list, result from a nested call to brelse.</p>
+</li>
+<li><p>if an interrupt handler invoked brelse while a process was executing getblk, so the kernel raises the processor execution level at strategic places in getblk, too.</p>
+</li>
+</ol>
+<h1 id="when-a-process-wakes-up-where-should-it-to-execute"><a href="#when-a-process-wakes-up-where-should-it-to-execute" class="headerlink" title="when a process wakes up, where should it to execute?"></a>when a process wakes up, where should it to execute?</h1><p>it must search the hash queue again for the block.<br>当一个进程由于buffer被唤醒的时候，只是通知这个进程可能有buffer空闲，</p>
+<p>3.4 READING AND WRITING DISK BLOCKS<br>?????????</p>
+<h1 id="5-1-How-to-implement-open-syscall"><a href="#5-1-How-to-implement-open-syscall" class="headerlink" title="5.1 How to implement open syscall?"></a>5.1 How to implement open syscall?</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//global data:</span></span><br><span class="line">current-&gt;filp[fd]</span><br><span class="line">file_table</span><br><span class="line"></span><br><span class="line"><span class="title function_">open</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    convert file name to <span class="title function_">inode</span><span class="params">(algorithm namei)</span>;</span><br><span class="line">    allocate file table entry <span class="keyword">for</span> inode and initialize count, offset;</span><br><span class="line">    allocate user file descriptor entry, <span class="built_in">set</span> pointer to file table entry;</span><br><span class="line">    unlock(inode);</span><br><span class="line">    <span class="keyword">return</span> (user file descriptor);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2022/06/16/book_the_design_of_unix_system/" title="the design of unix">https://youngvoice.github.io/2022/06/16/book_the_design_of_unix_system/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/book/" rel="tag"># book</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/05/what-is-rational-number/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/26/file-system/" rel="next" title="what mechanism exists back in file system?">
+                  what mechanism exists back in file system? <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

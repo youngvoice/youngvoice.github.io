@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="how to add a simple functions based on already have(file system)?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pipe and dup">
+<meta property="og:url" content="https://youngvoice.github.io/2022/12/31/pipe_dup/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="how to add a simple functions based on already have(file system)?">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-12-31T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-02-04T09:23:00.639Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="learning">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2022/12/31/pipe_dup/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2022/12/31/pipe_dup/","path":"2022/12/31/pipe_dup/","title":"pipe and dup"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>pipe and dup | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-dup-does"><span class="nav-number">1.</span> <span class="nav-text">What dup does?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-implement-the-pipe-and-redirection-in-shell"><span class="nav-number">2.</span> <span class="nav-text">How to implement the pipe and redirection in shell ???</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-use-the-user%E2%80%99s-favorite-pager-to-display-some-output"><span class="nav-number">3.</span> <span class="nav-text">How to use the user’s favorite pager to display some output?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-implement-Coprocesses"><span class="nav-number">4.</span> <span class="nav-text">How implement Coprocesses?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-create-a-pipe-the-kernel-implements-pipes-in-the-file-system"><span class="nav-number">5.</span> <span class="nav-text">How to create a pipe???(the kernel implements pipes in the file system)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-remain-consistent-with-the-access-interface-for-regular-files"><span class="nav-number">6.</span> <span class="nav-text">How to remain consistent with the access interface for regular files?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-we-can-not-adjust-pipe%E2%80%99s-byte-offset-via-the-lseek-system-call"><span class="nav-number">7.</span> <span class="nav-text">Why we can not adjust pipe’s byte offset via the lseek system call?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pipe-inode-%E6%9C%89%E6%B2%A1%E6%9C%89%E4%B8%8E%E7%A3%81%E7%9B%98%E4%B8%8A%E7%9A%84-inode-%E6%9C%89%E5%AF%B9%E5%BA%94%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">pipe inode 有没有与磁盘上的 inode 有对应？？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pipe-%E7%9A%84-fifo-%E5%8A%9F%E8%83%BD%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">pipe 的 fifo 功能是如何实现的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#drawing-figure%E2%80%A6%E2%80%A6"><span class="nav-number">10.</span> <span class="nav-text">drawing figure……</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Some-problem-about-the-process-state-related-to-pipe"><span class="nav-number">11.</span> <span class="nav-text">Some problem about the process state related to pipe?</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2022/12/31/pipe_dup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="pipe and dup | I am thinking...">
+      <meta itemprop="description" content="how to add a simple functions based on already have(file system)?">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pipe and dup
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-12-31 00:00:00" itemprop="dateCreated datePublished" datetime="2022-12-31T00:00:00+00:00">2022-12-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-02-04 09:23:00" itemprop="dateModified" datetime="2023-02-04T09:23:00+00:00">2023-02-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/file-system/" itemprop="url" rel="index"><span itemprop="name">file system</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/file-system/kernel/" itemprop="url" rel="index"><span itemprop="name">kernel</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">how to add a simple functions based on already have(file system)?</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>named pipe<br>open()</p>
+<p>unnamed pipe<br>pipe()</p>
+<h1 id="What-dup-does"><a href="#What-dup-does" class="headerlink" title="What dup does?"></a>What dup does?</h1><p>When a process start , the process executes<br>newfd &#x3D; dup(1);</p>
+<p>then the fd 3 in user file decriptor table will point to the same file table entry with fd 1.</p>
+<pre><code>         user file                                file table                               inode table              
+       descriptor table                                                                                             
+      +--------------+                     +-----------------------+                +-------------------------+     
+    0 |              |                     |                       |                |            .            |     
+      +--------------+                     |                       |                |            .            |     
+    1 |              +-                    +-----------------------+                |            .            |     
+      +--------------+ \-                  |           .           |                |            .            |     
+    2 |              |   \-                |           .           |                |            .            |     
+      +--------------+     \-              |           .           |                |            .            |     
+    3 |              |--     \-            +-----------------------+                +-------------------------+     
+      +--------------+  \--    \-          |count 0 offset   R     |                |  count 2                |     
+    4 |              |     \--   \-        +-----------------------+                |      /etc/passwd        |     
+      +--------------+        \-   \-      |           .           |                +-------------------------+     
+    5 |              |          \--  \-    |           .           |                |            .            |     
+      +--------------+             \-- \-  |           .           |                |            .            |     
+    6 |              |                \--\&gt;+-----------------------+                |            .            |     
+      +--------------+                   \&gt;|count 2 offset   RW    |--              |            .            |     
+    7 |              |                     +-----------------------+  \---          |            .            |     
+      +--------------+                     |           .           |      \---      |            .            |     
+      |              |                     |           .           |          \---  +-------------------------+     
+      |              |                     |           .           |              \&gt;|     stdout              |     
+      +--------------+                     +-----------------------+                |                         |     
+                                           |count  offset    W     |                +-------------------------+     
+                                           +-----------------------+                |            .            |     
+                                           |                       |                |            .            |     
+                                           |                       |                |            .            |     
+                                           |                       |                |            .            |     
+                                           |                       |                |            .            |     
+                                           +-----------------------+                +-------------------------+     
+                                 
+</code></pre>
+<p>kernel code<br>“fs&#x2F;file.c”</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE1(dup, <span class="type">unsigned</span> <span class="type">int</span>, fildes)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> ret = -EBADF;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">file</span> =</span> fget_raw(fildes);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (file) &#123;</span><br><span class="line">                ret = get_unused_fd_flags(<span class="number">0</span>); <span class="comment">// find the lowest-numbered available file descriptor</span></span><br><span class="line">                <span class="keyword">if</span> (ret &gt;= <span class="number">0</span>)</span><br><span class="line">                        fd_install(ret, file); <span class="comment">// assign the same file table entry to the new file descriptor</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                        fput(file);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>dup() call get_unused_fd_flags() to find the lowest-numbered available file descriptor, if success, assign the same file table entry to the new file descriptor.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE2(dup2, <span class="type">unsigned</span> <span class="type">int</span>, oldfd, <span class="type">unsigned</span> <span class="type">int</span>, newfd)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (unlikely(newfd == oldfd)) &#123; <span class="comment">/* corner case */</span></span><br><span class="line">                <span class="class"><span class="keyword">struct</span> <span class="title">files_struct</span> *<span class="title">files</span> =</span> current-&gt;files;</span><br><span class="line">                <span class="type">int</span> retval = oldfd;</span><br><span class="line"></span><br><span class="line">                rcu_read_lock();</span><br><span class="line">                <span class="keyword">if</span> (!files_lookup_fd_rcu(files, oldfd))</span><br><span class="line">                        retval = -EBADF;</span><br><span class="line">                rcu_read_unlock();</span><br><span class="line">                <span class="keyword">return</span> retval;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ksys_dup3(oldfd, newfd, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">ksys_dup3</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> oldfd, <span class="type">unsigned</span> <span class="type">int</span> newfd, <span class="type">int</span> flags)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> do_dup2(files, file, newfd, flags);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">do_dup2</span><span class="params">(<span class="keyword">struct</span> files_struct *files,</span></span><br><span class="line"><span class="params">        <span class="keyword">struct</span> file *file, <span class="type">unsigned</span> fd, <span class="type">unsigned</span> flags)</span></span><br><span class="line">__<span class="title function_">releases</span><span class="params">(&amp;files-&gt;file_lock)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span> (!tofree &amp;&amp; fd_is_open(fd, fdt))</span><br><span class="line">                <span class="keyword">goto</span> Ebusy;</span><br><span class="line">        get_file(file);</span><br><span class="line">        rcu_assign_pointer(fdt-&gt;fd[fd], file);</span><br><span class="line">        __set_open_fd(fd, fdt);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>dup2() &#x3D;&#x3D;&gt; ksys_dup3() &#x3D;&#x3D;&gt; do_dup2(),<br>在 dup2 函数中调用 rcu_assign_pointer 来将文件指针复制到新的文件描述符中，并将新的文件描述符标记为打开状态。</p>
+<h1 id="How-to-implement-the-pipe-and-redirection-in-shell"><a href="#How-to-implement-the-pipe-and-redirection-in-shell" class="headerlink" title="How to implement the pipe and redirection in shell ???"></a>How to implement the pipe and redirection in shell ???</h1><p>Every time you type a sequence of commands in a pipeline for the shell to execute, the shell creates a separate process for each command and <strong>links</strong> the standard output of one process to the standard input of the next using a pipe.</p>
+<h1 id="How-to-use-the-user’s-favorite-pager-to-display-some-output"><a href="#How-to-use-the-user’s-favorite-pager-to-display-some-output" class="headerlink" title="How to use the user’s favorite pager to display some output?"></a>How to use the user’s favorite pager to display some output?</h1><p>one way is to writing all the data to a temporary file and calling <strong>system</strong> to disply that file.</p>
+<p>but we want to use the pipe to directly copy to the pager.</p>
+<h1 id="How-implement-Coprocesses"><a href="#How-implement-Coprocesses" class="headerlink" title="How implement Coprocesses?"></a>How implement Coprocesses?</h1><p>a filter that the same program generates the filter’s input and reads the filter’s output.</p>
+<p>example:</p>
+<p>reads two numbers from its standard input, computes their sum, and writes the sum to its standard output.</p>
+<h1 id="How-to-create-a-pipe-the-kernel-implements-pipes-in-the-file-system"><a href="#How-to-create-a-pipe-the-kernel-implements-pipes-in-the-file-system" class="headerlink" title="How to create a pipe???(the kernel implements pipes in the file system)"></a>How to create a pipe???(the kernel implements pipes in the file system)</h1><p>The traditional implementation of pipes uses the file system for data storage.（所以相当于通过文件来共享数据，使用文件系统的一些机制来共享数据）(或者可以使用与文件系统一样的机制，基于所谓的 pipe device ？？？)</p>
+<pre><code>         user file                                file table                               inode table              
+       descriptor table                                                                                             
+      +--------------+                     +-----------------------+                +-------------------------+     
+    0 |              |                     |                       |                |            .            |     
+      +--------------+                     |                       |                |            .            |     
+    1 |              |                     +-----------------------+                |            .            |     
+      +--------------+                     |           .           |                |            .            |     
+    2 |              |                     |           .           |                |            .            |     
+      +--------------+                     |           .           |                |            .            |     
+    3 |     fd[0]    |----------           +-----------------------+                |            .            |     
+      +--------------+          \---------&gt;|count 1          R     |--              |            .            |     
+    4 |     fd[1]    |----------           +-----------------------+  \--           |            .            |     
+      +--------------+          \---------&gt;|count 1          W     |--   \--        +-------------------------+     
+    5 |              |                     +-----------------------+  \---  \--     |  count 2                |     
+      +--------------+                     |           .           |      \--- \--  |  offset                 |     
+    6 |              |                     |           .           |          \---\&gt;|                         |     
+      +--------------+                     |           .           |              \&gt;|                         |     
+    7 |              |                     |           .           |                |                         |     
+      +--------------+                     |           .           |                |                         |     
+      |              |                     |           .           |                +-------------------------+     
+      |              |                     |           .           |                |            .            |     
+      +--------------+                     |           .           |                |            .            |     
+                                           |           .           |                |            .            |     
+                                           |           .           |                |            .            |     
+                                           |           .           |                |            .            |     
+                                           |           .           |                |            .            |     
+                                           |           .           |                |            .            |     
+                                           |           .           |                |            .            |     
+                                           +-----------------------+                +-------------------------+     
+</code></pre>
+<ol>
+<li>assign an inode</li>
+<li>allocates a pair of user file descriptors and corresponding file table entries for the pipe(one for reading and the other for writing to the pipe)<br>It uses the file table so that the interface for the read, write and other system calls is consistent with the interface for regular files.</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">SYSCALL_DEFINE1(pipe, <span class="type">int</span> __user *, fildes)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> do_pipe2(fildes, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">do_pipe2</span><span class="params">(<span class="type">int</span> __user *fildes, <span class="type">int</span> flags)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">files</span>[2];</span></span><br><span class="line">        <span class="type">int</span> fd[<span class="number">2</span>];</span><br><span class="line">        <span class="type">int</span> error;</span><br><span class="line"></span><br><span class="line">        error = __do_pipe_flags(fd, files, flags);</span><br><span class="line">        <span class="keyword">if</span> (!error) &#123;     </span><br><span class="line">                        fd_install(fd[<span class="number">0</span>], files[<span class="number">0</span>]);</span><br><span class="line">                        fd_install(fd[<span class="number">1</span>], files[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> error;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __do_pipe_flags(<span class="type">int</span> *fd, <span class="keyword">struct</span> file **files, <span class="type">int</span> flags)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> error;</span><br><span class="line">        <span class="type">int</span> fdw, fdr;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (flags &amp; ~(O_CLOEXEC | O_NONBLOCK | O_DIRECT | O_NOTIFICATION_PIPE))</span><br><span class="line">                <span class="keyword">return</span> -EINVAL;</span><br><span class="line"></span><br><span class="line">        error = create_pipe_files(files, flags);</span><br><span class="line">        <span class="keyword">if</span> (error)</span><br><span class="line">                <span class="keyword">return</span> error;</span><br><span class="line"></span><br><span class="line">        error = get_unused_fd_flags(flags);</span><br><span class="line">        <span class="keyword">if</span> (error &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">goto</span> err_read_pipe;</span><br><span class="line">        fdr = error;</span><br><span class="line"></span><br><span class="line">        error = get_unused_fd_flags(flags);</span><br><span class="line">        <span class="keyword">if</span> (error &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">goto</span> err_fdr;</span><br><span class="line">        fdw = error;</span><br><span class="line"></span><br><span class="line">        audit_fd_pair(fdr, fdw);</span><br><span class="line">        fd[<span class="number">0</span>] = fdr;</span><br><span class="line">        fd[<span class="number">1</span>] = fdw;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>pipe  &#x3D;&#x3D;&gt; do_pipe2  &#x3D;&#x3D;&gt; __do_pipe_flags<br>首先调用 create_pipe_files 创建 inode 和 file table， 然后通过 get_unused_fd_flags 获取文件描述符</p>
+<h1 id="How-to-remain-consistent-with-the-access-interface-for-regular-files"><a href="#How-to-remain-consistent-with-the-access-interface-for-regular-files" class="headerlink" title="How to remain consistent with the access interface for regular files?"></a>How to remain consistent with the access interface for regular files?</h1><blockquote>
+<p>the kernel use the file table to implement pipe, so that the interface for the read, write and other system calls is consistent with the interface for regular files. As a result, processes do not have to know whether they are reading or writing a regular file or a pipe.</p>
+</blockquote>
+<h1 id="Why-we-can-not-adjust-pipe’s-byte-offset-via-the-lseek-system-call"><a href="#Why-we-can-not-adjust-pipe’s-byte-offset-via-the-lseek-system-call" class="headerlink" title="Why we can not adjust pipe’s byte offset via the lseek system call?"></a>Why we can not adjust pipe’s byte offset via the lseek system call?</h1><blockquote>
+<p>the inode records byte offsets in the pipe where the next read or write of the pipe will start. Maintaining the byte offsets in the inode allows convenient FIFO access to the pipe data. So random access I&#x2F;O to a pipe is not possible.</p>
+</blockquote>
+<p>note that the regular files offset is maintained in the file table.</p>
+<h1 id="pipe-inode-有没有与磁盘上的-inode-有对应？？？"><a href="#pipe-inode-有没有与磁盘上的-inode-有对应？？？" class="headerlink" title="pipe inode 有没有与磁盘上的 inode 有对应？？？"></a>pipe inode 有没有与磁盘上的 inode 有对应？？？</h1><h1 id="pipe-的-fifo-功能是如何实现的？"><a href="#pipe-的-fifo-功能是如何实现的？" class="headerlink" title="pipe 的 fifo 功能是如何实现的？"></a>pipe 的 fifo 功能是如何实现的？</h1><p>maintain the byte offsets in the inode.<br>processes cannot adjust byte offset via the lseek system call and so random access I&#x2F;O to a pipe is not possible.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>half duplex</th>
+<th>used only between processes that have a common ancestor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pipe(unamed pipe)</td>
+<td>have</td>
+<td>have</td>
+</tr>
+<tr>
+<td>FIFO(named pipe)</td>
+<td>have</td>
+<td>get around</td>
+</tr>
+<tr>
+<td>Unix domain sockets</td>
+<td>get around</td>
+<td>get around</td>
+</tr>
+</tbody></table>
+<h1 id="drawing-figure……"><a href="#drawing-figure……" class="headerlink" title="drawing figure……"></a>drawing figure……</h1><pre><code>                      parent                               child
+                +------------------+                 +------------------+
+                |                  |     fork        |                  |
+                |                  |   ----------&gt;   |                  |
+                |                  |                 |                  |
+                |  fd[0]     fd[1] |                 | fd[0]     fd[1]  |
+                +----++---------+--+                 +---++-------++----+
+                     ^^         |                        ^^       | 
+                     ||         |                        ||       | 
+                     ++---------+------------------------+|       |            
+                     |+---------+-------------------------+       |            
+                     ||         |                                 |            
+                     ||         |                                 |            
+                     ||         |                                 |            
+                     ||         +---------------------------------+            
+                     ||                                           |            
+                     ||                                           |            
+                     ||                                           |            
+                +----++-------------------------------------------+-----+      
+                |    ||                                           |     |      
+                |    ||      +--------------------------+         |     |      
+                |    |+----- |                          |         |     |      
+                |    +------ |           pipe           + &lt;-------+     |      
+                |            +--------------------------+               |      
+                |                                                       |      
+                |                                                       |      
+                +-------------------------------------------------------+      
+                                        kernel                                 
+                                                                               
+
+
+                                                                               
+                                                                               
+                       parent                               child              
+                 +------------------+                 +------------------+     
+                 |                  |     fork        |                  |     
+                 |                  |   ----------&gt;   |                  |     
+                 |                  |                 |                  |     
+                 |  fd[0]     fd[1] |                 | fd[0]     fd[1]  |     
+                 +----++---------+--+                 +---++-------++----+     
+                      ^^                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                      ||                                           |           
+                 +----++-------------------------------------------+-----+     
+                 |    ||                                           |     |     
+                 |    ||      +--------------------------+         |     |     
+                 |    |+----- |                          |         |     |     
+                 |    +------ |           pipe           + &lt;-------+     |     
+                 |            +--------------------------+               |     
+                 |                                                       |     
+                 |                                                       |     
+                 +-------------------------------------------------------+     
+                                         kernel                                
+                                                                               
+</code></pre>
+<h1 id="Some-problem-about-the-process-state-related-to-pipe"><a href="#Some-problem-about-the-process-state-related-to-pipe" class="headerlink" title="Some problem about the process state related to pipe?"></a>Some problem about the process state related to pipe?</h1><p>What will happen when we write to a pipe whose read end has been closed?           </p>
+<p>当最后一个 read end 被关掉的时候，如果有写的进程在 sleep 怎么办？</p>
+<p>What will happen when we read from a pipe whose write end has been closed?         </p>
+<p>当最后一个 write end 被关掉的时候，如果有读的进程在 sleep 怎么办？</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2022/12/31/pipe_dup/" title="pipe and dup">https://youngvoice.github.io/2022/12/31/pipe_dup/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/learning/" rel="tag"># learning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/12/07/time/" rel="prev" title="一次时间测量引发的故事">
+                  <i class="fa fa-chevron-left"></i> 一次时间测量引发的故事
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/02/04/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

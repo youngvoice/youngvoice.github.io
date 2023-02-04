@@ -1,3 +1,9 @@
+---
+title: number system
+description: the different type numbers
+categories: [math]
+tags: [math]
+---
 # 数字作为数学的研究对象之一，有必要再好好整理一番。
 # 正数和负数的由来？
 为了表示在生活中出现的具有相反意义的量，从而发明了负数。0是正数和负数的分界。

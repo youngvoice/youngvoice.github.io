@@ -1,4 +1,9 @@
-
+---
+title: versatile platform
+description: process and system virtual machine
+categories: [cs, knowledge, book]
+tags: [cs, knowledge, book]
+---
 # 虚拟机需要解决哪些问题？
 虚拟机用来解释执行汇编指令，
 ## 都有哪些汇编指令需要处理？？？

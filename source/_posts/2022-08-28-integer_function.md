@@ -1,10 +1,8 @@
 ---
 title: floor and ceil function
 description: how to align on boundary?
-categories:
- - language
- - memory
-tags: [learning]
+categories: [math]
+tags: [math]
 ---
 具体数学：Concrete Mathematics
 Chapter 3

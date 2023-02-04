@@ -1,9 +1,8 @@
 ---
 title: Variadic functions in C
 description: how to work in variadic functions?
-categories:
- - language
-tags: [learning]
+categories: [cs, knowledge, program]
+tags: [cs, knowledge, program]
 ---
 Variadic functions in C
 

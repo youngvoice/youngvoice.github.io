@@ -1,9 +1,8 @@
 ---
 title: How to access two nets in the same time?
 description: what is network route table?
-categories:
- - tutorial
-tags: [learning]
+categories: [cs, knowledge, network]
+tags: [cs, knowledge, network]
 ---
 
 # 缘从何起之如何通过两个网卡同时访问内外网？

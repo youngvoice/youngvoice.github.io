@@ -1,10 +1,8 @@
 ---
 title: the design of unix 
 description: the filesystem and process
-categories:
- - book
- - review
-tags: [book]
+categories: [cs, knowledge, book]
+tags: [cs, knowledge, book]
 ---
 Preface
 This book describes the internal algorithms and structures that form the basis of the operating system and their relationship to the programmer interface.

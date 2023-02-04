@@ -1,10 +1,8 @@
 ---
 title: complement encode
-description: information
-categories:
- - complement encode
- - cast operation
-tags: [note]
+description: complement encode and cast operation
+categories: [cs, math, information]
+tags: [cs, math, information]
 ---
 
 

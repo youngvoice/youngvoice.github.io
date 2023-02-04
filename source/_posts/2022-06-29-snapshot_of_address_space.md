@@ -1,9 +1,8 @@
 ---
 title: argc, argv, envp, auxiliary vector 
 description: initial process stack
-categories:
- - csu
-tags: [csu]
+categories: [cs, knowledge, process, csu]
+tags: [cs, knowledge, process, csu]
 ---
 Operating System Interface
 Process Initialization

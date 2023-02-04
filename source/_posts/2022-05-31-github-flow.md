@@ -1,10 +1,8 @@
 ---
 title: github work flow
 description: How to use git and github
-categories:
-- [tools, github]
-tags: 
-- tutorial
+categories: [tools, github]
+tags: [tools, github]
 ---
 git checkout
 git rebase

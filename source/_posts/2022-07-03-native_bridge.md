@@ -1,9 +1,8 @@
 ---
 title: the mechanism of native bridge
 description: design and implement and use of native bridge
-categories:
- - android
-tags: [native bridge]
+categories: [cs, knowledge, android, linker]
+tags: [cs, knowledge, android, native bridge]
 ---
 
                                                                                          

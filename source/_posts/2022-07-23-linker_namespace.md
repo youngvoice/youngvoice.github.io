@@ -1,9 +1,8 @@
 ---
 title: VNDK
 description: VNDK and namespace
-categories:
- - android
-tags: [VNDK]
+categories: [cs, knowledge, android, linker]
+tags: [cs, knowledge, android, linker]
 ---
 
 VNDK(Vendor Native Development Kit)

@@ -1,10 +1,8 @@
 ---
 title: what story a program has? 
 description: the story of a whole life of program
-categories:
-- process
-tags: 
-- question
+categories: [cs, knowledge, operating system, process]
+tags: [cs, knowledge, operating system, process]
 ---
 
 # how do we use a computer?

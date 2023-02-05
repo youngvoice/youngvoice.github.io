@@ -1,10 +1,8 @@
 ---
 title: what mechanism exists back in file system? 
 description: the story of process read file content
-categories:
-- file system
-tags:
-- question
+categories: [cs, knowledge, operating system, file system]
+tags: [cs, knowledge, operating system, file system]
 ---
 如果说syscall是操作系统的横向大门的话，我就称文件系统为实践入手操作系统的纵向大门。
 # 缘从何起之进程如何读取或写入文件内容？

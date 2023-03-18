@@ -11,6 +11,8 @@ Android logger driver manages a handful of separate kernel-hosted buffers for lo
 
 
 # architecture
+https://elinux.org/Android_Logging_System(the design)(https://www.slideshare.net/tetsu.koba/logging-system-of-android-5111399)
+
 the logger driver is the core building block on which all other logging-related functionality relies.
 each buffer it manages is exposed as a separate entry within /dev/log/.
 
@@ -45,6 +47,10 @@ event buffer
 
 the classic linux syslog relies on sending messages through sockets(generates a task switch), it also uses files to store its information(writes to a storage device), 
 
+
+
+# the requirement of linux driver implementation
+https://elinux.org/Android_logger
 
 # Android logger project
 https://elinux.org/Mainline_Android_logger_project

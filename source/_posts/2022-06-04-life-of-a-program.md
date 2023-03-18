@@ -4,7 +4,8 @@ description: the story of a whole life of program
 categories: [cs, knowledge, operating system, process]
 tags: [cs, knowledge, operating system, process]
 ---
-
+# whole life of process
+进程的一生就是进程状态不断切换的过程
 # how do we use a computer?
 In common, we use a computer through command line or GUI, which all through program.
 
@@ -549,8 +550,12 @@ user program entry.
 2. dynamically linked program
 first run dynamic linker, then transfer control to user program entry.
 
-Update 2022/6/25
+# (进程状态转换图)
 
+## 关于 exit 与 join 的关系问题之僵尸进程？？？
+
+Update 2022/6/25
+Update 2023/2/15
 
 
 

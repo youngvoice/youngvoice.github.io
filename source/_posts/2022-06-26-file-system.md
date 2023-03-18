@@ -39,6 +39,61 @@ super_block: filesystem control block
 # what is the file system does to disk?
 从系统调用 read/write , 最后，读写到磁盘上的数据
 # what relationship exist between file system and directory(mount)?
+mount and unmounting file systems
+
+a physical disk unit consists of several logical sections. a section of a disk may contain a logical file system, consisting of a boot block, super block, inode list and data blocks and each section has a device file name.
+
+## one access method by block
+processes can access data in a section by opening the appropriate device file name and then reading and writing the "file", treating it as a sequence of disk blocks.
+
+## another access method by file system
+the mount system call allows users to access data in a disk section as a file system instead of a sequence of disk blocks.
+
+the mount system call connects the file system in a specified section of a disk to the existing file system hierarchy, and the umount system call disconnects a file system from the hierarchy.
+
+## what the mount system call does???(operate data structure)
+```c
+mount("/dev/dsk1", "/usr", 0);
+```
+after completion of the mount system call, the root of the mounted file system is accessed by the name "/usr".
+
+
+the kernel has a mount table with entries for every mounted file system.
+
+### todo
+1. permission check
+2. the kernel finds the inode of the special file that represents the file system to be mounted, extracts the major and minor numbers that identify the appropriate disk section.
+3. finds the inode of the directory on which the file system will be mounted.
+4. allocates a free slot in the mount table, marks the slot in use,
+5. assigns the device number field in the mount table.
+
+The kernel calls the open procedure for the block device containing the file system in the same way it invokes the procedure when opening the block device directly.
+6. the kernel then allocates a free buffer from the buffer pool to hold the super block of the mounted file system
+7. the kernel stores a pointer to the inode of the mounted-on directory of the original file tree(for allowing file path names containing ".." to traverse the mount point,)
+8. it finds the root inode of the mounted file system and stores a pointer to the inode in the mount table.
+
+to the user, the mounted-on directory and the root of the mounted file system are logically equivalent,
+9. kernel establishes their equivalence by their coexistence in the mount table entry.(the process can no longer access the inode of the mounted-on directory).
+
+
+10. the kernel marks the mounted-on inode as a mount point.
+
+
+## How crossing mount points in file path names(iget, namei)???
+crossing from the mounted-on file system to the mounted file system
+crossing from the mounted file system to the mounted-on file system
+
+
+the following sequence of shell commands illustrates the two cases.
+```bash
+mount /dev/sdk1 /usr
+cd /usr/src/uts
+cd ../../..
+```
+the first cd command causes the kernel parses the path name, crossing the mount point at "/usr".
+The second cd command results in the kernel parsing the path name and crossing the mount point at the third ".." in the path name.
+
+
 
 
 # what the open does? 

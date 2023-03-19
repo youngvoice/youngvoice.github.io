@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="缘从何起之 program segments and process memory regions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How does linux load a excutable program?">
+<meta property="og:url" content="https://youngvoice.github.io/2023/03/19/linux_binfmt/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="缘从何起之 program segments and process memory regions">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-03-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-19T05:53:03.486Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="kernel">
+<meta property="article:tag" content="executable format">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2023/03/19/linux_binfmt/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2023/03/19/linux_binfmt/","path":"2023/03/19/linux_binfmt/","title":"How does linux load a excutable program?"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>How does linux load a excutable program? | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">31</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">41</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%98%E4%BB%8E%E4%BD%95%E8%B5%B7%E4%B9%8Bprogram-segments-and-process-memory-regions"><span class="nav-number">1.</span> <span class="nav-text">缘从何起之program segments and process memory regions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#program-execution"><span class="nav-number">2.</span> <span class="nav-text">program execution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#questions"><span class="nav-number">2.1.</span> <span class="nav-text">questions?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#command-line-arguments-and-shell-environment"><span class="nav-number">2.2.</span> <span class="nav-text">command-line arguments and shell environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#libraries"><span class="nav-number">2.3.</span> <span class="nav-text">libraries</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#program-segments-and-process-memory-regions"><span class="nav-number">2.4.</span> <span class="nav-text">program segments and process memory regions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#executable-format"><span class="nav-number">3.</span> <span class="nav-text">executable format</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E6%98%AF%E5%A6%82%E4%BD%95%E9%81%8D%E5%8E%86-formats-list%EF%BC%8C%E6%9D%A5%E7%A1%AE%E5%AE%9A%E4%BD%BF%E7%94%A8%E5%93%AA%E7%A7%8D-linux-binfmt-%E7%9A%84%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">我们是如何遍历 formats list，来确定使用哪种 linux_binfmt 的？？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#binfmt-misc"><span class="nav-number">5.</span> <span class="nav-text">binfmt_misc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#how-the-below-command-works"><span class="nav-number">5.1.</span> <span class="nav-text">how the below command works?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-enable-binfmt-misc"><span class="nav-number">5.2.</span> <span class="nav-text">how to enable binfmt_misc?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-job-the-exec-function-need-to-do"><span class="nav-number">6.</span> <span class="nav-text">what job the exec function need to do?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#exec-family"><span class="nav-number">6.1.</span> <span class="nav-text">exec family</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parameters"><span class="nav-number">6.2.</span> <span class="nav-text">parameters:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#the-pathname-of-the-file-to-be-executed-absolute-or-relative-to-the-process%E2%80%99s-current-directory"><span class="nav-number">6.2.1.</span> <span class="nav-text">the pathname of the file to be executed(absolute or relative to the process’s current directory)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#command-line-argument-for-the-new-program"><span class="nav-number">6.2.2.</span> <span class="nav-text">command-line argument for the new program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#environment-strings"><span class="nav-number">6.2.3.</span> <span class="nav-text">environment strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-lib"><span class="nav-number">6.2.4.</span> <span class="nav-text">C lib</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sys-execve-service-routine"><span class="nav-number">6.3.</span> <span class="nav-text">sys_execve service routine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-load-binary-method-of-each-format-does"><span class="nav-number">6.4.</span> <span class="nav-text">What load_binary method of each format does?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-the-job-of-dynamic-linker-does"><span class="nav-number">6.5.</span> <span class="nav-text">What is the job of dynamic linker does?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-flow-of-prepare-binprm-function"><span class="nav-number">6.6.</span> <span class="nav-text">the flow of prepare_binprm function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-flow-of-flush-old-exec-function"><span class="nav-number">6.7.</span> <span class="nav-text">the flow of flush_old_exec() function</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2023/03/19/linux_binfmt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="How does linux load a excutable program? | I am thinking...">
+      <meta itemprop="description" content="缘从何起之 program segments and process memory regions">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How does linux load a excutable program?
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-03-19 00:00:00 / Modified: 05:53:03" itemprop="dateCreated datePublished" datetime="2023-03-19T00:00:00+00:00">2023-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/" itemprop="url" rel="index"><span itemprop="name">cs</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/kernel/" itemprop="url" rel="index"><span itemprop="name">kernel</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/kernel/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/kernel/linux/executable-format/" itemprop="url" rel="index"><span itemprop="name">executable format</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">缘从何起之 program segments and process memory regions</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="缘从何起之program-segments-and-process-memory-regions"><a href="#缘从何起之program-segments-and-process-memory-regions" class="headerlink" title="缘从何起之program segments and process memory regions"></a>缘从何起之program segments and process memory regions</h1><h1 id="program-execution"><a href="#program-execution" class="headerlink" title="program execution"></a>program execution</h1><p>the relationship between program and process</p>
+<p>how the kernel sets up the execution context for a process according to the contents of the program file?<br>load a bunch of instructions into memory and point the cpu to them</p>
+<h2 id="questions"><a href="#questions" class="headerlink" title="questions?"></a>questions?</h2><ol>
+<li>different executable formats(binfmt_elf, binfmt_misc, binfmt_script …)</li>
+<li>shared libraries</li>
+<li>other information in the execution context<br> arg &amp; env</li>
+</ol>
+<h2 id="command-line-arguments-and-shell-environment"><a href="#command-line-arguments-and-shell-environment" class="headerlink" title="command-line arguments and shell environment"></a>command-line arguments and shell environment</h2><p>Figure 20-1</p>
+<h2 id="libraries"><a href="#libraries" class="headerlink" title="libraries"></a>libraries</h2><p>Shared libraries are especially convenient on systems that provide file memory mapping,because they reduce the amount of main memory requested for executing a program.</p>
+<h2 id="program-segments-and-process-memory-regions"><a href="#program-segments-and-process-memory-regions" class="headerlink" title="program segments and process memory regions"></a>program segments and process memory regions</h2><h1 id="executable-format"><a href="#executable-format" class="headerlink" title="executable format"></a>executable format</h1><ol>
+<li>sets up a new execution environment for the current process by reading the information stored in an executable file.</li>
+</ol>
+<p>load_binary<br>2. dynamically binds a shared library to an already running process<br>load_shlib<br>3. stores the execution context of the current process in a file named core.<br>core_dump</p>
+<p>init_elf_binfmt 函数被放到 init 段，所以在系统启动过程中将会被调用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;./fs/binfmt_elf.c&quot;</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">init_elf_binfmt</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        register_binfmt(&amp;elf_format);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>the last element in the formats list is always an object describing the executable format for interpreted scripts.<br>（如何保证它是最后一个，以及是最后一个的话在访问上面有什么好处？？？）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">init_script_binfmt</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        register_binfmt(&amp;script_format);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="我们是如何遍历-formats-list，来确定使用哪种-linux-binfmt-的？？？"><a href="#我们是如何遍历-formats-list，来确定使用哪种-linux-binfmt-的？？？" class="headerlink" title="我们是如何遍历 formats list，来确定使用哪种 linux_binfmt 的？？？"></a>我们是如何遍历 formats list，来确定使用哪种 linux_binfmt 的？？？</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sys_execve</span><br><span class="line">    do_execve</span><br><span class="line">        do_execveat_common</span><br><span class="line">            bprm_execve</span><br><span class="line">                exec_binprm</span><br><span class="line">                    prepare_binprm</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                        Fills the buf field of the linux_binprm structure with the first 128 bytes of the</span></span><br><span class="line"><span class="comment">                        executable file.</span></span><br><span class="line"><span class="comment">                        */</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>stage 1, 读取可执行文件的前 BINPRM_BUF_SIZE 字节到 bprm-&gt;buf 中</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">prepare_binprm</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">loff_t</span> pos = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(bprm-&gt;buf, <span class="number">0</span>, BINPRM_BUF_SIZE);</span><br><span class="line">        <span class="keyword">return</span> kernel_read(bprm-&gt;file, bprm-&gt;buf, BINPRM_BUF_SIZE, &amp;pos);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>stage 2, 在搜索可执行文件对应的格式时，通过 bprm-&gt;buf 中的内容来判断</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;./fs/exec.c&quot;</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">search_binary_handler</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">        retval = prepare_binprm(bprm);</span><br><span class="line">        <span class="keyword">if</span> (retval &lt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> retval;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        list_for_each_entry(fmt, &amp;formats, lh) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!try_module_get(fmt-&gt;module))</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">            read_unlock(&amp;binfmt_lock);</span><br><span class="line"></span><br><span class="line">            retval = fmt-&gt;load_binary(bprm);</span><br><span class="line"></span><br><span class="line">            read_lock(&amp;binfmt_lock);</span><br><span class="line">            put_binfmt(fmt);</span><br><span class="line">            <span class="keyword">if</span> (bprm-&gt;point_of_no_return || (retval != -ENOEXEC)) &#123;</span><br><span class="line">                    read_unlock(&amp;binfmt_lock);</span><br><span class="line">                    <span class="keyword">return</span> retval;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>load_script checks whether the executable file starts with the #! pair of characters.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;./fs/binfmt_script.c&quot;</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">load_script</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">const</span> <span class="type">char</span> *i_name, *i_sep, *i_arg, *i_end, *buf_end;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">file</span>;</span></span><br><span class="line">        <span class="type">int</span> retval;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Not ours to exec if we don&#x27;t start with &quot;#!&quot;. */</span></span><br><span class="line">        <span class="keyword">if</span> ((bprm-&gt;buf[<span class="number">0</span>] != <span class="string">&#x27;#&#x27;</span>) || (bprm-&gt;buf[<span class="number">1</span>] != <span class="string">&#x27;!&#x27;</span>))</span><br><span class="line">                <span class="keyword">return</span> -ENOEXEC;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>if the executable file starts with the #! pair of characters, it interprets the rest of the first line as the pathname of another executable file and tries to execute it by passing the name of the script file as a parameter<br>加载 interpret 并且设置其参数为 脚本的文件名</p>
+<p>下面的具体实现有时间再看？？？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;./fs/binfmt_script.c&quot;</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">load_script</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * OK, we&#x27;ve parsed out the interpreter name and</span></span><br><span class="line"><span class="comment">         * (optional) argument.</span></span><br><span class="line"><span class="comment">         * Splice in (1) the interpreter&#x27;s name for argv[0]</span></span><br><span class="line"><span class="comment">         *           (2) (optional) argument to interpreter</span></span><br><span class="line"><span class="comment">         *           (3) filename of shell script (replace argv[0])</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * This is done in reverse order, because of how the</span></span><br><span class="line"><span class="comment">         * user environment and arguments are stored.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        * OK, now restart the process with the interpreter&#x27;s dentry.</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        file = open_exec(i_name);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="binfmt-misc"><a href="#binfmt-misc" class="headerlink" title="binfmt_misc"></a>binfmt_misc</h1><h2 id="how-the-below-command-works"><a href="#how-the-below-command-works" class="headerlink" title="how the below command works?"></a>how the below command works?</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;:name:type:offset:string:mask:interpreter:flags&#x27;</span> &gt; /proc/sys/fs/binfmt_misc/register</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;./fs/binfmt_misc.c&quot;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> flags;            <span class="comment">/* type, status, etc. */</span></span><br><span class="line">        <span class="type">int</span> offset;                     <span class="comment">/* offset of magic */</span></span><br><span class="line">        <span class="type">int</span> size;                       <span class="comment">/* size of magic/mask */</span></span><br><span class="line">        <span class="type">char</span> *magic;                    <span class="comment">/* magic or filename extension */</span></span><br><span class="line">        <span class="type">char</span> *mask;                     <span class="comment">/* mask, NULL for exact match */</span></span><br><span class="line">        <span class="type">const</span> <span class="type">char</span> *interpreter;        <span class="comment">/* filename of interpreter */</span></span><br><span class="line">        <span class="type">char</span> *name;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">dentry</span> *<span class="title">dentry</span>;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">file</span> *<span class="title">interp_file</span>;</span></span><br><span class="line">&#125; Node;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* /&lt;entry&gt; */</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">bm_entry_operations</span> =</span> &#123;</span><br><span class="line">        .read           = bm_entry_read,</span><br><span class="line">        .write          = bm_entry_write,</span><br><span class="line">        .llseek         = default_llseek,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* /register */</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">bm_register_operations</span> =</span> &#123;</span><br><span class="line">        .write          = bm_register_write,</span><br><span class="line">        .llseek         = noop_llseek,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* /status */</span></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">bm_status_operations</span> =</span> &#123;</span><br><span class="line">        .read           = bm_status_read,</span><br><span class="line">        .write          = bm_status_write,</span><br><span class="line">        .llseek         = default_llseek,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * This registers a new binary format, it recognises the syntax</span></span><br><span class="line"><span class="comment"> * &#x27;:name:type:offset:magic:mask:interpreter:flags&#x27;</span></span><br><span class="line"><span class="comment"> * where the &#x27;:&#x27; is the IFS, that can be chosen with the first char</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> Node *<span class="title function_">create_entry</span><span class="params">(<span class="type">const</span> <span class="type">char</span> __user *buffer, <span class="type">size_t</span> count)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Parse the &#x27;name&#x27; field. */</span></span><br><span class="line">        e-&gt;name = p;</span><br><span class="line">        p = <span class="built_in">strchr</span>(p, del);</span><br><span class="line">        <span class="keyword">if</span> (!p)</span><br><span class="line">                <span class="keyword">goto</span> einval;</span><br><span class="line">        *p++ = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span> (!e-&gt;name[<span class="number">0</span>] ||</span><br><span class="line">            !<span class="built_in">strcmp</span>(e-&gt;name, <span class="string">&quot;.&quot;</span>) ||</span><br><span class="line">            !<span class="built_in">strcmp</span>(e-&gt;name, <span class="string">&quot;..&quot;</span>) ||</span><br><span class="line">            <span class="built_in">strchr</span>(e-&gt;name, <span class="string">&#x27;/&#x27;</span>))</span><br><span class="line">                <span class="keyword">goto</span> einval;</span><br><span class="line"></span><br><span class="line">        pr_debug(<span class="string">&quot;register: name: &#123;%s&#125;\n&quot;</span>, e-&gt;name);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Parse the &#x27;type&#x27; field. */</span></span><br><span class="line">        <span class="keyword">if</span></span><br><span class="line">                <span class="comment">/* Handle the &#x27;M&#x27; (magic) format. */</span></span><br><span class="line">                <span class="comment">/* Parse the &#x27;offset&#x27; field. */</span></span><br><span class="line">                <span class="comment">/* Parse the &#x27;magic&#x27; field. */</span></span><br><span class="line">                <span class="comment">/* Parse the &#x27;mask&#x27; field. */</span></span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 * Decode the magic &amp; mask fields.</span></span><br><span class="line"><span class="comment">                 * Note: while we might have accepted embedded NUL bytes from</span></span><br><span class="line"><span class="comment">                 * above, the unescape helpers here will stop at the first one</span></span><br><span class="line"><span class="comment">                 * it encounters.</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">               <span class="comment">/* Handle the &#x27;E&#x27; (extension) format. */</span></span><br><span class="line">                <span class="comment">/* Skip the &#x27;offset&#x27; field. */</span></span><br><span class="line">                <span class="comment">/* Parse the &#x27;magic&#x27; field. */</span></span><br><span class="line">                <span class="comment">/* Skip the &#x27;mask&#x27; field. */</span></span><br><span class="line">        <span class="comment">/* Parse the &#x27;interpreter&#x27; field. */</span></span><br><span class="line">        <span class="comment">/* Parse the &#x27;flags&#x27; field. */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">ssize_t</span> bm_register_write(<span class="keyword">struct</span> file *file, <span class="type">const</span> <span class="type">char</span> __user *buffer,</span><br><span class="line">                               <span class="type">size_t</span> count, <span class="type">loff_t</span> *ppos)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">        e = create_entry(buffer, count);</span><br><span class="line"></span><br><span class="line">        list_add(&amp;e-&gt;<span class="built_in">list</span>, &amp;entries);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***************************************************</span></span><br><span class="line"><span class="comment">* end stage 1</span></span><br><span class="line"><span class="comment">***************************************************</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="string">&quot;./fs/binfmt_misc.c&quot;</span></span><br><span class="line"><span class="type">static</span> <span class="title function_">LIST_HEAD</span><span class="params">(entries)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/***************************************************</span></span><br><span class="line"><span class="comment">* begin stage 2</span></span><br><span class="line"><span class="comment">***************************************************</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * the loader itself</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">load_misc_binary</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line">        Node *fmt;</span><br><span class="line">        fmt = check_file(bprm);</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment">/* note by xjk</span></span><br><span class="line"><span class="comment">        *complete the task by fmt*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Check if we support the binfmt</span></span><br><span class="line"><span class="comment"> * if we do, return the node, else NULL</span></span><br><span class="line"><span class="comment"> * locking is done in load_misc_binary</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">static</span> Node *<span class="title function_">check_file</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">/* Walk all the registered handlers. */</span></span><br><span class="line">        list_for_each(l, &amp;entries) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">/* Make sure this one is currently enabled. */</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">/* Do matching based on extension if applicable. */</span></span><br><span class="line">                <span class="comment">/* Do matching based on magic &amp; mask. */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="how-to-enable-binfmt-misc"><a href="#how-to-enable-binfmt-misc" class="headerlink" title="how to enable binfmt_misc?"></a>how to enable binfmt_misc?</h2><p>config BINFMT_MISC when compile kernel</p>
+<p>register MISC file system and bin format</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">init_misc_binfmt</span><span class="params">(<span class="type">void</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="type">int</span> err = register_filesystem(&amp;bm_fs_type);</span><br><span class="line">        <span class="keyword">if</span> (!err)</span><br><span class="line">                insert_binfmt(&amp;misc_format);</span><br><span class="line">        <span class="keyword">return</span> err;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>mount misc kind of file system</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> dentry *<span class="title function_">mount_single</span><span class="params">(<span class="keyword">struct</span> file_system_type *fs_type,</span></span><br><span class="line"><span class="params">        <span class="type">int</span> flags, <span class="type">void</span> *data,</span></span><br><span class="line"><span class="params">        <span class="type">int</span> (*fill_super)(<span class="keyword">struct</span> super_block *, <span class="type">void</span> *, <span class="type">int</span>))</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">super_block</span> *<span class="title">s</span>;</span></span><br><span class="line">        <span class="type">int</span> error;</span><br><span class="line"></span><br><span class="line">        s = sget(fs_type, compare_single, set_anon_super, flags, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span> (IS_ERR(s))</span><br><span class="line">                <span class="keyword">return</span> ERR_CAST(s);</span><br><span class="line">        <span class="keyword">if</span> (!s-&gt;s_root) &#123;</span><br><span class="line">                error = fill_super(s, data, flags &amp; SB_SILENT ? <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span> (!error)</span><br><span class="line">                        s-&gt;s_flags |= SB_ACTIVE;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                error = reconfigure_single(s, flags, data);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (unlikely(error)) &#123;</span><br><span class="line">                deactivate_locked_super(s);</span><br><span class="line">                <span class="keyword">return</span> ERR_PTR(error);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dget(s-&gt;s_root);</span><br><span class="line">&#125;</span><br><span class="line">EXPORT_SYMBOL(mount_single);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="what-job-the-exec-function-need-to-do"><a href="#what-job-the-exec-function-need-to-do" class="headerlink" title="what job the exec function need to do?"></a>what job the exec function need to do?</h1><h2 id="exec-family"><a href="#exec-family" class="headerlink" title="exec family"></a>exec family</h2><p>exec is a family of functions that replace the execution context of a process with a new context described by an executable file.</p>
+<h2 id="parameters"><a href="#parameters" class="headerlink" title="parameters:"></a>parameters:</h2><h3 id="the-pathname-of-the-file-to-be-executed-absolute-or-relative-to-the-process’s-current-directory"><a href="#the-pathname-of-the-file-to-be-executed-absolute-or-relative-to-the-process’s-current-directory" class="headerlink" title="the pathname of the file to be executed(absolute or relative to the process’s current directory)"></a>the pathname of the file to be executed(absolute or relative to the process’s current directory)</h3><p>search for the executable file in all directories specified by the PATH environment variable(execlp, execvp)</p>
+<h3 id="command-line-argument-for-the-new-program"><a href="#command-line-argument-for-the-new-program" class="headerlink" title="command-line argument for the new program"></a>command-line argument for the new program</h3><p>variable number of additional parameters, the parameters are organized in a list(as the l character in the function names suggests) terminated by a NULL value (execl, execlp, execle)</p>
+<p>single parameter, the parameter is the address of a vector(as the v character in the function names suggests) of pointers to command-line argument strings. The last component of the array must be NULL.</p>
+<h3 id="environment-strings"><a href="#environment-strings" class="headerlink" title="environment strings"></a>environment strings</h3><p>last parameter the address of an array of pointers to environment strings(execle, execve), the last component of the array must be NULL.</p>
+<p>access from the external environ global variable, which is defined in the C lib.</p>
+<h3 id="C-lib"><a href="#C-lib" class="headerlink" title="C lib"></a>C lib</h3><p>all exec functions, with the exception of execve, are wrapper routines defined in the C lib and use execve(), which is the only system call offered by Linux to deal with program execution.</p>
+<h2 id="sys-execve-service-routine"><a href="#sys-execve-service-routine" class="headerlink" title="sys_execve service routine"></a>sys_execve service routine</h2><p>The sys_execve() service routine (1)finds the corresponding file, (2)checks the executable format, and (3)modifies the execution context of the current process according to the information stored in it, then the process (4)starts executing the code stored in the executable file.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">sys_execve</span><br><span class="line">    do_execve</span><br><span class="line">        do_execveat_common</span><br><span class="line">            bprm_execve</span><br><span class="line">                exec_binprm</span><br><span class="line">                    prepare_binprm</span><br><span class="line">                        <span class="comment">/*</span></span><br><span class="line"><span class="comment">                        Fills the buf field of the linux_binprm structure with the first 128 bytes of the</span></span><br><span class="line"><span class="comment">                        executable file.</span></span><br><span class="line"><span class="comment">                        */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* @filename: the address of the executable file pathname</span></span><br><span class="line"><span class="comment">* @argv: the address of a NULL-terminated array of pointers to strings; each string represents a command-line argument.</span></span><br><span class="line"><span class="comment">* @envp: the address of a NULL-terminated array of pointers to strings; each string represents an environment variable in the NAME=value format.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">SYSCALL_DEFINE3(execve,</span><br><span class="line">                <span class="type">const</span> <span class="type">char</span> __user *, filename,</span><br><span class="line">                <span class="type">const</span> <span class="type">char</span> __user *<span class="type">const</span> __user *, argv,</span><br><span class="line">                <span class="type">const</span> <span class="type">char</span> __user *<span class="type">const</span> __user *, envp)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">return</span> do_execve(getname(filename), argv, envp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//version 2.6</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">do_execve</span><span class="params">(<span class="type">const</span> <span class="type">char</span> * filename,</span></span><br><span class="line"><span class="params">        <span class="type">const</span> <span class="type">char</span> __user *<span class="type">const</span> __user *argv,</span></span><br><span class="line"><span class="params">        <span class="type">const</span> <span class="type">char</span> __user *<span class="type">const</span> __user *envp,</span></span><br><span class="line"><span class="params">        <span class="keyword">struct</span> pt_regs * regs)</span></span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">/* dynamically allocates a linux_binprm data structure</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        bprm = kmalloc(<span class="keyword">sizeof</span>(*bprm), GFP_KERNEL);</span><br><span class="line"></span><br><span class="line">        file = open_exec(filename);</span><br><span class="line"></span><br><span class="line">        sched_exec();</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        * Local Descriptor Table</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        retval = init_new_context(current, bprm-&gt;mm);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        retval = prepare_binprm(bprm);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        retval = copy_strings_kernel(<span class="number">1</span>, &amp;bprm-&gt;filename, bprm);</span><br><span class="line">        retval = copy_strings(bprm-&gt;envc, envp, bprm);</span><br><span class="line">        retval = copy_strings(bprm-&gt;argc, argv, bprm);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        * Invokes the search_binary_handler() function, which scans the formats list and tries to apply the load_binary method of each element. The scan of the formats list terminates as soon as a load_binary method succeeds in acknowledging the executable format of the file.</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line">        retval = search_binary_handler(bprm,regs);</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;./fs/exec.c&quot;</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">search_binary_handler</span><span class="params">(<span class="keyword">struct</span> linux_binprm *bprm)</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">        retval = prepare_binprm(bprm);</span><br><span class="line"></span><br><span class="line">        list_for_each_entry(fmt, &amp;formats, lh) &#123;</span><br><span class="line"></span><br><span class="line">            retval = fmt-&gt;load_binary(bprm);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="What-load-binary-method-of-each-format-does"><a href="#What-load-binary-method-of-each-format-does" class="headerlink" title="What load_binary method of each format does?"></a>What load_binary method of each format does?</h2><p>for example, the elf dynamically linked program format</p>
+<p>the executable file is stored on a filesystem that allows file memory mapping and that it requires one or more shared libraries.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* check some magic numbers stored in the first 128 bytes of the file to identify the executable format</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* reads the header that describes the program&#x27;s segments and the shared libraries requested of the executable file. </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* gets the pathname of the dynamic linker, which is used to locate the shared libraries and map them into memory.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* gets the dentry object of the dynamic linker.</span></span><br><span class="line"><span class="comment">* checks the permissions of the dynamic linker</span></span><br><span class="line"><span class="comment">* copies the first 128 bytes of the dynamic linker into a buffer.</span></span><br><span class="line"><span class="comment">* performs some consistency checks on the dynamic linker type</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes the flush_old_exec() function to release almost all resources used by the previous computation;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*************************************</span></span><br><span class="line"><span class="comment">*************************************</span></span><br><span class="line"><span class="comment">*************************************</span></span><br><span class="line"><span class="comment">* the point of no return:</span></span><br><span class="line"><span class="comment">* the function cannot restore the previous computation if something goes wrong.</span></span><br><span class="line"><span class="comment">*************************************</span></span><br><span class="line"><span class="comment">*************************************</span></span><br><span class="line"><span class="comment">****************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* sets up the new personality of the process</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes arch_pick_mmap_layout() to select the layout of the memory regions of the process</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**************************</span></span><br><span class="line"><span class="comment">* stage_map_region_1</span></span><br><span class="line"><span class="comment">***************************</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">* Invokes the setup_arg_pages() function to allocate a new memory region descriptor for the process&#x27;s user mode stack and to insert that memory region into the process&#x27;s address space. It also assigns the page frames containing the command-line arguments and the environment variable strings to the new memory region.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**************************</span></span><br><span class="line"><span class="comment">* stage_map_region_2</span></span><br><span class="line"><span class="comment">***************************</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes the do_mmap() function to create a new memory region that maps the text segment of the executable file. the initial linear address of the memory region depends on the executable format, because the program&#x27;s executable code is usually not relocatable. Therefore, the function assumes that the text segment is loaded starting from specific logical address offset.(elf are loaded starting from linear address 0x08048000)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**************************</span></span><br><span class="line"><span class="comment">* stage_map_region_3</span></span><br><span class="line"><span class="comment">***************************</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes the do_mmap() function to create a new memory region that maps the data segment of the executable file. Again, the initial linear address of the memory region depends on the executable format, because the executable code expects to find its variables at specified offsets. (elf are loaded right after the text segment)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* allocates additional memory regions for every other specialized segments of the executable file.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes a function that loads the dynamic linker (elf use function load_elf_interp)(the function performs the operations in stage_map_region_1 ~ stage_map_region_3 for the dynamic linker instead of the file to be executed). The initial addresses of the memory regions that will include the text and data of the dynamic linker are specified by the dynamic linker itself;(however, they are very high to avoid collisions with the memory regions that map the text and data of the file to be executed)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Stores in the binfmt field of the process descriptor the address of the linux_binfmt object of the executable format.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* creates specific dynamic linker tables and stores them on the user mode stack between the command-line arg and the array of pointers to env string.(fig 20-1)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Sets the values of the start_code, end_code, start_data, end_data, start_brk, brk, and start_stack fields of the process&#x27;s memory descriptor</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes the do_brk() function to create a new anonymous memory region mapping the bss segment of the program. Thg size of this memory region was computed when the executable program was linked. The initial linear address of the memory region must be specified, because the program&#x27;s executable code is usually not relocatable. In an ELF program, the bss segment is loaded right after the data segment.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Invokes the start_thread() macro to modify the values of the user mode registers eip and esp saved on the kernel mode stack, so that they point to the entry point of the dynamic linker and to the top of the new user mode stack, respectively.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* If the process is being traced, it notifies the debugger about the completion of the execve() system call</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>After the execve() system call terminates, the calling process resumes its execution in user mode, but the execution context is dramatically changed compared with before in this time(the code that invoked the system call no longer exists). Instead, a new program to be executed is mapped in the address space of the process.</p>
+<h2 id="What-is-the-job-of-dynamic-linker-does"><a href="#What-is-the-job-of-dynamic-linker-does" class="headerlink" title="What is the job of dynamic linker does?"></a>What is the job of dynamic linker does?</h2><p>Its first job is to set up a basic execution context for itself, (starting from the information stored by the kernel in the user mode stack between the array of pointers to env strings and arg_start.)</p>
+<p>then the dynamic linker must examine the program to be executed to identify which shared libs must be loaded and which functions in each shared lib are effectively requested.</p>
+<p>next, the interpreter issues several mmap() system calls to create memory regions mapping the pages that will hold the library functions actually used by the program.</p>
+<p>then, the interpreter updates all references to the symbols of the shared library, according to the linear addresses of the library’s memory regions.</p>
+<p>finally, the dynamic linker terminates its execution by jumping to the entry point of the program to be executed.</p>
+<h2 id="the-flow-of-prepare-binprm-function"><a href="#the-flow-of-prepare-binprm-function" class="headerlink" title="the flow of prepare_binprm function"></a>the flow of prepare_binprm function</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* checks again whether the file is executable;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Initializes the e_uid and e_gid fields of the linux_binprm structure, (the setuid and setgid flags of the executable file).</span></span><br><span class="line"><span class="comment">* checks process capabilities</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* fills the buf field of the linux_binprm structure with the first 128 bytes of the executable file.</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>prepare_binprm</p>
+<h2 id="the-flow-of-flush-old-exec-function"><a href="#the-flow-of-flush-old-exec-function" class="headerlink" title="the flow of flush_old_exec() function"></a>the flow of flush_old_exec() function</h2><p>release almost all resources used by the previous computation;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* the table of signal handlers </span></span><br><span class="line"><span class="comment">* decrements the usage counter of the old one;</span></span><br><span class="line"><span class="comment">*</span></span><br><span class="line"><span class="comment">* detaches the process from the old thread group(invoke de_thread())</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* make a copy of the files_struct structure containing the open files of the process</span></span><br><span class="line"><span class="comment">* </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">unshare_files();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* release the memory descriptor, all memory regions, and all page frames assigned to the process and to clean up the process&#x27;s Page Tables.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">exec_mmap();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* sets the comm field of the process descriptor with the executable file pathname.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* clear the values of the floating point registers and debug registers saved in the TSS segment.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">flush_thread();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* updates the table of signal handlers by resetting each signal to its default action.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">flush_signal_handlers();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* close all open files having the corresponding flag in the files-&gt;close_on_exec field of the process descriptor set</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">flush_old_files();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2023/03/19/linux_binfmt/" title="How does linux load a excutable program?">https://youngvoice.github.io/2023/03/19/linux_binfmt/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cs/" rel="tag"># cs</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/kernel/" rel="tag"># kernel</a>
+              <a href="/tags/executable-format/" rel="tag"># executable format</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/18/tty/" rel="prev" title="How does linux terminal works?">
+                  <i class="fa fa-chevron-left"></i> How does linux terminal works?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/19/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

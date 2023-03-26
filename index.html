@@ -83,7 +83,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">31</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">37</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">39</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">31</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -152,12 +152,12 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">39</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -215,7 +215,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-03-26 08:50:54" itemprop="dateCreated datePublished" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Created: 2023-03-26 09:07:55" itemprop="dateCreated datePublished" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
 
   
@@ -285,7 +285,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/03/26/ELF/" class="post-title-link" itemprop="url">Untitled</a>
+          <a href="/2023/03/26/ELF/" class="post-title-link" itemprop="url">为了让程序运行起来，我们对地址引用做了哪些事？？？</a>
         </h2>
 
         <div class="post-meta-container">
@@ -297,7 +297,24 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-03-26 00:00:00 / Modified: 08:50:54" itemprop="dateCreated datePublished" datetime="2023-03-26T00:00:00+00:00">2023-03-26</time>
+      <time title="Created: 2023-03-26 00:00:00 / Modified: 09:07:55" itemprop="dateCreated datePublished" datetime="2023-03-26T00:00:00+00:00">2023-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/" itemprop="url" rel="index"><span itemprop="name">cs</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/loader-and-linker/" itemprop="url" rel="index"><span itemprop="name">loader and linker</span></a>
+        </span>
     </span>
 
   
@@ -310,61 +327,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>绝对地址，相对地址<br>为了让程序运行起来，我们对地址引用做了哪些事？？？<br>不管是动态链接还是静态链接，在程序可以运行时，我们要让它达到什么状态？？？<br>objdump -r a.o 该命令可以用来查看a.o里的重定位表，即关于引用到的外部符号的表。</p>
-<h1 id="看静态链接，同时思考静态链接与动态链接所解决问题的异同点？"><a href="#看静态链接，同时思考静态链接与动态链接所解决问题的异同点？" class="headerlink" title="看静态链接，同时思考静态链接与动态链接所解决问题的异同点？"></a>看静态链接，同时思考静态链接与动态链接所解决问题的异同点？</h1><h1 id="从符号重定义说起"><a href="#从符号重定义说起" class="headerlink" title="从符号重定义说起"></a>从符号重定义说起</h1><h1 id="多个符号定义之符号重定义问题？"><a href="#多个符号定义之符号重定义问题？" class="headerlink" title="多个符号定义之符号重定义问题？"></a>多个符号定义之符号重定义问题？</h1><p>链接器按如下规则，处理与选择，被多次定义的全局符号：</p>
-<ul>
-<li>不允许强符号被多次定义</li>
-<li>如果强符号出现一次，其他为弱符号，则选择强符号</li>
-<li>如果在所有目标文件中都是弱符号，那么选择占用空间最大的那一个。</li>
-</ul>
-<h1 id="符号未定义错误问题？"><a href="#符号未定义错误问题？" class="headerlink" title="符号未定义错误问题？"></a>符号未定义错误问题？</h1><p>符号引用，强引用与弱引用<br>当链接器对外部符号引用进行决议，如果没有找到该符号的定义就报符号未定义错误，则该引用为强引用。如果对于未找到的符号，链接器不报错，并将其置为一个特殊的值，用于在运行时进行判断（比如将未定义的函数置为NULL）（如何在运行时判断程序是否可以使用一个外部模块功能）。</p>
-<h2 id="如何通过弱引用机制来判断一个程序是否为多线程版本（外部模块）？"><a href="#如何通过弱引用机制来判断一个程序是否为多线程版本（外部模块）？" class="headerlink" title="如何通过弱引用机制来判断一个程序是否为多线程版本（外部模块）？"></a>如何通过弱引用机制来判断一个程序是否为多线程版本（外部模块）？</h2><h1 id="弱符号，弱引用机制有什么用？"><a href="#弱符号，弱引用机制有什么用？" class="headerlink" title="弱符号，弱引用机制有什么用？"></a>弱符号，弱引用机制有什么用？</h1><p>在一个程序库中，如果将库中定义的符号设置为弱符号，那么该符号就可以被用户定义的强符号所覆盖，从而程序可以使用自定义的版本。<br>程序可以将对外部扩展功能模块的引用设置为弱引用，当将扩展模块与程序链接在一起时，扩展模块可以使用；当去掉某些扩展模块，程序任然可以链接，只是无法使用扩展功能，</p>
-<h1 id="在弱符号机制下，由于符号类型对linker是透明的，那么当在多个目标文件中的多个同名符号的类型不一致时，linker该如何处理？"><a href="#在弱符号机制下，由于符号类型对linker是透明的，那么当在多个目标文件中的多个同名符号的类型不一致时，linker该如何处理？" class="headerlink" title="在弱符号机制下，由于符号类型对linker是透明的，那么当在多个目标文件中的多个同名符号的类型不一致时，linker该如何处理？"></a>在弱符号机制下，由于符号类型对linker是透明的，那么当在多个目标文件中的多个同名符号的类型不一致时，linker该如何处理？</h1><p>多个符号同时出现，可能出现的场景有</p>
-<ul>
-<li>多个强符号</li>
-<li>一个强符号，其他为弱符号</li>
-<li>多个弱符号</li>
-</ul>
-<p>common block</p>
-<h1 id="common-block机制是干什么的？-有common-block机制的原因是什么？"><a href="#common-block机制是干什么的？-有common-block机制的原因是什么？" class="headerlink" title="common block机制是干什么的？ 有common block机制的原因是什么？"></a>common block机制是干什么的？ 有common block机制的原因是什么？</h1><p>主要用来支持弱符号机制，因为有多个弱符号存在，编译器确定其最终所占空间的大小，所以暂时将其标记为common block，然后在链接阶段找到各个符号所占空间最大的那一个，最终该符号所占空间大小为该最大空间。</p>
-<h1 id="static-linking"><a href="#static-linking" class="headerlink" title="static linking"></a>static linking</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查看</span><br><span class="line">ar -t libc.a</span><br><span class="line">解包</span><br><span class="line">ar -x libc.a</span><br></pre></td></tr></table></figure>
-<h3 id="为什么静态库中的目标文件，往往一个目标文件只包含一个函数实现？"><a href="#为什么静态库中的目标文件，往往一个目标文件只包含一个函数实现？" class="headerlink" title="为什么静态库中的目标文件，往往一个目标文件只包含一个函数实现？"></a>为什么静态库中的目标文件，往往一个目标文件只包含一个函数实现？</h3><p>静态链接是以目标文件为单位，这样可以节省空间</p>
-<p>链接控制脚本指定输出文件格式（可执行文件、动态链接库）</p>
-<h1 id="最小的程序？"><a href="#最小的程序？" class="headerlink" title="最小的程序？"></a>最小的程序？</h1><h2 id="为什么我们无法直接编译一个含有main函数的程序生成可执行文件？（一个空的main函数）"><a href="#为什么我们无法直接编译一个含有main函数的程序生成可执行文件？（一个空的main函数）" class="headerlink" title="为什么我们无法直接编译一个含有main函数的程序生成可执行文件？（一个空的main函数）"></a>为什么我们无法直接编译一个含有main函数的程序生成可执行文件？（一个空的main函数）</h2><p>首先遇到的问题就是链接有个warning，因为在默认的链接器脚本中需要symbol _start来作为可执行程序的entry,但是，我们的程序中不存在该symbol。<br>我们可以通过 ld的 -e entry 参数来指定entry为main来解决</p>
-<h3 id="借着遇到的问题是程序运行segment-fault了？"><a href="#借着遇到的问题是程序运行segment-fault了？" class="headerlink" title="借着遇到的问题是程序运行segment fault了？"></a>借着遇到的问题是程序运行segment fault了？</h3><h2 id="如何在最小的程序中实现打印？（如何系统调用）"><a href="#如何在最小的程序中实现打印？（如何系统调用）" class="headerlink" title="如何在最小的程序中实现打印？（如何系统调用）"></a>如何在最小的程序中实现打印？（如何系统调用）</h2><h1 id="地址空间分配"><a href="#地址空间分配" class="headerlink" title="地址空间分配"></a>地址空间分配</h1><h1 id="符号解析与重定位"><a href="#符号解析与重定位" class="headerlink" title="符号解析与重定位"></a>符号解析与重定位</h1><p>binutils&#x2F;ld&#x2F;ldmain.c<br>lang_init()<br>lang_final()<br>lang_process()<br>lang_map()<br>lang_print_memory_usage()<br>lang_finish()</p>
-<h1 id="gcc如何在汇编时，将代码汇编成位置无关码？"><a href="#gcc如何在汇编时，将代码汇编成位置无关码？" class="headerlink" title="gcc如何在汇编时，将代码汇编成位置无关码？"></a>gcc如何在汇编时，将代码汇编成位置无关码？</h1><p>将地址放到数据段，<br>如果是我们自己写汇编的话，为了生成位置无关码，我们就需要关注这个问题。</p>
-<h1 id="再看动态链接"><a href="#再看动态链接" class="headerlink" title="再看动态链接"></a>再看动态链接</h1><p>将链接过程推迟到程序运行时</p>
-<h2 id="动态链接时文件在磁盘和内存中分别是如何存在的？"><a href="#动态链接时文件在磁盘和内存中分别是如何存在的？" class="headerlink" title="动态链接时文件在磁盘和内存中分别是如何存在的？"></a>动态链接时文件在磁盘和内存中分别是如何存在的？</h2><p>可以通过图例说明</p>
-<h2 id="当程序所依赖的某个模块更新后，由于新旧模块的接口之间不兼容会导致原有的程序无法运行，怎么解决？"><a href="#当程序所依赖的某个模块更新后，由于新旧模块的接口之间不兼容会导致原有的程序无法运行，怎么解决？" class="headerlink" title="当程序所依赖的某个模块更新后，由于新旧模块的接口之间不兼容会导致原有的程序无法运行，怎么解决？"></a>当程序所依赖的某个模块更新后，由于新旧模块的接口之间不兼容会导致原有的程序无法运行，怎么解决？</h2><p>共享库版本管理机制</p>
-<h1 id="能不能直接将目标文件用来执行，然后在运行时链接？"><a href="#能不能直接将目标文件用来执行，然后在运行时链接？" class="headerlink" title="能不能直接将目标文件用来执行，然后在运行时链接？"></a>能不能直接将目标文件用来执行，然后在运行时链接？</h1><h1 id="运行时动态链接过程，可以不依赖与操作系统吗？"><a href="#运行时动态链接过程，可以不依赖与操作系统吗？" class="headerlink" title="运行时动态链接过程，可以不依赖与操作系统吗？"></a>运行时动态链接过程，可以不依赖与操作系统吗？</h1><p>虚拟地址空间分布<br>存储管理，内存共享<br>进程线程机制</p>
-<h1 id="工作过程是啥样的？"><a href="#工作过程是啥样的？" class="headerlink" title="工作过程是啥样的？"></a>工作过程是啥样的？</h1><p>当程序被装载时，系统的动态链接器会将程序所需要的所有动态链接库装载到进程地址空间（空间分配），并将程序中所有未决议的符号绑定到相应的动态链接库中，并进行重定位工作（符号解析与重定位）</p>
-<h1 id="与静态链接不一样，在最终的可执行文件中，没有包含动态库的文件内容，那么在运行时怎么知道一个符号是被动态链接的呢？"><a href="#与静态链接不一样，在最终的可执行文件中，没有包含动态库的文件内容，那么在运行时怎么知道一个符号是被动态链接的呢？" class="headerlink" title="与静态链接不一样，在最终的可执行文件中，没有包含动态库的文件内容，那么在运行时怎么知道一个符号是被动态链接的呢？"></a>与静态链接不一样，在最终的可执行文件中，没有包含动态库的文件内容，那么在运行时怎么知道一个符号是被动态链接的呢？</h1><p>当链接器将参与的目标文件链接成可执行文件时，对于目标文件中引用到的外部符号，如果该符号在静态库中，则按照静态链接进行，如果该符号在动态库中，则将这个符号标记为一个动态链接的符号。</p>
-<h1 id="既然动态链接的可执行文件中不包含动态库文件，那为什么动态库还需要参与链接过程？"><a href="#既然动态链接的可执行文件中不包含动态库文件，那为什么动态库还需要参与链接过程？" class="headerlink" title="既然动态链接的可执行文件中不包含动态库文件，那为什么动态库还需要参与链接过程？"></a>既然动态链接的可执行文件中不包含动态库文件，那为什么动态库还需要参与链接过程？</h1><p>应该在链接过程中，需要提供动态库的符号信息，以确定该符号为动态链接的符号。</p>
-<h1 id="如果动态库的装载地址固定下来会有什么问题？（之前确实有库的设计是装载地址是固定的，可以看一下这样会有什么问题，动态库需要是地址无关的）"><a href="#如果动态库的装载地址固定下来会有什么问题？（之前确实有库的设计是装载地址是固定的，可以看一下这样会有什么问题，动态库需要是地址无关的）" class="headerlink" title="如果动态库的装载地址固定下来会有什么问题？（之前确实有库的设计是装载地址是固定的，可以看一下这样会有什么问题，动态库需要是地址无关的）"></a>如果动态库的装载地址固定下来会有什么问题？（之前确实有库的设计是装载地址是固定的，可以看一下这样会有什么问题，动态库需要是地址无关的）</h1><p>可以与静态库的链接过程进程对比，可以发现静态库的装载地址也是不固定的，因为在链接时我们需要对其进行重定位，动态库的地址在装载前也无法固定下来，因为动态库有很多个，所以这怎么固定地址呢？</p>
-<h1 id="如果代码是地址相关-地址重定位-的话，如何实现不同进程的代码共享呢？"><a href="#如果代码是地址相关-地址重定位-的话，如何实现不同进程的代码共享呢？" class="headerlink" title="如果代码是地址相关(地址重定位)的话，如何实现不同进程的代码共享呢？"></a>如果代码是地址相关(地址重定位)的话，如何实现不同进程的代码共享呢？</h1><p>可重定位代码段，是指需要修改代码段访问地址的指令，这样的代码段会无法在进程间共享</p>
-<h1 id="为了解决地址无关问题，我们参照静态链接中用到的重定位方法，将重定位的步骤推迟到装载时，这可以解决动态库的地址问题吗？"><a href="#为了解决地址无关问题，我们参照静态链接中用到的重定位方法，将重定位的步骤推迟到装载时，这可以解决动态库的地址问题吗？" class="headerlink" title="为了解决地址无关问题，我们参照静态链接中用到的重定位方法，将重定位的步骤推迟到装载时，这可以解决动态库的地址问题吗？"></a>为了解决地址无关问题，我们参照静态链接中用到的重定位方法，将重定位的步骤推迟到装载时，这可以解决动态库的地址问题吗？</h1><p>因外动态链接库是需要在多个进程之间共享的，所以，如果对库的指令部分在装载时进行重定位，即意味着对指令的修改，这样会造成代码部分无法在多个进程间共享的问题。而由于数据部分对不同的进程来说不一样，所以可以采用这样的方式来进行解决地址关问题。</p>
-<p>在gcc编译共享库代码时，如果只有 -shared 而没有  -fPIC 则生成的共享库就是装载时重定位的。</p>
-<h1 id="什么是地址无关代码呢？"><a href="#什么是地址无关代码呢？" class="headerlink" title="什么是地址无关代码呢？"></a>什么是地址无关代码呢？</h1><p>把指令中那些需要修改的部分分离出来，可以跟数据部分放在一起，而我们知道每个进程数据部分都是各自有一份，这样就可以让指令部分保持不变。</p>
-<h1 id="那么指令部分都有哪些需要被分离出来呢？"><a href="#那么指令部分都有哪些需要被分离出来呢？" class="headerlink" title="那么指令部分都有哪些需要被分离出来呢？"></a>那么指令部分都有哪些需要被分离出来呢？</h1><p>要说明上面的问题，就要知道指令部分都有哪些地址引用方法，</p>
-<p>GOT(Global Offset Table)<br>相对与当前指令的偏移</p>
-<p>在动态链接中我们通过GOT来实现符号解析和重定位（重定位表）</p>
-<h1 id="相比于静态链接，影响动态链接性能的主要问题有哪些？"><a href="#相比于静态链接，影响动态链接性能的主要问题有哪些？" class="headerlink" title="相比于静态链接，影响动态链接性能的主要问题有哪些？"></a>相比于静态链接，影响动态链接性能的主要问题有哪些？</h1><p>此处性能主要指运行时</p>
-<ol>
-<li>在程序运行开始时要进行一次链接工作</li>
-<li>间接寻址</li>
-</ol>
-<h1 id="在程序一开始运行时，有必要对所有的函数全都完成链接工作吗？"><a href="#在程序一开始运行时，有必要对所有的函数全都完成链接工作吗？" class="headerlink" title="在程序一开始运行时，有必要对所有的函数全都完成链接工作吗？"></a>在程序一开始运行时，有必要对所有的函数全都完成链接工作吗？</h1><p>因为，程序模块间有大量的符号引用关系，一些函数可能在执行过程中可能都不会用到，所以我们可以将符号的绑定工作推迟到使用函数时，即Lazy Binding技术。也就是说，当函数第一次使用时才进行binding工作，</p>
-<h1 id="假如现在模块中有一个对外部符号的调用正在发生，那如何实现绑定工作呢？"><a href="#假如现在模块中有一个对外部符号的调用正在发生，那如何实现绑定工作呢？" class="headerlink" title="假如现在模块中有一个对外部符号的调用正在发生，那如何实现绑定工作呢？"></a>假如现在模块中有一个对外部符号的调用正在发生，那如何实现绑定工作呢？</h1><p>这时，我们所知道的信息是（caller_module, external_function_name）<br>我们首先执行查找工作, 在glibc中函数如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_dl_runtime_resolve()</span><br></pre></td></tr></table></figure>
-
-<p>除了我们需要的信息，我们同时应该把自身的信息导出去，比如通过符号表什么的</p>
-<h1 id="引入PLT后对GOT有啥影响？"><a href="#引入PLT后对GOT有啥影响？" class="headerlink" title="引入PLT后对GOT有啥影响？"></a>引入PLT后对GOT有啥影响？</h1><p>ELF将GOT拆分成了两个表，.got用来保存全局变量引用的地址，.got.plt用来保存函数引用的地址</p>
-<h1 id="动态库符号导出？？？"><a href="#动态库符号导出？？？" class="headerlink" title="动态库符号导出？？？"></a>动态库符号导出？？？</h1><p>动态符号导入导出<br>静态符号引用定义</p>
-<h1 id="数据段的重定位是什么时候完成的呢？"><a href="#数据段的重定位是什么时候完成的呢？" class="headerlink" title="数据段的重定位是什么时候完成的呢？"></a>数据段的重定位是什么时候完成的呢？</h1><p>在装载时需要对数据段的一些符号进行重定位<br>重定位表<br>.rel.text   .rel.dyn    .got and .data<br>.rel.data   .rel.plt    .got.plt</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/2463150/what-is-the-fpie-option-for-position-independent-executables-in-gcc-and-ld/51308031#51308031">https://stackoverflow.com/questions/2463150/what-is-the-fpie-option-for-position-independent-executables-in-gcc-and-ld/51308031#51308031</a></p>
-<p><a target="_blank" rel="noopener" href="https://students.mimuw.edu.pl/ZSO/PUBLIC-SO/2018-2019/04_elf/index-en.html#et-exec-special-tricks-for-dynamic-linking">https://students.mimuw.edu.pl/ZSO/PUBLIC-SO/2018-2019/04_elf/index-en.html#et-exec-special-tricks-for-dynamic-linking</a></p>
-<p><a target="_blank" rel="noopener" href="https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html#creating_shared_library">https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html#creating_shared_library</a></p>
-
+          <p>编译，链接，装载</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/03/26/ELF/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -426,7 +397,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -530,7 +501,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -642,7 +613,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -746,7 +717,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -854,7 +825,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -958,7 +929,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1058,7 +1029,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1162,7 +1133,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-03-26 08:50:54" itemprop="dateModified" datetime="2023-03-26T08:50:54+00:00">2023-03-26</time>
+      <time title="Modified: 2023-03-26 09:07:55" itemprop="dateModified" datetime="2023-03-26T09:07:55+00:00">2023-03-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">

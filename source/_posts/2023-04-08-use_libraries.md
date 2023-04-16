@@ -14,7 +14,9 @@ tags: [cs, linux, loader, linker]
 | static library(Relocatable object file) | static link |
 | shared library(shared object file) | dynamic link|
 | shared library(shared object file)| loding & linking at runtime|
-
+# 静态链接的步骤有哪些？
+空间与地址分配
+符号解析与重定位
 
 # What is shared library?
 相对与静态链接库而言更节约磁盘和内存空间

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="how glibc runtime dynamic linker implemented?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="runtime dynamic linker in glibc">
+<meta property="og:url" content="https://youngvoice.github.io/2023/04/15/glibc_dl/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="how glibc runtime dynamic linker implemented?">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-15T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-16T06:58:45.228Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="linker">
+<meta property="article:tag" content="loader">
+<meta property="article:tag" content="glibc">
+<meta property="article:tag" content="runtime dynamic linker">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2023/04/15/glibc_dl/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2023/04/15/glibc_dl/","path":"2023/04/15/glibc_dl/","title":"runtime dynamic linker in glibc"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>runtime dynamic linker in glibc | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">35</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">47</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">36</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Where-are-ld-so-source-code"><span class="nav-number">1.</span> <span class="nav-text">Where are ld.so source code?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%AD%A5%E9%AA%A4%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">动态连接的步骤和实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A3%85%E8%BD%BD%E6%89%80%E9%9C%80%E7%9A%84%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">装载所需的共享对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">4.</span> <span class="nav-text">重定位和初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#summary"><span class="nav-number">5.</span> <span class="nav-text">summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E5%95%A5linux%E4%B8%8A%E7%9A%84%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%99%A8%E6%97%A2%E6%98%AF%E4%B8%80%E4%B8%AA%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1%EF%BC%8C%E4%B9%9F%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9A%84%E7%A8%8B%E5%BA%8F%EF%BC%9F%EF%BC%9F"><span class="nav-number">6.</span> <span class="nav-text">为啥linux上的动态链接器既是一个共享对象，也是一个可执行的程序？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D%E5%85%B7%E4%BD%93%E6%8C%87%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">重定位具体指的是什么？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#note"><span class="nav-number">8.</span> <span class="nav-text">note</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%EF%BC%8C%E5%9C%A8%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E5%99%A8%E9%93%BE%E6%8E%A5%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%9C%A8%E8%BE%93%E5%87%BA%E7%9A%84%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6%E4%B8%AD%E5%88%B0%E5%BA%95%E5%8A%A0%E5%85%A5%E4%BA%86%E5%93%AA%E4%BA%9B%E6%9C%89%E5%85%B3%E5%8A%A8%E6%80%81%E7%AC%A6%E5%8F%B7%E7%9A%84%E4%BF%A1%E6%81%AF%EF%BC%9F%EF%BC%9F"><span class="nav-number">8.1.</span> <span class="nav-text">动态链接，在静态链接器链接的时候，在输出的可执行文件中到底加入了哪些有关动态符号的信息？？</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2023/04/15/glibc_dl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="runtime dynamic linker in glibc | I am thinking...">
+      <meta itemprop="description" content="how glibc runtime dynamic linker implemented?">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          runtime dynamic linker in glibc
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-04-15 00:00:00" itemprop="dateCreated datePublished" datetime="2023-04-15T00:00:00+00:00">2023-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-04-16 06:58:45" itemprop="dateModified" datetime="2023-04-16T06:58:45+00:00">2023-04-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/" itemprop="url" rel="index"><span itemprop="name">cs</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/loader/" itemprop="url" rel="index"><span itemprop="name">loader</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/loader/linker/" itemprop="url" rel="index"><span itemprop="name">linker</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/loader/linker/glibc/" itemprop="url" rel="index"><span itemprop="name">glibc</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/linux/loader/linker/glibc/runtime-dynamic-linker/" itemprop="url" rel="index"><span itemprop="name">runtime dynamic linker</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">how glibc runtime dynamic linker implemented?</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Where-are-ld-so-source-code"><a href="#Where-are-ld-so-source-code" class="headerlink" title="Where are ld.so source code?"></a>Where are ld.so source code?</h1><p>ref 2023-04-08-use_libraries<br>elf&#x2F;rtld.c<br>sysdeps&#x2F;generic&#x2F;dl-sysdep.c</p>
+<h1 id="动态连接的步骤和实现"><a href="#动态连接的步骤和实现" class="headerlink" title="动态连接的步骤和实现"></a>动态连接的步骤和实现</h1><p>step1：<br>启动动态链接器本身<br>step2：<br>装载所需的共享对象<br>step3：<br>重定位和初始化</p>
+<h1 id="装载所需的共享对象"><a href="#装载所需的共享对象" class="headerlink" title="装载所需的共享对象"></a>装载所需的共享对象</h1><p>广度优先遍历</p>
+<p>在可执行文件的 “.dynamic” 段中，寻找 DT_NEEDED 类型的 entry ，在该 entry 中指出了该可执行文件（另一种情况是共享库）所依赖的共享对象名。由此，链接器将可执行文件所依赖的所有共享对象名放入一个装载队列中，然后依次从队列中取共享对象名，找到相应的文件后，读取 ELF 文件头和 “.dynamic” 段，然后将当前共享对象的代码段和数据段映射到进程地址空间中，如果通过 “.dynamic” 段发现该共享对象还依赖于其他共享对象，那么依次将发现的其他共享对象名放入装载队列中，如此直到装载队列为空，即将所有的依赖共享对象都装载到进程地址空间中。</p>
+<p>在此过程中每装载一个新的共享对象，则将其符号表合并到全局符号表中，所以，当最后所有的共享对象都被装载进来的时候，全局符号表里面将包含进程中所有的动态链接所需要的符号。</p>
+<h1 id="重定位和初始化"><a href="#重定位和初始化" class="headerlink" title="重定位和初始化"></a>重定位和初始化</h1><p>在通过上面的步骤将所有的共享对象都装载进来，并形成了全局符号表之后，链接器开始重新遍历可执行文件和各个共享对象的重定位表，将GOT&#x2F;PLT表中需要重定位的位置进行修正。在修正的过程中可以方便的访问全局符号表，然后根据重定位类型计算重定位入口地址。<br>重定位完成后，如果某个共享对象有 “.init” 段，那么动态链接器就会执行该段中的代码。再接着动态链接器将控制权交给程序的入口，开始真正执行。</p>
+<h1 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h1><p>装载依赖的共享库<br>进行动态链接</p>
+<h1 id="为啥linux上的动态链接器既是一个共享对象，也是一个可执行的程序？？"><a href="#为啥linux上的动态链接器既是一个共享对象，也是一个可执行的程序？？" class="headerlink" title="为啥linux上的动态链接器既是一个共享对象，也是一个可执行的程序？？"></a>为啥linux上的动态链接器既是一个共享对象，也是一个可执行的程序？？</h1><p>因为，linux 内核在执行 execve 时，只是按照elf 头表里的描述对文件进行装载，然后就按照规则 判断如果没有 “.interp” 就转到elf文件的e_entry; 如果有 “.interp” 的话就转到动态链接器的 e_entry 的方式来执行。</p>
+<p>动态链接器本身是静态链接的<br>如果动态链接器本身不是 PIC 的话，首先会使得代码段无法共享，其次在它自举时还需要对自身的代码段进行重定位<br>linux上的 ld-linux.so.2 是 PIC 的</p>
+<h1 id="重定位具体指的是什么？？"><a href="#重定位具体指的是什么？？" class="headerlink" title="重定位具体指的是什么？？"></a>重定位具体指的是什么？？</h1><p>重定位指的是对相关指令的修改（引用到外部符号）</p>
+<h1 id="note"><a href="#note" class="headerlink" title="note"></a>note</h1><p>relocation: 更强调按照程序被实际加载到的地址，对程序中的地址引用加以修改<br>symbol resolution: </p>
+<blockquote>
+<p>the references from one subprogram to another are made using symbols; a main program might use a square root routine called sqrt, and the math library defines sqrt. A linker resolves the symbol by noting the location assigned to sqrt in the lib, and patching the caller’s object code to so the call instruction refers to that location</p>
+</blockquote>
+<p>但是当我们是动态链接时，由于代码是位置无关码，所以当按照重定位表进行重定位时常常伴随着符号解析的过程。</p>
+<p>symbol table:</p>
+<blockquote>
+<p>some symbols are exported, defined within the file for use in other files, generally the names of routines within the file that can be called from elsewhere. Other symbols are imported, used in the file but not defined, generally the names of routines called from but not present in the file.</p>
+</blockquote>
+<h2 id="动态链接，在静态链接器链接的时候，在输出的可执行文件中到底加入了哪些有关动态符号的信息？？"><a href="#动态链接，在静态链接器链接的时候，在输出的可执行文件中到底加入了哪些有关动态符号的信息？？" class="headerlink" title="动态链接，在静态链接器链接的时候，在输出的可执行文件中到底加入了哪些有关动态符号的信息？？"></a>动态链接，在静态链接器链接的时候，在输出的可执行文件中到底加入了哪些有关动态符号的信息？？</h2><p>我们可以推测的至少有，将依赖的动态库名记录了下来，也将依赖的动态库中的符号记录了下来</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2023/04/15/glibc_dl/" title="runtime dynamic linker in glibc">https://youngvoice.github.io/2023/04/15/glibc_dl/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cs/" rel="tag"># cs</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/linker/" rel="tag"># linker</a>
+              <a href="/tags/loader/" rel="tag"># loader</a>
+              <a href="/tags/glibc/" rel="tag"># glibc</a>
+              <a href="/tags/runtime-dynamic-linker/" rel="tag"># runtime dynamic linker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/09/book_Programmers_self-cultivation/" rel="prev" title="为了让程序运行起来，我们对地址引用做了哪些事？？？">
+                  <i class="fa fa-chevron-left"></i> 为了让程序运行起来，我们对地址引用做了哪些事？？？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/16/bionic_dl/" rel="next" title="runtime dynamic linker in bionic">
+                  runtime dynamic linker in bionic <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

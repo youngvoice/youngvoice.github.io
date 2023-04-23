@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="multi-user and multi-process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to design a system for multi-user and multi-process ?">
+<meta property="og:url" content="https://youngvoice.github.io/2023/04/23/multi_user_and_process/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="multi-user and multi-process">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-23T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-23T09:21:32.149Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="knowledge">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="multi-user-process">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2023/04/23/multi_user_and_process/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2023/04/23/multi_user_and_process/","path":"2023/04/23/multi_user_and_process/","title":"How to design a system for multi-user and multi-process ?"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>How to design a system for multi-user and multi-process ? | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">36</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">48</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">37</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#User-Identification"><span class="nav-number">1.</span> <span class="nav-text">User Identification</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data-file"><span class="nav-number">2.</span> <span class="nav-text">data file</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#process-relationship"><span class="nav-number">3.</span> <span class="nav-text">process relationship</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#login"><span class="nav-number">4.</span> <span class="nav-text">login</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#terminal-logins"><span class="nav-number">5.</span> <span class="nav-text">terminal logins</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#how-to-read-password"><span class="nav-number">5.0.1.</span> <span class="nav-text">how to read password</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setuid-2022-05-02-uid-euid-md"><span class="nav-number">5.1.</span> <span class="nav-text">setuid (2022-05-02-uid_euid.md)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#process-groups-sessions-and-controlling-terminal"><span class="nav-number">6.</span> <span class="nav-text">process groups, sessions and controlling terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-talk-to-the-controlling-terminal-when-the-standard-input-or-output-is-redirected"><span class="nav-number">6.1.</span> <span class="nav-text">how to talk to the controlling terminal, when the standard input or output is redirected?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%9A%E8%BF%87ssh%E9%93%BE%E6%8E%A5%E7%9A%84-terminal-%E9%80%80%E5%87%BA%E6%97%B6%EF%BC%8C%E9%80%9A%E8%BF%87%E8%AF%A5-terminal-%E5%90%AF%E5%8A%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E9%83%BD%E4%BC%9A%E9%80%80%E5%87%BA%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">为什么通过ssh链接的 terminal 退出时，通过该 terminal 启动的进程都会退出？？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8-ssh-remote-terminal-%E9%80%80%E5%87%BA%E6%97%B6%EF%BC%8C%E8%AE%A9%E9%80%9A%E8%BF%87%E8%AF%A5-terminal-%E5%90%AF%E5%8A%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8D%E9%80%80%E5%87%BA%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="nav-number">8.</span> <span class="nav-text">如何在 ssh remote terminal 退出时，让通过该 terminal 启动的进程不退出？？？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Job-control"><span class="nav-number">9.</span> <span class="nav-text">Job control</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#what-scenario-that-foreground-job-will-be-sended-signal-driver"><span class="nav-number">9.1.</span> <span class="nav-text">what scenario that foreground job will be sended signal?(driver)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-will-happen-if-a-background-job-try-to-read-from-the-terminal-driver"><span class="nav-number">9.2.</span> <span class="nav-text">what will happen, if a background job try to read from the terminal???(driver)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-will-happen-if-a-background-job-sends-its-output-to-the-controlling-terminal"><span class="nav-number">9.3.</span> <span class="nav-text">what will happen, if a background job sends its output to the controlling terminal?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#job-control-architecture"><span class="nav-number">9.4.</span> <span class="nav-text">job control architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-the-kernel-to-support-job-control-architecture"><span class="nav-number">10.</span> <span class="nav-text">How the kernel to support job control architecture???</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">11.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">48</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2023/04/23/multi_user_and_process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="How to design a system for multi-user and multi-process ? | I am thinking...">
+      <meta itemprop="description" content="multi-user and multi-process">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How to design a system for multi-user and multi-process ?
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-04-23 00:00:00 / Modified: 09:21:32" itemprop="dateCreated datePublished" datetime="2023-04-23T00:00:00+00:00">2023-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/" itemprop="url" rel="index"><span itemprop="name">cs</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/knowledge/" itemprop="url" rel="index"><span itemprop="name">knowledge</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/knowledge/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/knowledge/linux/multi-user-process/" itemprop="url" rel="index"><span itemprop="name">multi-user-process</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">multi-user and multi-process</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="User-Identification"><a href="#User-Identification" class="headerlink" title="User Identification"></a>User Identification</h1><p>User ID and Group ID are numeric value,<br>The User and Group ID is assigned by the system administrator when our login name is assigned, and we cannot change it.</p>
+<p>&#x2F;etc&#x2F;passwd the file maintains the mapping between login names and user IDs. struct passwd is defined in &lt;pwd.h&gt;</p>
+<p>&#x2F;etc&#x2F;group the file that maps group names into numeric group IDs. struct group is defined in &lt;grp.h&gt;</p>
+<h1 id="data-file"><a href="#data-file" class="headerlink" title="data file"></a>data file</h1><p>The general principle is that every data file has at least three functions:</p>
+<ol>
+<li><p>a get function that reads the next record, opening the file if necessary.</p>
+</li>
+<li><p>a set function that opens the file, if not already open, and rewinds the file.</p>
+</li>
+<li><p>an end entry that closes the data file.</p>
+</li>
+<li><p>extension(two keyed lookup routines are provided for the password file)<br>getpwnam<br>looks for a record with a specific user name.<br>getpwuid<br>looks for a recode with a specific user ID.</p>
+</li>
+</ol>
+<p>file’s owner<br>With every file on disk, the file system stores both the user ID and group ID of a file’s owner.</p>
+<h1 id="process-relationship"><a href="#process-relationship" class="headerlink" title="process relationship"></a>process relationship</h1><h1 id="login"><a href="#login" class="headerlink" title="login"></a>login</h1><p>start a windowing system after logging in,<br>other platforms automatically start the windowing system for you and you still have to log in</p>
+<p>the procedure that log in to a UNIX system using a terminal(a character-based terminal, or a graphical terminal(emulating a simple character-based terminal, or running a windowing system)).</p>
+<h1 id="terminal-logins"><a href="#terminal-logins" class="headerlink" title="terminal logins"></a>terminal logins</h1><p>init process does a fork followed by an exec of the program getty for every terminal device that allows a login.</p>
+<p>the getty calls open for the terminal device. The terminal is opened for reading and writing. Once the device is open, file descriptors 0, 1, and 2 are set to the device. Then getty outputs something like login: and waits for us to enter our user name.</p>
+<p>When we enter our user name, getty’s job is complete, and then it invokes the login program</p>
+<p>the login program does many things<br>    1. the login calls getpass to display the prompt Password:<br>    2. read our password (with echoing disabled)<br>    3. it calls crypt to encrypt the password that we entered and compares the encrypted result to the pw_passwd field from our shadow password file entry.<br>    4(false). if the login attempt fails because of an invalid password, login calls exit with argument of 1. this termination will be noticed by the parent(init), and it will do another fork followed by an exec of getty, starting the procedure over again for this terminal.<br>    4(true). if we log in correctly, login will<br>    change to our home directory<br>    change the ownership of our terminal device so we can own it<br>    change the access permissions for our terminal device so we have permission to read from and write to it.<br>    Set our group IDs by calling setgid and initgroups<br>    initialize the environment with all the information that login has: our home directory(HOME), shell(SHELL), user name (USER and LOGNAME), and a default path(PATH)<br>    change to our user ID(setuid) and invoke our login shell</p>
+<p>note:<br>since setuid is called by a superuser process, setuid changes all three user IDs: the real user ID, effective user ID, and saved set-user-ID. </p>
+<h3 id="how-to-read-password"><a href="#how-to-read-password" class="headerlink" title="how to read password"></a>how to read password</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio_ext.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;termios.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TCSASOFT 0</span></span><br><span class="line"><span class="type">char</span> *</span><br><span class="line"><span class="title function_">getpass</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *prompt)</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *in, *out;</span><br><span class="line">    <span class="type">int</span> tty_changed;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">termios</span> <span class="title">s</span>, <span class="title">t</span>;</span></span><br><span class="line">    <span class="type">static</span> <span class="type">char</span> *buf;</span><br><span class="line">    <span class="type">static</span> <span class="type">size_t</span> bufsize;</span><br><span class="line">    <span class="type">ssize_t</span> nread;</span><br><span class="line">    <span class="comment">// open the terminal to write and read</span></span><br><span class="line">    in = fopen(<span class="string">&quot;/dev/tty&quot;</span>, <span class="string">&quot;w+ce&quot;</span>);</span><br><span class="line">    out = in;</span><br><span class="line"></span><br><span class="line">    flockfile(out);</span><br><span class="line">    <span class="comment">// turn echoing off</span></span><br><span class="line">    <span class="keyword">if</span> (tcgetattr(fileno(in), &amp;t) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">	s = t;</span><br><span class="line">	t.c_lflag &amp;= ~(ECHO | ISIG);</span><br><span class="line">	tty_changed = (tcsetattr(fileno(in), TCSAFLUSH|TCSASOFT, &amp;t) == <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> tty_changed = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// write the prompt</span></span><br><span class="line">    <span class="built_in">fprintf</span>(out, <span class="string">&quot;%s&quot;</span>, prompt);</span><br><span class="line">    fflush(out);</span><br><span class="line">    <span class="comment">// read the password</span></span><br><span class="line">    nread = getline(&amp;buf, &amp;bufsize, in);</span><br><span class="line">    <span class="keyword">if</span> (buf != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">	<span class="keyword">if</span> (nread &lt; <span class="number">0</span>)</span><br><span class="line">	    buf[<span class="number">0</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (buf[nread - <span class="number">1</span>] == <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">	    <span class="comment">//remove the newline</span></span><br><span class="line">	    buf[nread - <span class="number">1</span>] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">	    <span class="keyword">if</span> (tty_changed)</span><br><span class="line">		<span class="comment">// write the newline that was not echoed</span></span><br><span class="line">		<span class="built_in">fprintf</span>(out, <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// restore the original setting</span></span><br><span class="line">    <span class="keyword">if</span> (tty_changed)</span><br><span class="line">	tcsetattr(fileno(in), TCSAFLUSH|TCSASOFT, &amp;s);</span><br><span class="line">    funlockfile(out);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// close the terminal now</span></span><br><span class="line">    <span class="keyword">if</span> (in != <span class="built_in">stdin</span>)</span><br><span class="line">	fclose(in);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> buf;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> *pswd;</span><br><span class="line">    pswd = getpass(<span class="string">&quot;input password:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;the input password is \n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, pswd);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="setuid-2022-05-02-uid-euid-md"><a href="#setuid-2022-05-02-uid-euid-md" class="headerlink" title="setuid (2022-05-02-uid_euid.md)"></a>setuid (2022-05-02-uid_euid.md)</h2><p>at this point, our login shell is running. Its parent process ID is the original init process(pid 1), so when our login shell terminates, init is notified and it starts the whole procedure over again for this terminal. File descriptors 0, 1, and 2 for our login shell are set to the terminal device.</p>
+<p>getty summary:<br>opens terminal device (file descriptors 0, 1, 2);<br>reads user name;<br>initial environment set</p>
+<h1 id="process-groups-sessions-and-controlling-terminal"><a href="#process-groups-sessions-and-controlling-terminal" class="headerlink" title="process groups, sessions and controlling terminal"></a>process groups, sessions and controlling terminal</h1><pre><code>                                                    session
+    +-----------------------------------------------------------------------------------------------------------------+
+    |                                                                                                                 |
+    |        +----------------+       +--------------------------------+           +-------------------------------+  |
+    |        | +-----------+  |       |   +-------+    +-----+         |           |   +-----+      +-------+      |  |
+    |        | |login shell|  |       |   | proc1 |    |proc2|         |           |   |proc3|      | proc4 |      |  |
+    |        | +-----------+  |       |   +-------+    +-----+         |           |   +-----+      +-------+      |  |
+    |        |                |       |                                |           |       +-------+               |  |
+    |        +----------------+       +--------------------------------+           |       | proc5 |               |  |
+    |                                                                              |       +-------+               |  |
+    |    background process group         background process group                 +-------------------------------+  |
+    |      session leader =                                                                                           |
+    |     controlling process                                                         foreground process group        |
+    +-----------------------------------------------------------------------------------------------------------------+
+                  &lt;-                                                               -&gt;
+                    \--                                                          -/                                                                
+                       \--                                                     -/                                                                   
+                          \--                                               --/  terminal input and                                                
+         modem disconnect    \--                                          -/    terminal-generated signals                                          
+         (hang-up signal)       \--                                     -/                                                                          
+                                   \-                                 -/             
+                                          *******************                
+                                     *****                   *****           
+                                   **     controlling terminal    **
+                                     *****                   ***** 
+                                          *******************      
+</code></pre>
+<p>a session can have a single controlling terminal.<br>session leader that establishes the connection to the controlling terminal is called the controlling process.<br>the process groups within a session that has a controlling terminal(what about that hasn’t a controlling terminal), can be divided into a single foreground process group and one or more background process groups.<br>if we press the terminal’s interrupt key, the interrupt signal is sent to all processes in the foreground process group.<br>if a modem (or network) disconnect is detected by the terminal interface, the hang-up signal is sent to the controlling process(the session leader).</p>
+<h2 id="how-to-talk-to-the-controlling-terminal-when-the-standard-input-or-output-is-redirected"><a href="#how-to-talk-to-the-controlling-terminal-when-the-standard-input-or-output-is-redirected" class="headerlink" title="how to talk to the controlling terminal, when the standard input or output is redirected?"></a>how to talk to the controlling terminal, when the standard input or output is redirected?</h2><p>a program can open the file &#x2F;dev&#x2F;tty to guarantees that it is talking to the controlling terminal. the kernel regards the special file as a synonym to the controlling terminal. But if the process doesn’t have a controlling terminal, the open of this device will fail.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="为什么通过ssh链接的-terminal-退出时，通过该-terminal-启动的进程都会退出？？？"><a href="#为什么通过ssh链接的-terminal-退出时，通过该-terminal-启动的进程都会退出？？？" class="headerlink" title="为什么通过ssh链接的 terminal 退出时，通过该 terminal 启动的进程都会退出？？？"></a>为什么通过ssh链接的 terminal 退出时，通过该 terminal 启动的进程都会退出？？？</h1><h1 id="如何在-ssh-remote-terminal-退出时，让通过该-terminal-启动的进程不退出？？？"><a href="#如何在-ssh-remote-terminal-退出时，让通过该-terminal-启动的进程不退出？？？" class="headerlink" title="如何在 ssh remote terminal 退出时，让通过该 terminal 启动的进程不退出？？？"></a>如何在 ssh remote terminal 退出时，让通过该 terminal 启动的进程不退出？？？</h1><h1 id="Job-control"><a href="#Job-control" class="headerlink" title="Job control"></a>Job control</h1><p>jobs:<br>groups of processes</p>
+<p>start multiple jobs from a single terminal and to control which jobs can access the terminal and which jobs are run in the background.</p>
+<p>we can use job control from a shell, we start a job in either the foreground or the background. A job is simply a collection of processes, often a pipeline of processes.</p>
+<h2 id="what-scenario-that-foreground-job-will-be-sended-signal-driver"><a href="#what-scenario-that-foreground-job-will-be-sended-signal-driver" class="headerlink" title="what scenario that foreground job will be sended signal?(driver)"></a>what scenario that foreground job will be sended signal?(driver)</h2><p>three special characters (Control-C, Control-backslash, Control-Z) which will generate signals to the foreground process group.</p>
+<h2 id="what-will-happen-if-a-background-job-try-to-read-from-the-terminal-driver"><a href="#what-will-happen-if-a-background-job-try-to-read-from-the-terminal-driver" class="headerlink" title="what will happen, if a background job try to read from the terminal???(driver)"></a>what will happen, if a background job try to read from the terminal???(driver)</h2><p>We know that only the foreground job receives terminal input. But if a background job try to read from the terminal, then the terminal driver will detect this and send a special signal SIGTTIN to the background job. This signal normally stops the background job although it is not an error. We are notified of this event by shell and can bring the job into the foreground so that it can read from the terminal.</p>
+<p>we move the stopped job into the foreground with the shell’s fg command. The shell to place the job into the foreground process group (tcsetpgrp) and send the continue signal (SIGCONT) to the process group.</p>
+<h2 id="what-will-happen-if-a-background-job-sends-its-output-to-the-controlling-terminal"><a href="#what-will-happen-if-a-background-job-sends-its-output-to-the-controlling-terminal" class="headerlink" title="what will happen, if a background job sends its output to the controlling terminal?"></a>what will happen, if a background job sends its output to the controlling terminal?</h2><h2 id="job-control-architecture"><a href="#job-control-architecture" class="headerlink" title="job control architecture"></a>job control architecture</h2><p>a shell that supports job control<br>the terminal driver in the kernel must support job control<br>The kernel must support certain job-control signals</p>
+<h1 id="How-the-kernel-to-support-job-control-architecture"><a href="#How-the-kernel-to-support-job-control-architecture" class="headerlink" title="How the kernel to support job control architecture???"></a>How the kernel to support job control architecture???</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>APUE<del>Chapter 6<br>APUE</del>Chapter 9</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2023/04/23/multi_user_and_process/" title="How to design a system for multi-user and multi-process ?">https://youngvoice.github.io/2023/04/23/multi_user_and_process/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cs/" rel="tag"># cs</a>
+              <a href="/tags/knowledge/" rel="tag"># knowledge</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/multi-user-process/" rel="tag"># multi-user-process</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/16/bionic_dl/" rel="prev" title="runtime dynamic linker in bionic">
+                  <i class="fa fa-chevron-left"></i> runtime dynamic linker in bionic
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/23/hello-world/" rel="next" title="Hello World">
+                  Hello World <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

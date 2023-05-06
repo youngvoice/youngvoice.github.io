@@ -175,6 +175,93 @@ struct task_struct {
 总之，很关键的一点是，内核用专门的结构来管理打开的文件。
 
 
+update 2023.4.27
+open 其实是文件系统的两条关键路径（mount and open）中的一条
+```c
+SYSCALL_DEFINE3(open, const char __user *, filename, int, flags, umode_t, mode)
+{
+        if (force_o_largefile())
+                flags |= O_LARGEFILE;
+        return do_sys_open(AT_FDCWD, filename, flags, mode);
+}
+
+long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
+{
+        struct open_how how = build_open_how(flags, mode);
+        return do_sys_openat2(dfd, filename, &how);
+}
+
+```
+
+```c
+static long do_sys_openat2(int dfd, const char __user *filename,
+                           struct open_how *how)
+{
+
+
+        fd = get_unused_fd_flags(how->flags);
+        if (fd >= 0) {
+                struct file *f = do_filp_open(dfd, tmp, &op);
+                {
+                        fsnotify_open(f);
+                        fd_install(fd, f);
+                }
+        }
+        putname(tmp);
+        return fd;
+}
+
+
+struct file *do_filp_open(int dfd, struct filename *pathname,
+                const struct open_flags *op)
+{
+        struct nameidata nd;
+
+        set_nameidata(&nd, dfd, pathname, NULL);
+
+        
+        filp = path_openat(&nd, op, flags | LOOKUP_RCU);
+        if (unlikely(filp == ERR_PTR(-ECHILD)))
+                filp = path_openat(&nd, op, flags);
+        if (unlikely(filp == ERR_PTR(-ESTALE)))
+                filp = path_openat(&nd, op, flags | LOOKUP_REVAL);
+        restore_nameidata();
+        return filp;
+}
+
+
+
+```
+
+```c
+"fs/namei.c"
+
+static struct file *path_openat(struct nameidata *nd,
+                        const struct open_flags *op, unsigned flags)
+{
+        struct file *file;
+        int error;
+
+        file = alloc_empty_file(op->open_flag, current_cred());
+                
+                const char *s = path_init(nd, flags);
+                while (!(error = link_path_walk(s, nd)) &&
+                       (s = open_last_lookups(nd, file, op)) != NULL)
+                        ;
+                if (!error)
+                        error = do_open(nd, file, op);
+                terminate_walk(nd);
+        
+
+        fput(file);
+
+        return ERR_PTR(error);
+}
+
+
+```
+
+
 
 
 # what the write does?

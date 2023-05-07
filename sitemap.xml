@@ -2,60 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://youngvoice.github.io/2022/07/03/native_bridge/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2022/07/11/route_table/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2022/07/23/linker_namespace/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2022/08/21/variable-length_argument_lists/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2022/08/28/integer_function/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2022/09/01/hash/</loc>
-    
-    <lastmod>2023-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://youngvoice.github.io/2022/09/04/6-828-1/</loc>
     
     <lastmod>2023-05-07</lastmod>
@@ -371,6 +317,60 @@
   </url>
   
   <url>
+    <loc>https://youngvoice.github.io/2022/07/03/native_bridge/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2022/07/11/route_table/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2022/07/23/linker_namespace/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2022/08/21/variable-length_argument_lists/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2022/08/28/integer_function/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2022/09/01/hash/</loc>
+    
+    <lastmod>2023-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://youngvoice.github.io/404/index.html</loc>
     
     <lastmod>2023-05-07</lastmod>
@@ -389,14 +389,14 @@
 
   
   <url>
-    <loc>https://youngvoice.github.io/tags/tools/</loc>
+    <loc>https://youngvoice.github.io/tags/github-pages/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/tags/github-pages/</loc>
+    <loc>https://youngvoice.github.io/tags/tools/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -643,6 +643,13 @@
 
   
   <url>
+    <loc>https://youngvoice.github.io/categories/github-pages/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://youngvoice.github.io/categories/tools/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -692,13 +699,6 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://youngvoice.github.io/categories/note/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -706,7 +706,7 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/linux/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -720,21 +720,14 @@
   </url>
   
   <url>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/linux/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://youngvoice.github.io/categories/cs/math/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/android/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/kernel/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -748,14 +741,7 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/linux/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/android/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/android/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -783,14 +769,14 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/JOS/</loc>
+    <loc>https://youngvoice.github.io/categories/note/daily/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/note/daily/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/JOS/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -811,13 +797,6 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/file-system/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://youngvoice.github.io/categories/cs/math/information/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -825,21 +804,7 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/kernel/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/android/log-system/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/kernel/linux/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/file-system/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -853,20 +818,6 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/linux/loader/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/android/JNI/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://youngvoice.github.io/categories/cs/knowledge/android/linker/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -874,14 +825,7 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/android/loader/</loc>
-    <lastmod>2023-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/categories/cs/knowledge/linux/multi-user-process/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/android/JNI/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -902,7 +846,70 @@
   </url>
   
   <url>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/kernel/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/android/log-system/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/kernel/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/linux/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://youngvoice.github.io/categories/cs/knowledge/operating-system/kernel/file-system/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/android/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/kernel/linux/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/knowledge/linux/multi-user-process/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/linux/loader/</loc>
+    <lastmod>2023-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/categories/cs/android/loader/</loc>
     <lastmod>2023-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

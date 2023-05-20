@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="learn android system">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Embedded android">
+<meta property="og:url" content="https://youngvoice.github.io/2023/05/21/book_embedded_android/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="learn android system">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-21T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-20T23:04:39.981Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="cs">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="architecture">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2023/05/21/book_embedded_android/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2023/05/21/book_embedded_android/","path":"2023/05/21/book_embedded_android/","title":"Embedded android"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Embedded android | I am thinking...</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">37</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">50</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">38</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#system-startup"><span class="nav-number">2.</span> <span class="nav-text">system startup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#App-Developer%E2%80%99s-View"><span class="nav-number">3.</span> <span class="nav-text">App Developer’s View</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Concepts"><span class="nav-number">3.1.</span> <span class="nav-text">Android Concepts</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#components"><span class="nav-number">3.1.1.</span> <span class="nav-text">components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#four-main-types-of-components"><span class="nav-number">3.1.2.</span> <span class="nav-text">four main types of components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#components-lifecycle"><span class="nav-number">3.1.3.</span> <span class="nav-text">components lifecycle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manifest-file"><span class="nav-number">3.1.4.</span> <span class="nav-text">Manifest file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#processes-and-threads"><span class="nav-number">3.1.5.</span> <span class="nav-text">processes and threads</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remote-procedure-calls-RPCs"><span class="nav-number">3.1.6.</span> <span class="nav-text">Remote procedure calls(RPCs)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Framework-Intro"><span class="nav-number">3.2.</span> <span class="nav-text">Framework Intro</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Native-Development"><span class="nav-number">3.3.</span> <span class="nav-text">Native Development</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overall-Architecture"><span class="nav-number">4.</span> <span class="nav-text">Overall Architecture</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux-kernel"><span class="nav-number">5.</span> <span class="nav-text">linux kernel</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hardware-Support"><span class="nav-number">6.</span> <span class="nav-text">Hardware Support</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Linux-Apporach"><span class="nav-number">6.1.</span> <span class="nav-text">The Linux Apporach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Android%E2%80%99s-General-Approach"><span class="nav-number">6.2.</span> <span class="nav-text">Android’s General Approach</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Native-User-Space"><span class="nav-number">7.</span> <span class="nav-text">Native User-Space</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Logger"><span class="nav-number">7.1.</span> <span class="nav-text">Logger</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-system-log"><span class="nav-number">7.2.</span> <span class="nav-text">linux system log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#android-log"><span class="nav-number">7.3.</span> <span class="nav-text">android log</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-logcat-different-kernel-log-buffer"><span class="nav-number">8.</span> <span class="nav-text">how to logcat different kernel log buffer?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-use-the-command-line-options-of-logcat"><span class="nav-number">9.</span> <span class="nav-text">how to use the command line options of logcat?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-reduce-the-log-output-to-a-manageable-level"><span class="nav-number">10.</span> <span class="nav-text">how to reduce the log output to a manageable level?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#logger-driver"><span class="nav-number">10.1.</span> <span class="nav-text">logger driver</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dalvik-and-Android%E2%80%99s-Java"><span class="nav-number">11.</span> <span class="nav-text">Dalvik and Android’s Java</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Native-Interface"><span class="nav-number">11.1.</span> <span class="nav-text">Java Native Interface</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#System-Services"><span class="nav-number">12.</span> <span class="nav-text">System Services</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-Server"><span class="nav-number">12.1.</span> <span class="nav-text">System Server</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-7"><span class="nav-number">13.</span> <span class="nav-text">Chapter 7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Building-the-AOSP-without-the-Framework"><span class="nav-number">13.1.</span> <span class="nav-text">Building the AOSP without the Framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hardware-Abstraction-Layer"><span class="nav-number">13.2.</span> <span class="nav-text">Hardware Abstraction Layer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ref"><span class="nav-number">14.</span> <span class="nav-text">Ref</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">50</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2023/05/21/book_embedded_android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Embedded android | I am thinking...">
+      <meta itemprop="description" content="learn android system">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Embedded android
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2023-05-21T00:00:00+00:00">2023-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-20 23:04:39" itemprop="dateModified" datetime="2023-05-20T23:04:39+00:00">2023-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/" itemprop="url" rel="index"><span itemprop="name">cs</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/android/" itemprop="url" rel="index"><span itemprop="name">android</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/cs/android/architecture/" itemprop="url" rel="index"><span itemprop="name">architecture</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">learn android system</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>多进程执行的样子<br>jvm虚拟机<br>zygote</p>
+<h1 id="Chapter-1"><a href="#Chapter-1" class="headerlink" title="Chapter 1"></a>Chapter 1</h1><h1 id="system-startup"><a href="#system-startup" class="headerlink" title="system startup"></a>system startup</h1><p>the init doesn’t actually start the Zygote directly; instead it uses the app_process command to get Zygote started by the Android Runtime. The runtime then starts the first Dalvik VM of the system and tells it to invoke the Zygote’s main().</p>
+<p>The beauty of having all apps fork from the Zygote is that it’s a “virgin” VM that has all the system classes and resources an app may need preloaded and ready to be used. In other words, new apps don’t have to wait until those are loaded to start executing. All of this works because the Linux kernel implements a copy-on-write (COW) policy for forks.</p>
+<h1 id="App-Developer’s-View"><a href="#App-Developer’s-View" class="headerlink" title="App Developer’s View"></a>App Developer’s View</h1><h2 id="Android-Concepts"><a href="#Android-Concepts" class="headerlink" title="Android Concepts"></a>Android Concepts</h2><h3 id="components"><a href="#components" class="headerlink" title="components"></a>components</h3><h3 id="four-main-types-of-components"><a href="#four-main-types-of-components" class="headerlink" title="four main types of components"></a>four main types of components</h3><p>Activities<br>Services<br>Broadcast receivers<br>Content providers</p>
+<p>intents : events&#x2F;Qt signal</p>
+<h3 id="components-lifecycle"><a href="#components-lifecycle" class="headerlink" title="components lifecycle"></a>components lifecycle</h3><p>the user shouldn’t have to manage task switching.</p>
+<h3 id="Manifest-file"><a href="#Manifest-file" class="headerlink" title="Manifest file"></a>Manifest file</h3><p>apart from broadcast receivers, which can be registered at runtime, all other components must be declared at build time in the manifest file.</p>
+<h3 id="processes-and-threads"><a href="#processes-and-threads" class="headerlink" title="processes and threads"></a>processes and threads</h3><p>all components of an app are contained within a single Linux process.<br>When there are too many processes running to allow for new ones to start, the Linux Kernel’s out-of-memory (OOM) killing mechanisms will kick in.</p>
+<h3 id="Remote-procedure-calls-RPCs"><a href="#Remote-procedure-calls-RPCs" class="headerlink" title="Remote procedure calls(RPCs)"></a>Remote procedure calls(RPCs)</h3><p>Android defines its own RPC&#x2F;IPC mechanism: Binder</p>
+<h2 id="Framework-Intro"><a href="#Framework-Intro" class="headerlink" title="Framework Intro"></a>Framework Intro</h2><p>User interface<br>Data storage<br>Security and permissions</p>
+<h2 id="Native-Development"><a href="#Native-Development" class="headerlink" title="Native Development"></a>Native Development</h2><p>The use of NDK still involves all the limitations and requirement that apply to Java app developers.</p>
+<h1 id="Overall-Architecture"><a href="#Overall-Architecture" class="headerlink" title="Overall Architecture"></a>Overall Architecture</h1><p>Figure 2-1 Android’s architecture</p>
+<h1 id="linux-kernel"><a href="#linux-kernel" class="headerlink" title="linux kernel"></a>linux kernel</h1><h1 id="Hardware-Support"><a href="#Hardware-Support" class="headerlink" title="Hardware Support"></a>Hardware Support</h1><h2 id="The-Linux-Apporach"><a href="#The-Linux-Apporach" class="headerlink" title="The Linux Apporach"></a>The Linux Apporach</h2><h2 id="Android’s-General-Approach"><a href="#Android’s-General-Approach" class="headerlink" title="Android’s General Approach"></a>Android’s General Approach</h2><h1 id="Native-User-Space"><a href="#Native-User-Space" class="headerlink" title="Native User-Space"></a>Native User-Space</h1><p>Note that Android’s user-space was designed pretty much from a blank slate and differs greatly from what you’d find in a standard Linux distribution.</p>
+<h2 id="Logger"><a href="#Logger" class="headerlink" title="Logger"></a>Logger</h2><h2 id="linux-system-log"><a href="#linux-system-log" class="headerlink" title="linux system log"></a>linux system log</h2><p>kernel’s own log  &#x3D;&#x3D;&#x3D;&gt; command dmesg (print message), printk, core kernel code, device drivers.<br>system logs &#x3D;&#x3D;&#x3D;&gt; &#x2F;var&#x2F;log  and command logger(write message)<br>the classic syslog relies on sending messages through sockets, and therefore generates a task switch. It also use files to store it’s information, therefore generating writes to a storage device.</p>
+<h2 id="android-log"><a href="#android-log" class="headerlink" title="android log"></a>android log</h2><p>kernel logging functionality is used as is.<br>android defines its own logging mechanisms based on the android logger driver added to the kernel.<br>Android’s logging functionality manages a handful of separate kernel-hosted buffers for logging data from user space. Hence, no task-switches or file-writes are required for each event being logged. Instead, the driver maintains circular buffers in RAM where it logs every incoming event and returns immediately back to the caller.<br>the circular buffer categorized into Events log, System log, Radio log, Main log. </p>
+<h1 id="how-to-logcat-different-kernel-log-buffer"><a href="#how-to-logcat-different-kernel-log-buffer" class="headerlink" title="how to logcat different kernel log buffer?"></a>how to logcat different kernel log buffer?</h1><h1 id="how-to-use-the-command-line-options-of-logcat"><a href="#how-to-use-the-command-line-options-of-logcat" class="headerlink" title="how to use the command line options of logcat?"></a>how to use the command line options of logcat?</h1><p>The Android logging system is a set of structured circular buffers maintained by the system process logd. The set of available buffers is fixed and defined by the system.<br>main: stores most application logs<br>system: stores messages originating from the Android OS<br>crash: stores crash logs. </p>
+<ul>
+<li>radio: View the buffer that contains radio&#x2F;telephony related messages.</li>
+<li>events: View the interpreted binary system event buffer messages.</li>
+<li>main: View the main log buffer (default) does not contain system and crash log messages.</li>
+<li>system: View the system log buffer (default).<br>crash: View the crash log buffer (default).</li>
+<li>all: View all buffers.</li>
+<li>default: Reports main, system, and crash buffers.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>option</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b <buffer></td>
+<td>Load an alternate log buffer for viewing, such as events or radio. The main, system, and crash buffer set is used by default. See Viewing Alternative Log Buffers.</td>
+</tr>
+</tbody></table>
+<p>The primary interface to the logging system is the shared library liblog and its header &lt;android&#x2F;log.h&gt;. All language-specific logging facilities eventually call the function __android_log_write. By default, it calls the function __android_log_logd_logger, which sends the log entry to logd using a socket. Starting with API level 30, the logging function can be changed by calling __android_set_log_writer. More information is available in the NDK documentation.</p>
+<p>liblog requires every event being logged to have a priority, a tag and data.<br>The priority is either verbose, debug, info, warn or error.<br>the tag is a unique string that identifies the component or module writing to the log.<br>the data is the actual information that need to be logged.</p>
+<p>In one word, each log entry has a priority (one of VERBOSE, DEBUG, INFO, WARNING, ERROR or FATAL), a tag that identifies the origin of the log, and the actual log message.</p>
+<h1 id="how-to-reduce-the-log-output-to-a-manageable-level"><a href="#how-to-reduce-the-log-output-to-a-manageable-level" class="headerlink" title="how to reduce the log output to a manageable level?"></a>how to reduce the log output to a manageable level?</h1><p>filtering log output using filter expressions, you can supply any number of tag:priority specifications in a single filter expression. The series of specifications if whitespace-delimited.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb logcat ActivityManager:I MyApp:D *:S</span><br></pre></td></tr></table></figure>
+<p>The final element in the above expression, *:S, sets the priority level for all tags to “silent”, thus ensuring only log messages with “ActivityManager” and “MyApp” are displayed. Using *:S is an excellent way to ensure that log output is restricted to the filters that you have explicitly specified — it lets your filters serve as an allowlist for log output.</p>
+<h2 id="logger-driver"><a href="#logger-driver" class="headerlink" title="logger driver"></a>logger driver</h2><p>the kernel’s drivers&#x2F;staging&#x2F;android&#x2F; directory.<br><a target="_blank" rel="noopener" href="http://elinux.org/Mainline_Android_logger_project">http://elinux.org/Mainline_Android_logger_project</a></p>
+<p>Reference<br><a target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/logcat#Overview">https://developer.android.com/studio/command-line/logcat#Overview</a></p>
+<h1 id="Dalvik-and-Android’s-Java"><a href="#Dalvik-and-Android’s-Java" class="headerlink" title="Dalvik and Android’s Java"></a>Dalvik and Android’s Java</h1><h2 id="Java-Native-Interface"><a href="#Java-Native-Interface" class="headerlink" title="Java Native Interface"></a>Java Native Interface</h2><p>Internally, the AOSP relies massively on JNI to enable Java-coded services and components to interface with Android’s low-level functionality, which is mostly written in C and C++;</p>
+<h1 id="System-Services"><a href="#System-Services" class="headerlink" title="System Services"></a>System Services</h1><h2 id="System-Server"><a href="#System-Server" class="headerlink" title="System Server"></a>System Server</h2><h1 id="Chapter-7"><a href="#Chapter-7" class="headerlink" title="Chapter 7"></a>Chapter 7</h1><h2 id="Building-the-AOSP-without-the-Framework"><a href="#Building-the-AOSP-without-the-Framework" class="headerlink" title="Building the AOSP without the Framework"></a>Building the AOSP without the Framework</h2><h2 id="Hardware-Abstraction-Layer"><a href="#Hardware-Abstraction-Layer" class="headerlink" title="Hardware Abstraction Layer"></a>Hardware Abstraction Layer</h2><h1 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h1><p><a target="_blank" rel="noopener" href="https://www.oreilly.com/library/view/embedded-android/9781449327958/">https://www.oreilly.com/library/view/embedded-android/9781449327958/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2023/05/21/book_embedded_android/" title="Embedded android">https://youngvoice.github.io/2023/05/21/book_embedded_android/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/cs/" rel="tag"># cs</a>
+              <a href="/tags/android/" rel="tag"># android</a>
+              <a href="/tags/architecture/" rel="tag"># architecture</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/23/multi_user_and_process/" rel="prev" title="How to design a system for multi-user and multi-process ?">
+                  <i class="fa fa-chevron-left"></i> How to design a system for multi-user and multi-process ?
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

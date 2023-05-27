@@ -14,8 +14,8 @@ date: 2023-02-04 08:51:40
 [cs, android, linker]
 [cs, program]
 [cs, program, data structure]
+[cs, math, architecture, information]
 [cs, math, program, algorithm]
-
 [math]
 
 [tools, github]

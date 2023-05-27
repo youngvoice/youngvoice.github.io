@@ -1,8 +1,8 @@
 ---
 title: complement encode
 description: complement encode and cast operation
-categories: [cs, math, information]
-tags: [cs, math, information]
+categories: [cs, math, architecture, information]
+tags: [cs, math, architecture, information]
 ---
 
 

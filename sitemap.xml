@@ -2,33 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://youngvoice.github.io/2023/04/23/multi_user_and_process/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2023/05/21/book_embedded_android/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2023/05/27/endian/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://youngvoice.github.io/2023/06/10/bitwise_operator/</loc>
     
     <lastmod>2023-06-11</lastmod>
@@ -326,6 +299,15 @@
   </url>
   
   <url>
+    <loc>https://youngvoice.github.io/2023/03/19/linux_binfmt/</loc>
+    
+    <lastmod>2023-06-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://youngvoice.github.io/2023/03/26/ELF/</loc>
     
     <lastmod>2023-06-11</lastmod>
@@ -336,15 +318,6 @@
   
   <url>
     <loc>https://youngvoice.github.io/2023/04/02/kalman/</loc>
-    
-    <lastmod>2023-06-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://youngvoice.github.io/2023/03/19/linux_binfmt/</loc>
     
     <lastmod>2023-06-11</lastmod>
     
@@ -381,6 +354,33 @@
   
   <url>
     <loc>https://youngvoice.github.io/2023/04/16/bionic_dl/</loc>
+    
+    <lastmod>2023-06-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2023/04/23/multi_user_and_process/</loc>
+    
+    <lastmod>2023-06-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2023/05/21/book_embedded_android/</loc>
+    
+    <lastmod>2023-06-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://youngvoice.github.io/2023/05/27/endian/</loc>
     
     <lastmod>2023-06-11</lastmod>
     
@@ -624,14 +624,14 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/tags/loader/</loc>
+    <loc>https://youngvoice.github.io/tags/executable-format/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/tags/executable-format/</loc>
+    <loc>https://youngvoice.github.io/tags/loader/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -976,14 +976,14 @@
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/linux/loader/linker/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/kernel/linux/executable-format/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://youngvoice.github.io/categories/cs/kernel/linux/executable-format/</loc>
+    <loc>https://youngvoice.github.io/categories/cs/linux/loader/linker/</loc>
     <lastmod>2023-06-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

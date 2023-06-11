@@ -267,6 +267,7 @@ reward_settings:
   # If true, a donate button will be displayed in every article by default.
   enable: false
   animation: false
+  #comment: Buy me a coffee
 
 reward:
   #wechatpay: /images/wechatpay.png
@@ -403,6 +404,7 @@ bookmark:
 github_banner:
   enable: false
   permalink: https://github.com/yourname
+  title: Follow me on GitHub
 
 
 # ---------------------------------------------------------------
@@ -761,7 +763,7 @@ google_analytics:
 
 # Baidu Analytics
 # See: https://tongji.baidu.com
-baidu_analytics: # <app_id>
+baidu_analytics: d0151213913d23785e89cc44331002a7 # <app_id>
 
 # Growingio Analytics
 # See: https://www.growingio.com
@@ -799,9 +801,9 @@ plausible:
 # Show number of visitors of each article.
 # You can visit https://www.leancloud.cn to get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: # <your app id>
-  app_key: # <your app key>
+  enable: true
+  app_id: KXmlfX5j58VDYijiWp6nSyxa-gzGzoHsz # <your app id>
+  app_key: icP17WRY0W95wXZ7w7X0pDd2 # <your app key>
   # Required for apps from CN region
   server_url: # <your server url>
   # Dependencies: https://github.com/theme-next/hexo-leancloud-counter-security

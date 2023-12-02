@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="to use github-pages based on Jekyll or hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How use github-pages">
+<meta property="og:url" content="https://youngvoice.github.io/2023/12/02/vim/index.html">
+<meta property="og:site_name" content="I am thinking...">
+<meta property="og:description" content="to use github-pages based on Jekyll or hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-02T13:45:56.554Z">
+<meta property="article:author" content="youngvoice">
+<meta property="article:tag" content="github pages">
+<meta property="article:tag" content="tools">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://youngvoice.github.io/2023/12/02/vim/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://youngvoice.github.io/2023/12/02/vim/","path":"2023/12/02/vim/","title":"How use github-pages"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>How use github-pages | I am thinking...</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d0151213913d23785e89cc44331002a7"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">I am thinking...</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">39</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">56</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">44</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ref"><span class="nav-number">1.</span> <span class="nav-text">ref</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">youngvoice</p>
+  <div class="site-description" itemprop="description">to record interesting things and questions</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://youngvoice.github.io/2023/12/02/vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="youngvoice">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="I am thinking...">
+      <meta itemprop="description" content="to record interesting things and questions">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="How use github-pages | I am thinking...">
+      <meta itemprop="description" content="to use github-pages based on Jekyll or hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          How use github-pages
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-12-02 00:00:00 / Modified: 13:45:56" itemprop="dateCreated datePublished" datetime="2023-12-02T00:00:00+00:00">2023-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tools/github-pages/" itemprop="url" rel="index"><span itemprop="name">github pages</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2023/12/02/vim/" class="post-meta-item leancloud_visitors" data-flag-title="How use github-pages" title="Views">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+</div>
+
+            <div class="post-description">to use github-pages based on Jekyll or hexo</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <pre><code>                          Problem 1
+</code></pre>
+<p>** To move the cursor, press the h,j,k,l keys as indicated. **</p>
+<p>** To quit<br>:q! <ENTER> </p>
+<p>** Press  x  to delete the character under the cursor. **</p>
+<p>** Press  i  to insert text. **</p>
+<p>** Press  A  to append text. **</p>
+<p>** Use  :wq  to save a file and exit. **</p>
+<pre><code>                          Lesson 1 SUMMARY
+</code></pre>
+<ol>
+<li><p>The cursor is moved using either the arrow keys or the hjkl keys.<br>h (left)       j (down)       k (up)       l (right)</p>
+</li>
+<li><p>To start Vim from the shell prompt type:  vim FILENAME <ENTER></p>
+</li>
+<li><p>To exit Vim type:     <ESC>   :q!   <ENTER>  to trash all changes.<br>    OR type:      <ESC>   :wq   <ENTER>  to save the changes.</p>
+</li>
+<li><p>To delete the character at the cursor type:  x</p>
+</li>
+<li><p>To insert or append text type:<br>i   type inserted text   <ESC>         insert before the cursor<br>A   type appended text   <ESC>         append after the line</p>
+</li>
+</ol>
+<p>NOTE: Pressing <ESC> will place you in Normal mode or will cancel<br>      an unwanted and partially completed command.</p>
+<pre><code>                          Problem 2
+</code></pre>
+<p>** Type  dw  to delete a word. **</p>
+<p>** Type  d$  to delete to the end of the line. **</p>
+<p>A short list of motions:<br>    w - until the start of the next word, EXCLUDING its first character.<br>    e - to the end of the current word, INCLUDING the last character.<br>    $ - to the end of the line, INCLUDING the last character.</p>
+<p>** Typing a number before a motion repeats it that many times. **</p>
+<p>** Typing a number with an operator repeats it that many times. **<br>d   number   motion</p>
+<p>** Type  dd   to delete a whole line. **</p>
+<p>** Press  u  to undo the last commands,   U  to fix a whole line. **</p>
+<pre><code>                        Lesson 2 SUMMARY
+</code></pre>
+<ol>
+<li><p>To delete from the cursor up to the next word type:    dw</p>
+</li>
+<li><p>To delete from the cursor to the end of a line type:    d$</p>
+</li>
+<li><p>To delete a whole line type:    dd</p>
+</li>
+<li><p>To repeat a motion prepend it with a number:   2w</p>
+</li>
+<li><p>The format for a change command is:<br>      operator   [number]   motion<br>where:<br>  operator - is what to do, such as  d  for delete<br>  [number] - is an optional count to repeat the motion<br>  motion   - moves over the text to operate on, such as  w (word),<br>         $ (to the end of line), etc.</p>
+</li>
+<li><p>To move to the start of the line use a zero:  0</p>
+</li>
+<li><p>To undo previous actions, type:           u  (lowercase u)<br>To undo all the changes on a line, type:  U  (capital U)<br>To undo the undo’s, type:                 CTRL-R</p>
+<pre><code>                 Problem 3
+</code></pre>
+</li>
+</ol>
+<p>** Type  p  to put previously deleted text after the cursor. **</p>
+<p>** Type  rx  to replace the character at the cursor with  x . **</p>
+<p>** To change until the end of a word, type  ce . **</p>
+<p>** The change operator is used with the same motions as delete. **</p>
+<pre><code>                          Lesson 3 SUMMARY
+</code></pre>
+<ol>
+<li><p>To put back text that has just been deleted, type   p .  This puts the<br>deleted text AFTER the cursor (if a line was deleted it will go on the<br>line below the cursor).</p>
+</li>
+<li><p>To replace the character under the cursor, type   r   and then the<br>character you want to have there.</p>
+</li>
+<li><p>The change operator allows you to change from the cursor to where the<br>motion takes you.  eg. Type  ce  to change from the cursor to the end of<br>the word,  c$  to change to the end of a line.</p>
+</li>
+<li><p>The format for change is:</p>
+<pre><code>c   [number]   motion
+
+
+
+                 Problem 4
+</code></pre>
+</li>
+</ol>
+<p>** Type CTRL-G to show your location in the file and the file status.<br>     Type  G  to move to a line in the file. **</p>
+<p>** Type  &#x2F;  followed by a phrase to search for the phrase. **</p>
+<p>** Type  %  to find a matching ),], or } . **</p>
+<p>** Type  :s&#x2F;old&#x2F;new&#x2F;g  to substitute ‘new’ for ‘old’. **<br>     type   :#,#s&#x2F;old&#x2F;new&#x2F;g    where #,# are the line numbers of the range<br>                               of lines where the substitution is to be done.<br>     Type   :%s&#x2F;old&#x2F;new&#x2F;g      to change every occurrence in the whole file.<br>     Type   :%s&#x2F;old&#x2F;new&#x2F;gc     to find every occurrence in the whole file,<br>                               with a prompt whether to substitute or not.</p>
+<pre><code>                           Lesson 4 SUMMARY
+</code></pre>
+<ol>
+<li><p>CTRL-G  displays your location in the file and the file status.<br>    G  moves to the end of the file.<br>number  G  moves to that line number.<br>   gg  moves to the first line.</p>
+</li>
+<li><p>Typing  &#x2F;  followed by a phrase searches FORWARD for the phrase.<br>Typing  ?  followed by a phrase searches BACKWARD for the phrase.<br>After a search type  n  to find the next occurrence in the same direction<br>or  N  to search in the opposite direction.<br>CTRL-O takes you back to older positions, CTRL-I to newer positions.</p>
+</li>
+<li><p>Typing  %  while the cursor is on a (,),[,],{, or } goes to its match.</p>
+</li>
+<li><p>To substitute new for the first old in a line type    :s&#x2F;old&#x2F;new<br>To substitute new for all ‘old’s on a line type       :s&#x2F;old&#x2F;new&#x2F;g<br>To substitute phrases between two line #’s type       :#,#s&#x2F;old&#x2F;new&#x2F;g<br>To substitute all occurrences in the file type        :%s&#x2F;old&#x2F;new&#x2F;g<br>To ask for confirmation each time add ‘c’             :%s&#x2F;old&#x2F;new&#x2F;gc</p>
+<pre><code>                 Problem 5
+</code></pre>
+</li>
+</ol>
+<p>** Type  :!  followed by an external command to execute that command. **<br>** To save the changes made to the text, type  :w FILENAME  **<br>** To save part of the file, type  v  motion  :w FILENAME **<br>** To insert the contents of a file, type  :r FILENAME  **</p>
+<pre><code>                           Lesson 5 SUMMARY
+</code></pre>
+<ol>
+<li><p>:!command  executes an external command.</p>
+<p>Some useful examples are:<br>   (Windows)        (Unix)<br>:!dir            :!ls            -  shows a directory listing.<br>:!del FILENAME   :!rm FILENAME   -  removes file FILENAME.</p>
+</li>
+<li><p>:w FILENAME  writes the current Vim file to disk with name FILENAME.</p>
+</li>
+<li><p>v  motion  :w FILENAME  saves the Visually selected lines in file<br>FILENAME.</p>
+</li>
+<li><p>:r FILENAME  retrieves disk file FILENAME and puts it below the<br>cursor position.</p>
+</li>
+<li><p>:r !dir  reads the output of the dir command and puts it below the<br>cursor position.</p>
+<pre><code>                Problem 6
+</code></pre>
+</li>
+</ol>
+<p>** Type  o  to open a line below the cursor and place you in Insert mode. **<br>** Type  a  to insert text AFTER the cursor. **<br>** Type a capital  R  to replace more than one character. **<br>** Use the  y  operator to copy text and  p  to paste it **<br>** Set an option so a search or substitute ignores case **</p>
+<pre><code>                           Lesson 6 SUMMARY
+</code></pre>
+<ol>
+<li><p>Type  o  to open a line BELOW the cursor and start Insert mode.<br>Type  O  to open a line ABOVE the cursor.</p>
+</li>
+<li><p>Type  a  to insert text AFTER the cursor.<br>Type  A  to insert text after the end of the line.</p>
+</li>
+<li><p>The  e  command moves to the end of a word.</p>
+</li>
+<li><p>The  y  operator yanks (copies) text,  p  puts (pastes) it.</p>
+</li>
+<li><p>Typing a capital  R  enters Replace mode until  <ESC>  is pressed.</p>
+</li>
+<li><p>Typing “:set xxx” sets the option “xxx”.  Some options are:<br>   ‘ic’ ‘ignorecase’       ignore upper&#x2F;lower case when searching<br>   ‘is’ ‘incsearch’        show partial matches for a search phrase<br>   ‘hls’ ‘hlsearch’        highlight all matching phrases<br>You can either use the long or the short option name.</p>
+</li>
+<li><p>Prepend “no” to switch an option off:   :set noic</p>
+<pre><code>                 Problem 7
+</code></pre>
+</li>
+</ol>
+<p>** Command line completion with CTRL-D and <TAB> **</p>
+<h1 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h1><p>vimtutor</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>Post author:  </strong>youngvoice
+  </li>
+  <li class="post-copyright-link">
+      <strong>Post link: </strong>
+      <a href="https://youngvoice.github.io/2023/12/02/vim/" title="How use github-pages">https://youngvoice.github.io/2023/12/02/vim/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/github-pages/" rel="tag"># github pages</a>
+              <a href="/tags/tools/" rel="tag"># tools</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/24/exponential_logarithmic/" rel="prev" title="exponential and logarithmic">
+                  <i class="fa fa-chevron-left"></i> exponential and logarithmic
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2022 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">youngvoice</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"KXmlfX5j58VDYijiWp6nSyxa-gzGzoHsz","app_key":"icP17WRY0W95wXZ7w7X0pDd2","server_url":null,"security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"youngvoice/comment.youngvoice.github.io","issue_term":"title","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>

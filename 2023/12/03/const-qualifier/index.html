@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"youngvoice.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="const qualifier in c&#x2F;c++">
+    <meta name="description" content="A hole in language knowledge and A bug in c compiler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="const qualifier">
 <meta property="og:url" content="https://youngvoice.github.io/2023/12/03/const-qualifier/index.html">
 <meta property="og:site_name" content="I am thinking...">
-<meta property="og:description" content="const qualifier in c&#x2F;c++">
+<meta property="og:description" content="A hole in language knowledge and A bug in c compiler">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-03T00:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-03T08:09:07.626Z">
+<meta property="article:modified_time" content="2023-12-03T09:06:46.817Z">
 <meta property="article:author" content="youngvoice">
 <meta property="article:tag" content="cs">
 <meta property="article:tag" content="program">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-the-initialization-of-%E2%80%98const-char-%E2%80%99-from-incompatible-pointer-type-%E2%80%98char-%E2%80%99-is-incompatible-pointer-type-conversion"><span class="nav-number">1.</span> <span class="nav-text">Why the initialization of ‘const char **’ from incompatible pointer type ‘char **’ is incompatible-pointer-type conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-fix-method"><span class="nav-number">2.</span> <span class="nav-text">A fix method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-the-incompatible-pointer-types-warning-is-still-there"><span class="nav-number">3.</span> <span class="nav-text">Why the incompatible-pointer-types warning is still there?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-description-of-const-in-C-primer"><span class="nav-number">4.</span> <span class="nav-text">The description of const in C++ primer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-conclusion"><span class="nav-number">5.</span> <span class="nav-text">The conclusion</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-the-initialization-of-%E2%80%98const-char-%E2%80%99-from-incompatible-pointer-type-%E2%80%98char-%E2%80%99-is-incompatible-pointer-type-conversion"><span class="nav-number">1.</span> <span class="nav-text">Why the initialization of ‘const char **’ from incompatible pointer type ‘char **’ is incompatible-pointer-type conversion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-fix-method"><span class="nav-number">2.</span> <span class="nav-text">A fix method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-the-incompatible-pointer-types-warning-is-still-there-this-is-the-error-from-compiler"><span class="nav-number">3.</span> <span class="nav-text">Why the incompatible-pointer-types warning is still there?(this is the error from compiler)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-description-of-const-in-C-primer"><span class="nav-number">4.</span> <span class="nav-text">The description of const in C++ primer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-conclusion"><span class="nav-number">5.</span> <span class="nav-text">The conclusion</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -212,7 +212,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="const qualifier | I am thinking...">
-      <meta itemprop="description" content="const qualifier in c/c++">
+      <meta itemprop="description" content="A hole in language knowledge and A bug in c compiler">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -228,7 +228,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2023-12-03 00:00:00 / Modified: 08:09:07" itemprop="dateCreated datePublished" datetime="2023-12-03T00:00:00+00:00">2023-12-03</time>
+      <time title="Created: 2023-12-03 00:00:00 / Modified: 09:06:46" itemprop="dateCreated datePublished" datetime="2023-12-03T00:00:00+00:00">2023-12-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
     </span>
 </div>
 
-            <div class="post-description">const qualifier in c/c++</div>
+            <div class="post-description">A hole in language knowledge and A bug in c compiler</div>
         </div>
       </header>
 
@@ -270,12 +270,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>The bug program</p>
+        <p>A program that looks like correct(this is the error from human):</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">       <span class="type">char</span> *p1 = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">       <span class="type">const</span> <span class="type">char</span> **p2 = &amp;p1;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Compile by gcc</p>
+<p>But compile by gcc, it has the warning.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">temp1.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">temp1.c:7:26: warning: initialization of ‘const char **’ from incompatible pointer <span class="built_in">type</span> ‘char **’ [-Wincompatible-pointer-types]</span><br><span class="line">    7 |        const char **p2 = &amp;p1;</span><br><span class="line">      |            </span><br></pre></td></tr></table></figure>
-
 
 <h2 id="Why-the-initialization-of-‘const-char-’-from-incompatible-pointer-type-‘char-’-is-incompatible-pointer-type-conversion"><a href="#Why-the-initialization-of-‘const-char-’-from-incompatible-pointer-type-‘char-’-is-incompatible-pointer-type-conversion" class="headerlink" title="Why the initialization of ‘const char **’ from incompatible pointer type ‘char **’ is incompatible-pointer-type conversion"></a>Why the initialization of ‘const char **’ from incompatible pointer type ‘char **’ is incompatible-pointer-type conversion</h2><p>A case have risk</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">       <span class="type">const</span> <span class="type">char</span> c = <span class="string">&#x27;x&#x27;</span>;</span><br><span class="line"></span><br><span class="line">       <span class="type">char</span> *p1;</span><br><span class="line"></span><br><span class="line">       <span class="type">const</span> <span class="type">char</span> **p2 = &amp;p1;</span><br><span class="line"></span><br><span class="line">       *p2 = &amp;c; </span><br><span class="line"></span><br><span class="line">       *p1 = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -288,7 +286,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">temp1.c: In <span class="keyword">function</span> ‘main’:</span><br><span class="line">temp1.c:12:33: warning: initialization of ‘const char * const*’ from incompatible pointer <span class="built_in">type</span> ‘char **’ [-Wincompatible-pointer-types]</span><br><span class="line">   12 |         const char * const*p2 = &amp;p1; //(recursive)</span><br><span class="line">      |                                 ^</span><br><span class="line">temp1.c:14:13: error: assignment of read-only location ‘*p2’</span><br><span class="line">   14 |         *p2 = &amp;c;</span><br><span class="line">      |             ^</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>The incompatible-pointer-types warning is still there, and have a additional error. The error is correct, meaning that we can’t change the const variable. But the warning should not be there.</p>
-<h2 id="Why-the-incompatible-pointer-types-warning-is-still-there"><a href="#Why-the-incompatible-pointer-types-warning-is-still-there" class="headerlink" title="Why the incompatible-pointer-types warning is still there?"></a>Why the incompatible-pointer-types warning is still there?</h2><p>This is a bug in c compiler, if you compile the program with g++, then it is having fixed the incompatible pointer type warning. only the error is left.</p>
+<h2 id="Why-the-incompatible-pointer-types-warning-is-still-there-this-is-the-error-from-compiler"><a href="#Why-the-incompatible-pointer-types-warning-is-still-there-this-is-the-error-from-compiler" class="headerlink" title="Why the incompatible-pointer-types warning is still there?(this is the error from compiler)"></a>Why the incompatible-pointer-types warning is still there?(this is the error from compiler)</h2><p>This is a bug in c compiler, if you compile the program with g++, then it is having fixed the incompatible pointer type warning. only the error is left.</p>
 <h2 id="The-description-of-const-in-C-primer"><a href="#The-description-of-const-in-C-primer" class="headerlink" title="The description of const in C++ primer"></a>The description of const in C++ primer</h2><p>top-level const to indicate that the pointer itself is a const. When a pointer can point to a const object, we refer to that const as a low-level const.</p>
 <p>The distinction between top-level and low-level matters when we copy an object. When we copy an object, top-level consts are ignored:</p>
 <p>On the other hand, low-level const is never ignored. When we copy an object, both objects must have the same low-level const qualification or there must be a conversion between the types of the two objects.</p>

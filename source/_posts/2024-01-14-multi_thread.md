@@ -1,7 +1,7 @@
 ---
 title: how support for multi-thread (TLS + thread)
 description: support multi-thread program running
-categories:[cs, operating system, process, thread] 
+categories: [cs, operating system, process, thread] 
 tags: [cs, operating system, process, thread]
 ---
 

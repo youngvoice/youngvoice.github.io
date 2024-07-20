@@ -320,4 +320,5 @@ VFS
 
 
 Update 2022/06/26
-
+# Ref
+http://kerneltravel.net/book/book/%E7%AC%AC%E5%85%AB%E7%AB%A0%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.pdf

@@ -1017,6 +1017,9 @@ when the system call terminates, the normal program can thus resume its executio
 
 在解决这两个关键问题的过程中，主要要涉及对栈帧的修改，以及对被中断现场的保存和恢复
 
+# 信号处理函数执行完成后为啥还要回到内核态去恢复现场？？（直接跳到正常的执行流程不行吗？？）
+
+# 发生信号的时候，正常的执行流的上下文保存在哪？？（在内核态堆栈还是用户态异常堆栈？？？）
 
 Ref
 

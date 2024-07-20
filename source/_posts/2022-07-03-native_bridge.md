@@ -1,7 +1,7 @@
 ---
 title: the mechanism of native bridge
 description: design and implement and use of native bridge
-categories: [cs, knowledge, android, linker]
+categories: [cs, knowledge, android, native bridge]
 tags: [cs, knowledge, android, native bridge]
 ---
 
@@ -405,4 +405,18 @@ struct NativeBridgeCallbacks {
 this is used as the Native Bridge interface of its actual implementation. In our case, this implementation is the xxxxx library. 
 
 
+# How Android system know it is loading a native code in form of different ISA ???
+enable native bridge
+property ro.dalvik.vm.native.bridge
 
+```
+bool NeedsNativeBridge(const char* instruction_set) { 
+  if (instruction_set == nullptr) { 
+    ALOGE("Null instruction set in NeedsNativeBridge."); 
+    return false; 
+  } 
+  return strncmp(instruction_set, kRuntimeISA,  
+               strlen(kRuntimeISA) + 1) != 0; 
+} 
+
+```

@@ -130,6 +130,9 @@ In this time, I take the below config
 https://hexo.io/docs/github-pages
 
 
+update, switch to the below config
+https://theme-next.js.org/docs/getting-started/deployment
+
 ### what is GITHUB_TOKEN?
 https://dev.to/github/the-githubtoken-in-github-actions-how-it-works-change-permissions-customizations-3cgp
 

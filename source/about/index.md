@@ -10,6 +10,7 @@ date: 2023-02-04 08:51:40
 [cs, operating system, file system]
 [cs, operating system, JOS]
 [cs, operating system, kernel]
+[cs, operating system, device]
 [cs, linux, permission]
 [cs, linux, loader and linker]
 [cs, linux, signal]

@@ -24,6 +24,7 @@ date: 2023-02-04 08:51:40
 [cs, program, data structure]
 [cs, math, architecture, information]
 [cs, math, program, algorithm]
+[cs, tools, AI]
 [math, function]
 
 [tools, github]

@@ -27,6 +27,7 @@ date: 2023-02-04 08:51:40
 [cs, tools, AI]
 [math, function]
 [math, AI, problem]
+[math, stochastic process]
 
 [tools, github]
 [misc]

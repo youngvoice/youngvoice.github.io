@@ -29,5 +29,6 @@ date: 2023-02-04 08:51:40
 [math, AI, problem]
 [math, stochastic process]
 [LLM, paper, tokenization]
+[LLM, paper, GPTQ]
 [tools, github]
 [misc]
